@@ -1,0 +1,2520 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedTech Hub - Beta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f8fafc;
+            overflow-x: hidden;
+        }
+        .english-text {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Card Effects */
+        .hub-card {
+            transition: all 0.3s ease;
+        }
+        .hub-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Quiz Buttons */
+        .option-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .option-btn:hover:not(:disabled) {
+            transform: translateX(-5px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .correct-answer {
+            background-color: #dcfce7 !important;
+            border-color: #22c55e !important;
+            color: #166534 !important;
+        }
+        .wrong-answer {
+            background-color: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            color: #991b1b !important;
+        }
+
+                /* Modal Blur */
+        #coming-soon-modal, #abort-modal {
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header (No Version Number Here) -->
+    <header class="bg-teal-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-center md:justify-start items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-teal-800 text-xl shadow-inner">
+                    <i class="fa-solid fa-laptop-medical"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold english-text tracking-wide">MedTech Hub</h1>
+                    <p class="text-xs text-teal-200">منصة تقنيات التخدير - المرحلة الثالثة</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-5xl relative">
+        
+        <!-- ========================================== -->
+        <!-- VIEW 1: DASHBOARD -->
+        <!-- ========================================== -->
+        <div id="view-dashboard" class="fade-in block">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 flex justify-center items-center gap-3">
+                    مرحباً بك في طريقك للامتياز <i class="fa-solid fa-graduation-cap text-teal-600"></i>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">اختر المادة للبدء بمراجعة المحاضرات أو خوض التحديات الشاملة والوزارية المخصصة لاختبار جاهزيتك.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1: Anesthesia (Active) -->
+                <div onclick="openSubject('anesthesia')" class="hub-card bg-white rounded-2xl p-6 border-t-4 border-teal-500 shadow-md cursor-pointer relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-full h-full bg-teal-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-syringe"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">أسس التخدير</h3>
+                        <p class="text-sm text-gray-500 mb-4">مادة وزارية • اختبارات المحاضرات والتحديات الشاملة.</p>
+                        <div class="flex items-center text-teal-600 font-semibold text-sm">
+                            دخول للمادة <i class="fa-solid fa-arrow-left mr-2"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Equipment (Coming Soon) -->
+                <div onclick="showComingSoon('أسس أجهزة التخدير')" class="hub-card bg-white rounded-2xl p-6 border-t-4 border-blue-500 shadow-md cursor-pointer">
+                    <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-desktop"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">أسس أجهزة التخدير</h3>
+                    <p class="text-sm text-gray-500 mb-4">مادة وزارية • سيتم إضافتها قريباً.</p>
+                    <div class="flex items-center text-gray-400 font-semibold text-sm">
+                        قريباً <i class="fa-solid fa-lock mr-2"></i>
+                    </div>
+                </div>
+
+                <!-- Card 3: ICU (Coming Soon) -->
+                <div onclick="showComingSoon('العناية المركزة')" class="hub-card bg-white rounded-2xl p-6 border-t-4 border-purple-500 shadow-md cursor-pointer">
+                    <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">أسس العناية المركزة</h3>
+                    <p class="text-sm text-gray-500 mb-4">مادة جامعية • سيتم إضافتها قريباً.</p>
+                    <div class="flex items-center text-gray-400 font-semibold text-sm">
+                        قريباً <i class="fa-solid fa-lock mr-2"></i>
+                    </div>
+                </div>
+
+                <!-- Card 4: Surgery (Coming Soon) -->
+                <div onclick="showComingSoon('أسس الجراحة')" class="hub-card bg-white rounded-2xl p-6 border-t-4 border-red-500 shadow-md cursor-pointer">
+                    <div class="w-14 h-14 bg-red-100 text-red-600 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-kit-medical"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">أسس الجراحة</h3>
+                    <p class="text-sm text-gray-500 mb-4">مادة جامعية • سيتم إضافتها قريباً.</p>
+                    <div class="flex items-center text-gray-400 font-semibold text-sm">
+                        قريباً <i class="fa-solid fa-lock mr-2"></i>
+                    </div>
+                </div>
+
+                <!-- Card 5: Internal Medicine (Coming Soon) -->
+                <div onclick="showComingSoon('الطب الباطني')" class="hub-card bg-white rounded-2xl p-6 border-t-4 border-emerald-500 shadow-md cursor-pointer">
+                    <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-stethoscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">الطب الباطني</h3>
+                    <p class="text-sm text-gray-500 mb-4">مادة جامعية • سيتم إضافتها قريباً.</p>
+                    <div class="flex items-center text-gray-400 font-semibold text-sm">
+                        قريباً <i class="fa-solid fa-lock mr-2"></i>
+                    </div>
+                </div>
+
+                <!-- Card 6: Ministerial Hub (Coming Soon) -->
+                <div onclick="showComingSoon('التحدي الوزاري الشامل')" class="hub-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 border-t-4 border-yellow-400 shadow-xl cursor-pointer text-white">
+                    <div class="w-14 h-14 bg-gray-700 text-yellow-400 rounded-xl flex items-center justify-center text-2xl mb-4 shadow-inner">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 flex items-center gap-2">التحدي الوزاري <span class="english-text text-xs font-bold bg-yellow-500 text-gray-900 px-2 py-0.5 rounded">HUB</span></h3>
+                    <p class="text-sm text-gray-300 mb-4">المحطة الأخيرة قبل الامتحان. نماذج وزارية مدمجة لمادتي التخدير والأجهزة.</p>
+                    <div class="flex items-center text-yellow-400 font-semibold text-sm">
+                        يفتح ليلة الامتحان <i class="fa-solid fa-lock mr-2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- VIEW 2: SUBJECT DETAILS -->
+        <!-- ========================================== -->
+        <div id="view-subject" class="hidden fade-in">
+            <button onclick="goBack('view-dashboard')" class="mb-6 flex items-center text-gray-600 hover:text-teal-700 font-semibold transition-colors">
+                <i class="fa-solid fa-arrow-right ml-2"></i> العودة للرئيسية
+            </button>
+
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 mb-8 flex items-center gap-4">
+                <div class="w-16 h-16 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center text-3xl shrink-0">
+                    <i class="fa-solid fa-syringe"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">أسس التخدير</h2>
+                    <p class="text-gray-500 mt-1">المنهج الوزاري للمرحلة الثالثة</p>
+                </div>
+            </div>
+
+            <!-- Section: Comprehensive Challenges -->
+            <h3 class="text-xl font-bold text-gray-800 mb-4 border-r-4 border-purple-500 pr-3">التحديات الشاملة</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+                <button onclick="startQuiz('except')" class="hub-card bg-gradient-to-l from-red-50 to-white border border-red-100 rounded-xl p-5 text-right text-red-800 flex justify-between items-center group">
+                    <div>
+                        <h4 class="font-bold text-lg mb-1 english-text">EXCEPT Challenge</h4>
+                        <p class="text-xs text-red-600 opacity-80">مراجعة المِد: 30 سؤال استثناء (المحاضرات 1-6)</p>
+                    </div>
+                    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                </button>
+                <button onclick="startQuiz('sba')" class="hub-card bg-gradient-to-l from-purple-50 to-white border border-purple-100 rounded-xl p-5 text-right text-purple-800 flex justify-between items-center group">
+    <div>
+        <h4 class="font-bold text-lg mb-1 english-text">SBA Challenge</h4>
+        <p class="text-xs text-purple-600 opacity-80">15 سيناريو سريري لاختبار الفهم العميق</p>
+    </div>
+    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center group-hover:bg-purple-600 group-hover:text-white transition-colors">
+        <i class="fa-solid fa-play"></i>
+    </div>
+</button>
+                <button onclick="startQuiz('ministerial')" class="hub-card bg-gradient-to-l from-yellow-50 to-white border border-yellow-100 rounded-xl p-5 text-right text-yellow-800 flex justify-between items-center group">
+    <div>
+        <h4 class="font-bold text-lg mb-1">الوزاري الشامل</h4>
+        <p class="text-xs text-yellow-600 opacity-80">43 سؤال وزاري مدمج (محاكاة حقيقية)</p>
+    </div>
+    <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center group-hover:bg-yellow-500 group-hover:text-white transition-colors">
+        <i class="fa-solid fa-play"></i>
+    </div>
+</button>
+            </div>
+
+                        <!-- Section: Mid-Course Lectures (Active) -->
+            <div class="flex items-center justify-between mb-4 border-r-4 border-teal-500 pr-3">
+                <h3 class="text-xl font-bold text-gray-800">محاضرات امتحان المِد</h3>
+                <span class="text-xs font-bold bg-teal-100 text-teal-800 px-3 py-1 rounded-full english-text">Mid-Course</span>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
+                <!-- Lecture 2 -->
+                <button onclick="startQuiz('lect2')" class="bg-white border border-gray-200 hover:border-teal-500 rounded-xl p-4 text-center transition duration-200 hover:shadow-md group">
+                    <div class="text-teal-600 text-2xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-venus"></i></div>
+                    <div class="font-bold text-gray-700">المحاضرة 2</div>
+                    <div class="text-xs text-gray-500 mt-1">النساء والتوليد</div>
+                </button>
+                <!-- Lecture 3 -->
+                <button onclick="startQuiz('lect3')" class="bg-white border border-gray-200 hover:border-teal-500 rounded-xl p-4 text-center transition duration-200 hover:shadow-md group">
+                    <div class="text-teal-600 text-2xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-baby"></i></div>
+                    <div class="font-bold text-gray-700">المحاضرة 3</div>
+                    <div class="text-xs text-gray-500 mt-1">تخدير الأطفال</div>
+                </button>
+                <!-- Lecture 4 -->
+                <button onclick="startQuiz('lect4')" class="bg-white border border-gray-200 hover:border-teal-500 rounded-xl p-4 text-center transition duration-200 hover:shadow-md group">
+                    <div class="text-teal-600 text-2xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-bed-pulse"></i></div>
+                    <div class="font-bold text-gray-700">المحاضرة 4</div>
+                    <div class="text-xs text-gray-500 mt-1">كبار السن</div>
+                </button>
+                <!-- Lecture 5 -->
+                <button onclick="startQuiz('lect5')" class="bg-white border border-gray-200 hover:border-teal-500 rounded-xl p-4 text-center transition duration-200 hover:shadow-md group">
+                    <div class="text-teal-600 text-2xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-weight-scale"></i></div>
+                    <div class="font-bold text-gray-700">المحاضرة 5</div>
+                    <div class="text-xs text-gray-500 mt-1">المريض البدين</div>
+                </button>
+                <!-- Lecture 6 -->
+                <button onclick="startQuiz('lect6')" class="bg-white border border-gray-200 hover:border-teal-500 rounded-xl p-4 text-center transition duration-200 hover:shadow-md group">
+                    <div class="text-teal-600 text-2xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-lungs"></i></div>
+                    <div class="font-bold text-gray-700">المحاضرة 6</div>
+                    <div class="text-xs text-gray-500 mt-1">جراحة الصدر</div>
+                </button>
+                <!-- Lecture 9 -->
+                <button onclick="startQuiz('lect9')" class="bg-white border border-gray-200 hover:border-teal-500 rounded-xl p-4 text-center transition duration-200 hover:shadow-md group">
+                    <div class="text-teal-600 text-2xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-droplet"></i></div>
+                    <div class="font-bold text-gray-700">المحاضرة 9</div>
+                    <div class="text-xs text-gray-500 mt-1">المسالك البولية</div>
+                </button>
+            </div>
+
+            <!-- Section: Final-Course Lectures (Locked) -->
+            <div class="flex items-center justify-between mb-4 border-r-4 border-gray-400 pr-3 opacity-80">
+                <h3 class="text-xl font-bold text-gray-600">بقية المنهج الوزاري</h3>
+                <span class="text-xs font-bold bg-gray-200 text-gray-600 px-3 py-1 rounded-full">قيد التجهيز للفاينل <i class="fa-solid fa-lock ml-1"></i></span>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 opacity-70">
+                <button onclick="showComingSoon('المحاضرة 1')" class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center cursor-not-allowed hover:bg-gray-100 transition duration-200">
+                    <div class="text-gray-400 text-xl mb-1"><i class="fa-solid fa-clipboard-list"></i></div>
+                    <div class="font-bold text-gray-600 text-sm">المحاضرة 1</div>
+                </button>
+                <button onclick="showComingSoon('المحاضرة 7')" class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center cursor-not-allowed hover:bg-gray-100 transition duration-200">
+                    <div class="text-gray-400 text-xl mb-1"><i class="fa-solid fa-bone"></i></div>
+                    <div class="font-bold text-gray-600 text-sm">المحاضرة 7</div>
+                </button>
+                <button onclick="showComingSoon('المحاضرة 8')" class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center cursor-not-allowed hover:bg-gray-100 transition duration-200">
+                    <div class="text-gray-400 text-xl mb-1"><i class="fa-solid fa-eye"></i></div>
+                    <div class="font-bold text-gray-600 text-sm">المحاضرة 8</div>
+                </button>
+                <button onclick="showComingSoon('المحاضرة 10')" class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center cursor-not-allowed hover:bg-gray-100 transition duration-200">
+                    <div class="text-gray-400 text-xl mb-1"><i class="fa-solid fa-brain"></i></div>
+                    <div class="font-bold text-gray-600 text-sm">المحاضرة 10</div>
+                </button>
+                <button onclick="showComingSoon('المحاضرة 11')" class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center cursor-not-allowed hover:bg-gray-100 transition duration-200">
+                    <div class="text-gray-400 text-xl mb-1"><i class="fa-solid fa-ear-listen"></i></div>
+                    <div class="font-bold text-gray-600 text-sm">المحاضرة 11</div>
+                </button>
+                <button onclick="showComingSoon('المحاضرة 12')" class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-center cursor-not-allowed hover:bg-gray-100 transition duration-200">
+                    <div class="text-gray-400 text-xl mb-1"><i class="fa-solid fa-gauge-simple-high"></i></div>
+                    <div class="font-bold text-gray-600 text-sm">المحاضرة 12</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- VIEW 3: QUIZ ENGINE -->
+        <!-- ========================================== -->
+        <div id="view-quiz" class="hidden fade-in">
+            <div class="flex justify-between items-center mb-6">
+                <button onclick="abortQuiz()" class="text-gray-500 hover:text-red-600 font-semibold text-sm flex items-center transition-colors">
+                    <i class="fa-solid fa-times mr-1 ml-2"></i> إنهاء الاختبار
+                </button>
+                <span id="quiz-title-display" class="font-bold text-teal-800 bg-teal-100 px-4 py-1 rounded-full text-sm english-text"></span>
+            </div>
+
+            <div class="mb-6">
+                <div class="flex justify-between text-sm font-semibold text-gray-600 mb-2 english-text">
+                    <span id="question-counter"></span>
+                    <span id="score-display">Score: 0</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 flex justify-end">
+                    <div id="progress-bar" class="bg-teal-500 h-2.5 rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100">
+                <div class="flex items-center mb-4">
+                    <span id="question-tag" class="text-xs font-bold px-2 py-1 rounded bg-red-100 text-red-800 uppercase tracking-wider ml-3 english-text"></span>
+                </div>
+                <h3 id="question-text" class="text-lg md:text-xl font-bold mb-6 leading-relaxed text-gray-800 english-text" dir="ltr"></h3>
+                
+                <div id="options-container" class="space-y-3 english-text" dir="ltr">
+                    <!-- Options injected by JS -->
+                </div>
+
+                <div id="explanation-box" class="hidden mt-6 p-4 rounded-lg bg-blue-50 border border-blue-200 fade-in">
+                    <h4 class="font-bold text-blue-800 mb-2 flex items-center"><i class="fa-solid fa-lightbulb text-yellow-500 ml-2"></i> التوضيح العلمي:</h4>
+                    <p id="explanation-text" class="text-sm text-blue-900 leading-relaxed english-text" dir="ltr"></p>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button id="next-btn" class="hidden bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2 px-8 rounded-lg transition duration-200 flex items-center">
+                        السؤال التالي <i class="fa-solid fa-chevron-left mr-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- VIEW 4: RESULT SCREEN -->
+        <!-- ========================================== -->
+        <div id="view-result" class="hidden fade-in bg-white rounded-2xl shadow-xl p-8 border border-gray-100 text-center max-w-2xl mx-auto mt-10">
+            <div id="result-icon" class="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 text-5xl"></div>
+            
+            <h2 class="text-3xl font-bold mb-2 text-gray-800">اكتمل التحدي!</h2>
+            <p id="result-fraction" class="text-gray-500 mb-6 font-semibold"></p>
+            
+            <div class="text-7xl font-black text-gray-800 mb-4 english-text tracking-tighter" id="final-score"></div>
+            <p id="result-message" class="text-lg font-bold mb-10 px-4"></p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="startQuiz(currentActiveQuizKey)" class="bg-white border-2 border-teal-600 text-teal-700 hover:bg-teal-50 font-bold py-3 px-8 rounded-xl transition duration-200 flex items-center justify-center">
+                    <i class="fa-solid fa-rotate-right ml-2"></i> إعادة الاختبار
+                </button>
+                <button onclick="goBack('view-subject')" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-xl shadow-md transition duration-200 flex items-center justify-center">
+                    العودة للمحاضرات <i class="fa-solid fa-list-check mr-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- MODAL: COMING SOON -->
+        <!-- ========================================== -->
+        <div id="coming-soon-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-40 fade-in px-4">
+            <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl relative">
+                <button onclick="closeComingSoon()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+                <div class="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-4 text-teal-600 text-4xl">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">قيد التجهيز</h3>
+                <p class="text-gray-600 mb-6">نعمل بصمت لتجهيز قسم <span id="modal-item-name" class="font-bold text-teal-600"></span>... انتظرونا في التحديث القادم.</p>
+                <button onclick="closeComingSoon()" class="w-full bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 rounded-xl transition duration-200 flex justify-center items-center gap-2">
+                    حسناً، سأنتظر <i class="fa-solid fa-check"></i>
+                </button>
+            </div>
+        </div>
+        <!-- ========================================== -->
+        <!-- MODAL: ABORT CONFIRMATION (نافذة تأكيد الإنهاء) -->
+        <!-- ========================================== -->
+        <div id="abort-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-40 fade-in px-4">
+            <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl relative">
+                <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4 text-red-600 text-4xl">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">إنهاء الاختبار؟</h3>
+                <p class="text-gray-600 mb-6">هل أنت متأكد أنك تريد إنهاء الاختبار الحالي والعودة؟ ستفقد جميع نقاطك وتقدمك الحالي في هذا التحدي.</p>
+                <div class="flex gap-3">
+                    <button onclick="confirmAbort()" class="w-1/2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition duration-200">
+                        نعم، إنهاء
+                    </button>
+                    <button onclick="cancelAbort()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 rounded-xl transition duration-200">
+                        إلغاء
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Engineered & Designed by) -->
+    <footer class="mt-auto bg-gray-50 border-t border-gray-200 py-6 relative">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-500 text-sm font-semibold flex items-center justify-center gap-2 mb-1">
+                <i class="fa-regular fa-copyright"></i> جميع الحقوق محفوظة لمنصة MedTech Hub 2026
+            </p>
+            <p class="text-teal-700 text-sm font-bold flex items-center justify-center gap-2 english-text">
+                <i class="fa-solid fa-code"></i> Engineered & Designed by: Ayman Farhan
+            </p>
+        </div>
+        <!-- Version Number hidden in corner -->
+        <div class="absolute bottom-2 right-4 text-gray-300 text-xs english-text font-bold opacity-70">
+            v1.0.0-beta
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- JAVASCRIPT LOGIC & DATABASE -->
+    <!-- ========================================== -->
+    <script>
+        // --- DATABASE ---
+        const quizDatabase = {
+            'except': [
+                {
+                    question: "All of the following are physiological changes during pregnancy EXCEPT:",
+                    options: ["Increased basal metabolic rate", "Decreased functional residual capacity (FRC)", "Increased minute ventilation", "Decreased cardiac output"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 2)",
+                    explanation: "Cardiac output and blood volume INCREASE during pregnancy to meet accelerated maternal and fetal metabolic demands."
+                },
+                {
+                    question: "Pregnancy is a contributing factor to failed intubation due to all the following EXCEPT:",
+                    options: ["Increase in breast size", "Increase in soft tissue mass around the airway", "Decrease in the reservoir of oxygen in the FRC", "Decrease in metabolic rate"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 2)",
+                    explanation: "Pregnancy results in an INCREASE in metabolic rate, which, combined with decreased FRC, increases the risk of hypoxia."
+                },
+                {
+                    question: "Supine hypotension (aortocaval compression) syndrome is characterized by all the following EXCEPT:",
+                    options: ["Hypotension", "Pallor and sweating", "Bradycardia", "Nausea and vomiting"],
+                    answer: 2,
+                    tag: "EXCEPT (Lect 2)",
+                    explanation: "The syndrome is characterized by pallor, tachycardia (not bradycardia), sweating, nausea, hypotension, and dizziness."
+                },
+                {
+                    question: "Preparation for anesthesia to prevent aspiration in pregnant women includes all the following EXCEPT:",
+                    options: ["Nil by mouth for at least 4 hours", "Reduction in gastric acid production", "Neutralization of any acid produced", "Decreasing lower esophageal sphincter tone"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 2)",
+                    explanation: "The goal is INCREASING lower esophageal sphincter tone (e.g., using metoclopramide) to prevent regurgitation."
+                },
+                {
+                    question: "Advantages of regional anesthesia for Caesarean section over general anesthesia include all EXCEPT:",
+                    options: ["Minimal risk of aspiration", "The neonate is more alert", "Better post-operative analgesia", "More 'hangover' effect for the mother"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 2)",
+                    explanation: "Regional anesthesia administers fewer drugs, resulting in LESS 'hangover' than after general anesthesia."
+                },
+                {
+                    question: "Major anatomical differences affecting airway management in neonates and infants include all EXCEPT:",
+                    options: ["Relatively large head and prominent occiput", "Relatively large tongue", "Short neck", "Longer trachea"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 3)",
+                    explanation: "Neonates and infants have a SHORTER trachea, along with narrower nasal passages and an anterior larynx."
+                },
+                {
+                    question: "Major physiological differences in the respiratory system of neonates include all EXCEPT:",
+                    options: ["Faster respiratory rate", "Lower lung compliance", "Greater chest wall compliance", "Increased functional residual capacity (FRC)"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 3)",
+                    explanation: "Neonates have a LOWER functional residual capacity (FRC), which leads to rapid desaturation during apnea."
+                },
+                {
+                    question: "Main causes of neonatal bradycardia and cardiac arrest during anesthesia include all EXCEPT:",
+                    options: ["Airway obstruction and hypoxia", "Hypothermia", "Succinylcholine administration", "Hyperglycemia"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 3)",
+                    explanation: "Metabolic causes of bradycardia include hypothermia, anemia, and HYPOglycemia, not hyperglycemia."
+                },
+                {
+                    question: "Neonates are highly liable to hypothermia due to all the following reasons EXCEPT:",
+                    options: ["Thin skin", "Low fat content", "Decreased surface area relative to weight", "Dry anesthetic gases"],
+                    answer: 2,
+                    tag: "EXCEPT (Lect 3)",
+                    explanation: "Neonates have a GREATER surface area relative to weight, which promotes greater heat loss."
+                },
+                {
+                    question: "The prolonged clinical duration of action of drugs like thiopental and fentanyl in neonates is due to all EXCEPT:",
+                    options: ["Larger intravascular and extracellular fluid compartments", "Immaturity of hepatic biotransformation pathways", "Decreased protein for drug binding", "Larger muscle mass"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 3)",
+                    explanation: "Neonates have a SMALLER muscle mass, which prolongs or delays the redistribution of these drugs."
+                },
+                {
+                    question: "Age-related physiological changes in the respiratory system include all EXCEPT:",
+                    options: ["Decreased lung compliance", "Decreased chest wall compliance", "Increased functional residual capacity (FRC)", "Increased total lung capacity (TLC)"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 4)",
+                    explanation: "Total lung capacity (TLC) is DECREASED in the elderly."
+                },
+                {
+                    question: "Age-related changes in body compartments include all EXCEPT:",
+                    options: ["Loss of skeletal muscle", "Decrease in total body water", "Increase in percentage of body fat", "Increase in intracellular water"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 4)",
+                    explanation: "There is a decrease in total body water (TBW) specifically due to a DECREASE in intracellular water."
+                },
+                {
+                    question: "To prevent Postoperative Cognitive Dysfunction (POCD) and delirium in the elderly, all the following drugs should ideally be avoided EXCEPT:",
+                    options: ["Benzodiazepines", "Meperidine", "Anticholinergics", "Paracetamol"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 4)",
+                    explanation: "Paracetamol is recommended as a regular simple analgesic. The others should be avoided."
+                },
+                {
+                    question: "During induction of anesthesia for an elderly patient, all of the following are true EXCEPT:",
+                    options: ["Arm-brain circulation time is increased", "Induction agent dose requirements are reduced", "Drugs should be titrated slowly", "Ketamine is highly recommended in the presence of cardiac disease"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 4)",
+                    explanation: "Ketamine should be AVOIDED in the presence of cardiac disease because it can cause tachycardia and hypertension."
+                },
+                {
+                    question: "Pharmacological changes in the elderly include all EXCEPT:",
+                    options: ["Reduced hepatic and renal blood flow", "Reduced plasma proteins", "Increased sensitivity to CNS depressants", "Minimum alveolar concentration (MAC) increases steadily with age"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 4)",
+                    explanation: "Minimum alveolar concentration (MAC) DECREASES steadily with age."
+                },
+                {
+                    question: "Obesity affects the respiratory system causing all the following EXCEPT:",
+                    options: ["Decreased functional residual capacity (FRC)", "Increased work of breathing", "Decreased lung compliance", "Decreased airway resistance"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 5)",
+                    explanation: "Obesity is associated with an INCREASE in airway resistance, resulting in rapid, shallow breathing patterns."
+                },
+                {
+                    question: "Obesity is associated with all the following cardiovascular disorders EXCEPT:",
+                    options: ["Systemic Hypertension", "Coronary Artery Disease", "Left ventricular hypertrophy", "Hypovolemia"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 5)",
+                    explanation: "Obesity-induced cardiomyopathy is associated with HYPERvolemia and increased cardiac output, not hypovolemia."
+                },
+                {
+                    question: "Regarding Obstructive Sleep Apnea (OSA) in obese patients, all are true EXCEPT:",
+                    options: ["Cessation of breathing for more than 10 seconds during sleep", "Causes hypoxemia and hypercapnia", "Causes daytime somnolence", "Affects at least 50% of morbidly obese patients"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 5)",
+                    explanation: "OSA affects at least 5% (not 50%) of morbidly obese patients."
+                },
+                {
+                    question: "During airway management of the obese patient, all are true EXCEPT:",
+                    options: ["Ramps are recommended to achieve optimal sniffing position", "Rapid decreases in arterial oxygenation may be seen with direct laryngoscopy", "Adequate preoxygenation is critical", "Laryngeal mask airways (LMAs) are absolutely indicated for routine elective use"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 5)",
+                    explanation: "LMAs remain relatively CONTRAINDICATED for elective use in morbidly obese patients, but are acceptable for emergency use."
+                },
+                {
+                    question: "Postoperative complications in obese patients include all EXCEPT:",
+                    options: ["Wound infection is twice as common", "Mechanical ventilation may be required if CO2 retention history exists", "Increased likelihood of deep vein thrombosis", "Decreased risk of pulmonary embolism"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 5)",
+                    explanation: "The likelihood of both deep vein thrombosis and pulmonary embolism is INCREASED in obese patients."
+                },
+                {
+                    question: "Common indications for thoracic surgery include all EXCEPT:",
+                    options: ["Chest trauma", "Malignancies of lungs and esophagus", "Mediastinal tumors", "Benign prostatic hyperplasia"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 6)",
+                    explanation: "Benign prostatic hyperplasia is a urological condition, not a thoracic surgery indication."
+                },
+                {
+                    question: "When preparing for rigid bronchoscopy for a foreign body in a child, all are true EXCEPT:",
+                    options: ["Sedative premedication should not be used", "Spontaneous ventilation is recommended", "Intubation should not be performed prior to rigid bronchoscopy", "Intravenous induction is preferred over inhalational induction"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 6)",
+                    explanation: "Inhalational induction (using sevoflurane or halothane in 100% oxygen) is recommended over IV induction."
+                },
+                {
+                    question: "Indications for One Lung Ventilation (OLV) include all EXCEPT:",
+                    options: ["Video-assisted thoracoscopic surgery (VATS)", "Lung protection from blood or pus", "Intensive care ventilation for a unilaterally diseased lung", "Median sternotomy for access to the thymus"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 6)",
+                    explanation: "Median sternotomy for thymus access is performed in the supine position and generally does not mandate OLV."
+                },
+                {
+                    question: "To treat gradual desaturation during one lung ventilation, all the following steps are appropriate EXCEPT:",
+                    options: ["Tell the surgeon early", "Turn the inspired oxygen up to 100%", "Apply PEEP to the ventilated lung", "Apply continuous negative pressure to the non-ventilated lung"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 6)",
+                    explanation: "You should apply continuous POSITIVE pressure (CPAP), not negative pressure, to the non-ventilated lung."
+                },
+                {
+                    question: "Factors that may contribute to postoperative hypoxemia after thoracotomy include all EXCEPT:",
+                    options: ["Pneumothorax", "Atelectasis", "Poor pain relief", "Fluid restriction"],
+                    answer: 3,
+                    tag: "EXCEPT (Lect 6)",
+                    explanation: "Fluid OVERLOAD, not fluid restriction, is a contributing factor to postoperative hypoxemia."
+                }
+            ],
+                        'sba': [
+                {
+                    question: "A 38-week pregnant woman is scheduled for an emergency Caesarean section. During RSI, you are unable to intubate the trachea. The patient is desaturating. What is the most appropriate next step in the failed intubation drill?",
+                    options: ["Continue attempting direct laryngoscopy with a smaller tube", "Administer more muscle relaxant", "Awaken the mother and consider a regional nerve block", "Proceed with surgery using a face mask"],
+                    answer: 2,
+                    tag: "SBA (Obstetrics)",
+                    explanation: "In obstetrics, if intubation fails during an elective or semi-urgent C-section, the standard drill is to awaken the mother and perform a regional block to avoid maternal hypoxia and aspiration."
+                },
+                {
+                    question: "A 2-year-old child is brought to the ER with sudden onset of stridor and choking after playing with small plastic toys. You are preparing for rigid bronchoscopy. Which induction technique is the safest and most recommended?",
+                    options: ["Intravenous Thiopental with Succinylcholine", "Inhalational induction with Sevoflurane in 100% Oxygen, maintaining spontaneous ventilation", "Intravenous Propofol with Rocuronium", "Awake fiberoptic intubation"],
+                    answer: 1,
+                    tag: "SBA (Pediatrics)",
+                    explanation: "For a suspected foreign body, inhalational induction (Sevoflurane) maintaining spontaneous ventilation is recommended to prevent dislodging the FB distally and to avoid the risks of positive pressure ventilation."
+                },
+                {
+                    question: "A 78-year-old male is recovering in the PACU after major abdominal surgery. He suddenly becomes highly agitated, confused, and delirious. Which of the following medications given intraoperatively is the most likely culprit?",
+                    options: ["Paracetamol", "Propofol", "Meperidine (Pethidine)", "Fentanyl"],
+                    answer: 2,
+                    tag: "SBA (Geriatrics)",
+                    explanation: "Meperidine, Benzodiazepines, and Anticholinergics should be avoided in the elderly as they heavily precipitate Postoperative Cognitive Dysfunction (POCD) and delirium."
+                },
+                {
+                    question: "A patient with a BMI of 45 is placed on the operating table. Despite 3 minutes of adequate preoxygenation, the patient's SpO2 drops rapidly to 85% within 40 seconds of inducing apnea for intubation. What is the primary physiological reason for this?",
+                    options: ["Increased airway resistance", "Decreased Functional Residual Capacity (FRC)", "Increased chest wall compliance", "Decreased cardiac output"],
+                    answer: 1,
+                    tag: "SBA (Obesity)",
+                    explanation: "Obesity significantly decreases FRC (especially supine). This means the oxygen reservoir in the lungs is very small, leading to rapid desaturation during apnea despite preoxygenation."
+                },
+                {
+                    question: "You are anesthetizing a patient for a left thoracotomy using a left-sided double-lumen tube (DLT). Five minutes after initiating one-lung ventilation (OLV), the SpO2 gradually drops from 99% to 90%. After informing the surgeon, what is your FIRST corrective action?",
+                    options: ["Apply CPAP to the non-ventilated lung", "Turn the inspired oxygen (FiO2) up to 100%", "Apply PEEP to the ventilated lung", "Convert immediately to two-lung ventilation"],
+                    answer: 1,
+                    tag: "SBA (Thoracic)",
+                    explanation: "For gradual desaturation during OLV, after telling the surgeon, the first immediate step is to turn FiO2 to 100%, followed by checking tube position and hemodynamics, then applying PEEP/CPAP."
+                },
+                {
+                    question: "A 65-year-old male is undergoing Transurethral Resection of the Prostate (TURP). Sixty minutes into the surgery, he becomes confused, his heart rate drops to 45 bpm, and he complains of visual disturbances. What is the most appropriate initial treatment?",
+                    options: ["Administer Hypotonic Saline", "Administer Atropine and Esmolol", "Administer Hypertonic Saline or Loop Diuretics", "Increase the rate of Glycine irrigation"],
+                    answer: 2,
+                    tag: "SBA (Urology)",
+                    explanation: "The patient is showing classic signs of TURP syndrome (water intoxication, hyponatremia, cerebral edema). Treatment relies on Mannitol, Hypertonic saline, or loop diuretics."
+                },
+                {
+                    question: "A pregnant woman at 39 weeks gestation is lying supine on the operating table prior to induction. She complains of nausea, dizziness, and begins to sweat. Her BP drops to 80/50 mmHg. What is the most effective and immediate mechanical maneuver to correct this?",
+                    options: ["Elevate her legs (Trendelenburg position)", "Administer a large fluid bolus", "Place a wedge under her right hip to create a left lateral tilt", "Perform immediate endotracheal intubation"],
+                    answer: 2,
+                    tag: "SBA (Obstetrics)",
+                    explanation: "She is experiencing Aortocaval Compression (Supine Hypotension Syndrome). Placing a wedge (>15°) under the right hip displaces the uterus off the inferior vena cava, restoring venous return."
+                },
+                {
+                    question: "A 4-week-old neonate requires surgery for pyloric stenosis. To estimate the correct internal diameter (ID) for an uncuffed endotracheal tube, which of the following sizes is most appropriate for a 3.5 kg full-term neonate?",
+                    options: ["2.5 mm", "3.0 mm", "3.5 mm", "4.0 mm"],
+                    answer: 2,
+                    tag: "SBA (Pediatrics)",
+                    explanation: "For neonates/infants weighing over 3000g, a 3.5 mm ID tube is appropriate. (Preterm <1500g = 2.5mm; 1500-3000g = 3.0mm)."
+                },
+                {
+                    question: "An 80-year-old patient with a history of hypertension and osteoarthritis is scheduled for hip replacement under spinal anesthesia. Why might this technique be technically challenging and potentially risky for this specific patient?",
+                    options: ["MAC is severely decreased in the elderly", "Osteoporosis and ligament laxity make spinal placement difficult and position changes risky", "Spinal anesthesia requires high doses of opioids", "The patient has a hyperactive baroreceptor reflex"],
+                    answer: 1,
+                    tag: "SBA (Geriatrics)",
+                    explanation: "Osteoporosis and ligament laxity in the elderly make neuraxial blocks technically difficult. Furthermore, vulnerable pressure points and joints are prone to dislocation or fracture during positioning."
+                },
+                {
+                    question: "A morbidly obese patient (BMI 45) is scheduled for laparoscopic surgery. Which position is highly recommended during the induction and intubation phase to optimize airway mechanics?",
+                    options: ["Flat supine position", "Trendelenburg position", "Ramped position (folded blankets under shoulders and head)", "Left lateral decubitus"],
+                    answer: 2,
+                    tag: "SBA (Obesity)",
+                    explanation: "Ramping the patient elevates the chest and brings the chin higher, offsetting the heavy chest weight, aligning the airway axes, and significantly improving the mechanics for ventilation and intubation."
+                },
+                {
+                    question: "During a right pneumonectomy, the surgeon closes the chest at the end of the procedure. A chest drain is placed into the empty pneumonectomy space. According to protocol, the drain is clamped but released for 5 minutes every hour. Why?",
+                    options: ["To instill local anesthetics for pain relief", "To allow the left lung to expand into the right cavity", "To ensure no air, blood, or excess fluid accumulates, which could cause cardiovascular collapse", "To prevent postoperative atrial fibrillation"],
+                    answer: 2,
+                    tag: "SBA (Thoracic)",
+                    explanation: "Fluid or air accumulation in the sealed pneumonectomy space can shift the mediastinum drastically, leading to severe cardiovascular collapse. Intermittent unclamping prevents this tension."
+                },
+                {
+                    question: "A patient with a bladder tumor is undergoing transurethral loop excision using diathermy. Suddenly, the patient's leg jerks violently. What nerve was stimulated, and what is the primary risk?",
+                    options: ["Femoral nerve; risk of bleeding", "Sciatic nerve; risk of bone fracture", "Obturator nerve; risk of bladder perforation", "Pudendal nerve; risk of urethral tear"],
+                    answer: 2,
+                    tag: "SBA (Urology)",
+                    explanation: "Diathermy can directly stimulate the obturator nerve, causing severe jerking of the leg. This sudden movement can push the bladder wall into the cutting loop, causing bladder perforation."
+                },
+                {
+                    question: "You are preparing a 3-year-old child (15 kg) for elective hernia repair. The child has been fasting properly. To calculate the maintenance fluid requirement using the 4-2-1 rule, what is the hourly IV fluid rate?",
+                    options: ["15 mL/h", "30 mL/h", "50 mL/h", "60 mL/h"],
+                    answer: 2,
+                    tag: "SBA (Pediatrics)",
+                    explanation: "4-2-1 rule: First 10 kg = 40 mL. Next 5 kg (15 - 10) = 5 x 2 = 10 mL. Total = 40 + 10 = 50 mL/h."
+                },
+                {
+                    question: "A patient with known Obstructive Sleep Apnea (OSA) and severe obesity undergoes abdominal surgery. In the PACU, what is the safest position for this patient to recover in?",
+                    options: ["Supine position", "Prone position", "Head-up to sitting position", "Trendelenburg position"],
+                    answer: 2,
+                    tag: "SBA (Obesity)",
+                    explanation: "Ideally, obese patients (especially those with OSA) should recover in a head-up or sitting position to keep the heavy abdominal contents off the diaphragm and maintain a patent upper airway."
+                },
+                {
+                    question: "During an elective Cesarean section under general anesthesia, after delivering the baby, the obstetrician requests an oxytocin bolus to contract the uterus. The patient has a history of severe mitral stenosis, and tachycardia must be strictly avoided. How should the oxytocin be administered?",
+                    options: ["Give 10 IU rapid IV push", "Do not give oxytocin; use Ergometrine instead", "Give an IV infusion of 30-50 IU in 500 mL of crystalloid over 4 hours", "Give 5 IU intramuscularly only"],
+                    answer: 2,
+                    tag: "SBA (Obstetrics)",
+                    explanation: "A rapid IV bolus of oxytocin causes severe tachycardia and hypotension. If tachycardia must be avoided, a slow IV infusion (30-50 IU in 500 mL over 4 hours) is effective and hemodynamically stable."
+                }
+            ],
+                        'ministerial': [
+                // --- Gynecology & Obstetrics ---
+                {
+                    question: "In pneumoperitoneum, all true EXCEPT:",
+                    options: ["Functional residual capacity was decreased", "Intra-abdominal pressure decreased", "Chest wall and lung compliance are both decreased", "Decreased venous return and cardiac output"],
+                    answer: 1,
+                    tag: "MINISTERIAL",
+                    explanation: "Intra-abdominal pressure INCREASES during pneumoperitoneum, it does not decrease."
+                },
+                {
+                    question: "For Abdominal hysterectomy all true EXCEPT:",
+                    options: ["Time 1 hr, often longer", "Pain +++", "Lithotomy position", "Practical techniques GA, ETT, IPPV"],
+                    answer: 2,
+                    tag: "MINISTERIAL",
+                    explanation: "Abdominal hysterectomy is performed in the supine position. Lithotomy is for vaginal hysterectomy."
+                },
+                {
+                    question: "Regarding indications for general anesthesia in obstetric, all true EXCEPT:",
+                    options: ["Maternal request", "Regional anesthesia contraindication", "Failed regional anesthesia", "Urgent surgery", "Full stomach patient"],
+                    answer: 4,
+                    tag: "MINISTERIAL",
+                    explanation: "A full stomach is a risk factor, not an indication for GA. Regional is safer for full stomach."
+                },
+                {
+                    question: "Which maneuver is performed to correct hypotension caused by aortocaval compression?",
+                    options: ["Massaging the abdomen", "Turning the patient on left side", "Administering medication", "Increasing fluid intake"],
+                    answer: 1,
+                    tag: "MINISTERIAL",
+                    explanation: "Turning the patient on the left side relieves pressure on the inferior vena cava."
+                },
+                {
+                    question: "Physiological changes during pregnancy all true EXCEPT:",
+                    options: ["Cardiac output and blood volume increase", "Fibrinogen and concentrations of factors VII, VIII, IX, X, and XII all decrease", "High risk for regurgitation and pulmonary aspiration", "Reduced functional residual capacity"],
+                    answer: 1,
+                    tag: "MINISTERIAL",
+                    explanation: "Pregnancy is a hypercoagulable state; fibrinogen and clotting factors INCREASE."
+                },
+                {
+                    question: "Advantage of epidural anesthesia during labor, all true EXCEPT:",
+                    options: ["Faster and easier to administer than IV pain medication", "Provide better pain relief than systemic analgesia", "Allow the mother to remain awake and participate in birth", "Reduce the risk of side effects for both mother and baby", "Profound hypotension is common"],
+                    answer: 4,
+                    tag: "MINISTERIAL",
+                    explanation: "Profound hypotension is more common with spinal anesthesia, not epidural."
+                },
+                {
+                    question: "About vagal stimulation in gynecological procedures:",
+                    options: ["Cause tachycardia", "Occur during cervical dilatation", "Occur during open more than laparoscopic procedures", "Prevented by lithotomy position"],
+                    answer: 1,
+                    tag: "MINISTERIAL",
+                    explanation: "Vagal stimulation typically occurs during cervical dilatation and causes bradycardia, not tachycardia."
+                },
+                {
+                    question: "Specific anesthetic consideration during gynecological surgery include:",
+                    options: ["PONV is a particular problem", "Pelvic surgery is associated with DVT", "Vagal stimulation may occur during cervical dilatation", "Prophylactic antibiotics reduce post-operative wound infection", "All of the above"],
+                    answer: 4,
+                    tag: "MINISTERIAL",
+                    explanation: "All options represent specific and critical considerations for gynecology."
+                },
+
+                // --- Pediatrics ---
+                {
+                    question: "Anatomical changes in pediatric include:",
+                    options: ["Large head and tongue", "Lung less compliance", "More prone for hypoxia", "Narrowest part is cricoid cartilage", "All of the above"],
+                    answer: 4,
+                    tag: "MINISTERIAL",
+                    explanation: "All these represent the classic anatomical challenges in pediatric anesthesia."
+                },
+                {
+                    question: "All the following of the breathing systems are used in pediatric EXCEPT:",
+                    options: ["Ayre's T-piece", "Mapleson F", "Mapleson H", "Circle system"],
+                    answer: 2,
+                    tag: "MINISTERIAL",
+                    explanation: "There is no 'Mapleson H' in standard breathing system classifications."
+                },
+                {
+                    question: "All the following can cause bradycardia in a child under GA EXCEPT:",
+                    options: ["Airway obstruction", "Neostigmine", "Succinylcholine", "Ketamine"],
+                    answer: 3,
+                    tag: "MINISTERIAL",
+                    explanation: "Ketamine typically causes tachycardia due to sympathetic stimulation."
+                },
+                {
+                    question: "The maintenance fluid requirement for pediatric patients according to the 4:2:1 rule:",
+                    options: ["2 mL/kg/h for the first 10 kg of weight", "1 mL/kg/h for 2nd 10 kilogram", "4 mL/kg/h for the first 10 kg of weight", "4 mL/kg/h for each remaining kilogram"],
+                    answer: 2,
+                    tag: "MINISTERIAL",
+                    explanation: "The rule starts with 4 mL/kg/h for the first 10 kg."
+                },
+                {
+                    question: "To estimate weight for a pediatric patient (1-12 months), which formula is true?",
+                    options: ["(0.5 x age in months) + 8", "(0.5 x age in months) + 4", "(2 x age in months) + 8", "(3 x age in months) + 7"],
+                    answer: 1,
+                    tag: "MINISTERIAL",
+                    explanation: "For infants under 1 year, weight = (0.5 x age in months) + 4."
+                },
+                {
+                    question: "The elderly people similarities with infant in?",
+                    options: ["Increased lung compliance", "Increased arterial oxygen tension and impaired ability to cough", "Increased renal tubular function", "Increased susceptibility to hypothermia"],
+                    answer: 3,
+                    tag: "MINISTERIAL",
+                    explanation: "Both extremes of age have poor thermoregulation and are highly susceptible to hypothermia."
+                },
+                {
+                    question: "What is the major physiological difference in glucose homeostasis between neonates and adults?",
+                    options: ["Neonates have reduced glycogen stores", "Neonates have increased glycogen stores", "Neonates have faster glucose metabolism", "Neonates have slower glucose metabolism"],
+                    answer: 0,
+                    tag: "MINISTERIAL",
+                    explanation: "Neonates have low glycogen stores, making them prone to hypoglycemia."
+                },
+                {
+                    question: "Regarding pediatrics GA, all are true EXCEPT:",
+                    options: ["The anesthetist's fingers should rest only on the mandible", "Clear masks allow respiration and the presence of vomitus to be observed", "Atropine should be given intravenously prior to succinylcholine", "Solids should not be given for at least 7 hrs before induction"],
+                    answer: 3,
+                    tag: "MINISTERIAL",
+                    explanation: "Solids are restricted for 6 hours, not 7 hours."
+                },
+
+                // --- Geriatrics ---
+                {
+                    question: "Induction of anesthesia for elderly patient:",
+                    options: ["Arm-brain circulation time is increased", "Induction agent dose requirements increase", "Titrate drugs injected rapidly", "Thiopentone or propofol should be given rapidly"],
+                    answer: 0,
+                    tag: "MINISTERIAL",
+                    explanation: "Due to decreased cardiac output, arm-brain circulation time is prolonged."
+                },
+                {
+                    question: "Hourly monitoring of urine output after major surgery in elderly patients is important because:",
+                    options: ["To assess pain levels", "To monitor kidney function", "To track fluid intake", "To assess level of consciousness"],
+                    answer: 1,
+                    tag: "MINISTERIAL",
+                    explanation: "Renal function can deteriorate rapidly in hypovolemic elderly patients."
+                },
+                {
+                    question: "Hypoxemia and airways collapse mostly occur in older patient because of increase in:",
+                    options: ["Total lung capacity", "Chest wall compliance", "Closing capacity than FRC", "Functional residual capacity (FRC)"],
+                    answer: 2,
+                    tag: "MINISTERIAL",
+                    explanation: "Closing capacity increases with age and may exceed FRC, leading to airway collapse."
+                },
+                {
+                    question: "Which of the following physiologic changes occurs in the geriatric patient?",
+                    options: ["Decreased lung compliance", "Increased O2 consumption", "Decreased residual volume", "Decreased closing volume"],
+                    answer: 0,
+                    tag: "MINISTERIAL",
+                    explanation: "Lung elasticity and compliance decrease with aging."
+                },
+                {
+                    question: "According to anesthesia of elderly patients which one is correct?",
+                    options: ["High MAC is recommended", "Decrease the requirement dose of anesthetic drugs", "High dose of propofol is preferred", "Ketamine is safe in CVS diseases"],
+                    answer: 1,
+                    tag: "MINISTERIAL",
+                    explanation: "Dose requirements for anesthetic drugs are decreased in the elderly."
+                },
+                {
+                    question: "Which analgesic is commonly prescribed for elderly patients as a simple pain reliever after surgery?",
+                    options: ["Morphine", "Paracetamol", "Ibuprofen", "Ketamine"],
+                    answer: 1,
+                    tag: "MINISTERIAL",
+                    explanation: "Paracetamol is the recommended regular simple analgesic."
+                },
+                {
+                    question: "All the following common in elderly EXCEPT:",
+                    options: ["Ischemic heart disease", "Diabetes mellitus", "Increase functional reserve", "Post operative confusion"],
+                    answer: 2,
+                    tag: "MINISTERIAL",
+                    explanation: "Functional reserve is significantly DECREASED in the elderly."
+                },
+
+                // --- Obesity ---
+                {
+                    question: "All of the followings are respiratory changes in supine position in obese patient EXCEPT:",
+                    options: ["Rapid shallow breathing", "Increase in lung compliance", "Decrease in functional residual capacity", "Increase in work of breathing"],
+                    answer: 1,
+                    tag: "MINISTERIAL",
+                    explanation: "Lung compliance is DECREASED in obese patients, not increased."
+                },
+                {
+                    question: "Optimal position that provide best intubation in the obese patient:",
+                    options: ["Trendelenburg position", "Lateral decubitus position", "Supine position", "Sniffing/ramp position"],
+                    answer: 3,
+                    tag: "MINISTERIAL",
+                    explanation: "The Ramping (sniffing) position is optimal to align the airway axes."
+                },
+                {
+                    question: "Obstructive sleep apnea:",
+                    options: ["Snoring", "Type II respiratory failure", "Day time somnolence", "Cause sleep disturbance", "All of the above"],
+                    answer: 4,
+                    tag: "MINISTERIAL",
+                    explanation: "All listed options are characteristic features of OSA."
+                },
+                {
+                    question: "By studying Obstructive Sleep Apnea (OSA), the following statements are true EXCEPT:",
+                    options: ["OSA is cessation of breathing for more than 10 seconds during sleep", "At least 50% of morbidly obese patients will have OSA", "Caused by passive collapse of the pharyngeal airway", "Treatment includes CPAP"],
+                    answer: 1,
+                    tag: "MINISTERIAL",
+                    explanation: "It affects at least 5% (not 50%) of morbidly obese patients."
+                },
+                {
+                    question: "Postoperative considerations for Extubation in obese patients are all true EXCEPT:",
+                    options: ["Delayed until effects of NMBAs completely reversed", "Stable hemodynamics", "Fully awake", "Supine position"],
+                    answer: 3,
+                    tag: "MINISTERIAL",
+                    explanation: "They should be extubated in a head-up/sitting position, not supine."
+                },
+                {
+                    question: "Rapid desaturation in the obese is secondary to?",
+                    options: ["Decrease FRC", "Decreased oxygen consumption", "Increase closing capacity", "None of the above"],
+                    answer: 0,
+                    tag: "MINISTERIAL",
+                    explanation: "Decreased FRC drastically reduces the oxygen reservoir."
+                },
+
+                // --- Thoracic Surgery ---
+                {
+                    question: "How long should oxygen be administered to patients after thoracotomy?",
+                    options: ["6 hours", "12 hours", "24 hours", "48 hours"],
+                    answer: 2,
+                    tag: "MINISTERIAL",
+                    explanation: "Oxygen should be administered for 24 hours postoperatively."
+                },
+                {
+                    question: "Which of the following is NOT an indication of one lung ventilation?",
+                    options: ["Video-assisted thoracoscopic surgery (VATS)", "Lung protection from blood or pus", "Intensive care ventilation", "Thymectomy"],
+                    answer: 3,
+                    tag: "MINISTERIAL",
+                    explanation: "Thymectomy (via median sternotomy) does not routinely require OLV."
+                },
+                {
+                    question: "To treat hypoxemia during one lung ventilation, all are used EXCEPT:",
+                    options: ["Turn the inspired oxygen up to 100%", "Applying positive end expiratory pressure (PEEP) to the ventilated lung", "Salbutamol", "Application of continuous positive pressure (CPAP) to the non-ventilated lung"],
+                    answer: 2,
+                    tag: "MINISTERIAL",
+                    explanation: "Salbutamol is a bronchodilator and is not the protocol for treating gradual desaturation during OLV."
+                },
+                {
+                    question: "About rigid bronchoscope, all true EXCEPT:",
+                    options: ["Esophageal FB may present with respiratory distress", "The majority of FBs will not be radio-opaque", "Sedative premedication should not be used", "Inhalational induction should not be used"],
+                    answer: 3,
+                    tag: "MINISTERIAL",
+                    explanation: "Inhalational induction SHOULD be used (e.g., Sevoflurane in 100% O2)."
+                },
+                {
+                    question: "Factor that may be contributed to increase post-operative hypoxemia in pt with thoracic surgery include all EXCEPT:",
+                    options: ["Poor pain control", "Oxygen supplementation", "Lung atelectasis", "Fluid overload"],
+                    answer: 1,
+                    tag: "MINISTERIAL",
+                    explanation: "Oxygen supplementation PREVENTS hypoxemia; it does not contribute to it."
+                },
+                {
+                    question: "Regarding the presentation of Inhalation of a foreign body in children all true EXCEPT:",
+                    options: ["Cough", "Choking", "Respiratory distress", "Stridor", "Hypopnea"],
+                    answer: 4,
+                    tag: "MINISTERIAL",
+                    explanation: "Tachypnea (fast breathing) is seen, not hypopnea (slow/shallow breathing)."
+                },
+                {
+                    question: "Techniques For OLV all true EXCEPT:",
+                    options: ["Double lumen tube", "Bronchial blocker", "Single lumen tube inserted beyond the carina", "None of the above"],
+                    answer: 3,
+                    tag: "MINISTERIAL",
+                    explanation: "All listed techniques A, B, and C are valid methods for OLV."
+                },
+
+                // --- Urological Surgery ---
+                {
+                    question: "About Nephrectomy, all true EXCEPT:",
+                    options: ["Attention to the patient's head and airway is very important", "Lateral position with the flank raised", "Risk of pneumothorax", "A chest drain may be inserted", "Minimally invasive surgery"],
+                    answer: 4,
+                    tag: "MINISTERIAL",
+                    explanation: "Nephrectomy is considered a MAJOR surgery, not a minimally invasive one."
+                },
+                {
+                    question: "Which one is true about post-operative analgesia for TURP surgery:",
+                    options: ["Epidural analgesia", "Rectus sheath catheter", "TAP block", "Oral paracetamol", "All of the above"],
+                    answer: 4,
+                    tag: "MINISTERIAL",
+                    explanation: "All of these techniques can be part of post-operative analgesia protocols."
+                },
+                {
+                    question: "TURP syndrome: this is a complex syndrome which may involve all the following changes EXCEPT:",
+                    options: ["Hypo-osmolality", "Hypernatremia", "Hyperglycemia", "Intravascular fluid shifts"],
+                    answer: 1,
+                    tag: "MINISTERIAL",
+                    explanation: "It involves HYPOnatremia (low sodium), not hypernatremia."
+                },
+                {
+                    question: "Signs of TURP syndrome all true EXCEPT:",
+                    options: ["Hyper or hypotension", "Convulsions", "Tachycardia", "Visual disturbance", "Confusion"],
+                    answer: 2,
+                    tag: "MINISTERIAL",
+                    explanation: "Bradycardia is a sign, not tachycardia."
+                },
+                {
+                    question: "What is the potential risk during a lateral position with the flank raised (kidney position) for surgical access, and how can it be addressed:",
+                    options: ["Risk of brachial plexus injury; addressed by avoiding shoulder abduction", "Risk of pneumothorax; addressed by manually inflating the lungs before pleural closure", "Risk of spinal cord compression; addressed by proper padding", "Risk of airway obstruction; addressed by head and neck support"],
+                    answer: 1,
+                    tag: "MINISTERIAL",
+                    explanation: "Pleural perforation is a specific risk in the kidney position; manual inflation before closure helps prevent issues."
+                },
+                {
+                    question: "Bladder tumor surgery - All true EXCEPT:",
+                    options: ["Can be done by face mask anesthesia", "Need large I.v cannula", "Stimulation of femoral nerve leads to jerky movement of the leg", "Lithotomy position is used"],
+                    answer: 2,
+                    tag: "MINISTERIAL",
+                    explanation: "It is the stimulation of the OBTURATOR nerve, not the femoral nerve."
+                },
+                {
+                    question: "Choose the correct answer about Nephrectomy:",
+                    options: ["Attention to the patient's head and airway is very important", "Lateral position with the flank raised", "Risk of pneumothorax", "All of the above"],
+                    answer: 3,
+                    tag: "MINISTERIAL",
+                    explanation: "All listed points are critical considerations for a nephrectomy."
+                }
+            ],
+                        'lect2': [
+                {
+                    question: "What is the recommended size of the endotracheal tube (ETT) for general anesthesia in pregnant patients?",
+                    options: ["7.0 - 7.5 mm", "6.0 - 6.5 mm", "5.0 - 5.5 mm", "8.0 - 8.5 mm"],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "Capillary engorgement of the respiratory mucosa during pregnancy predisposes the upper airways to trauma and bleeding. Therefore, gentle laryngoscopy and smaller ETTs (6-6.5 mm) should be employed."
+                },
+                {
+                    question: "Which of the following respiratory parameters decreases during pregnancy?",
+                    options: ["Minute ventilation", "Tidal volume", "Oxygen consumption", "Functional Residual Capacity (FRC)"],
+                    answer: 3,
+                    tag: "Recall",
+                    explanation: "FRC decreases by 20% during pregnancy. Minute ventilation, tidal volume, and oxygen consumption all increase."
+                },
+                {
+                    question: "What is the average blood loss during a normal vaginal delivery?",
+                    options: ["100 - 200 mL", "400 - 500 mL", "800 - 1000 mL", "1500 - 2000 mL"],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "Average blood loss during vaginal delivery is 400-500 mL, whereas it is 800-1000 mL for a Cesarean section."
+                },
+                {
+                    question: "About vagal stimulation in gynecological procedures, it most commonly occurs during:",
+                    options: ["Endotracheal intubation", "Cervical dilatation", "Skin incision", "Uterine contraction"],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "According to the past paper and lecture, vagal stimulation may occur during cervical dilatation, traction on the pelvic organs, or during laparoscopic procedures."
+                },
+                {
+                    question: "What happens to serum pseudocholinesterase activity at term pregnancy?",
+                    options: ["Increases by 50%", "Decreases by 25-30%", "Remains completely unchanged", "Decreases by 80%"],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "A 25-30% decrease in serum pseudocholinesterase activity is present at term, but it rarely produces significant prolongation of succinylcholine's action."
+                },
+                {
+                    question: "At which intervertebral space is a spinal anesthetic typically performed for a Caesarean section?",
+                    options: ["T10 / T11", "L1 / L2", "L3 / L4", "L5 / S1"],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "Spinal anesthetic is performed at the L3/4 interspace, usually using a 25G or smaller pencil-point needle."
+                },
+                {
+                    question: "In pneumoperitoneum (insufflating the abdomen with gas), all of the following physiological changes are true EXCEPT:",
+                    options: [
+                        "Functional residual capacity was decreased",
+                        "Intra-abdominal pressure decreased",
+                        "Chest wall and lung compliance are both decreased",
+                        "Decreased venous return and cardiac output"
+                    ],
+                    answer: 1,
+                    tag: "EXCEPT",
+                    explanation: "Pneumoperitoneum INCREASES intra-abdominal pressure. This is a direct question from the ministerial past papers."
+                },
+                {
+                    question: "Which maneuver is performed to correct hypotension caused by aortocaval compression syndrome?",
+                    options: [
+                        "Massaging the abdomen",
+                        "Turning the patient on the left side",
+                        "Administering large doses of medication",
+                        "Increasing fluid intake orally"
+                    ],
+                    answer: 1,
+                    tag: "SBA",
+                    explanation: "Turning the patient on her left side (often by placing a wedge >15° under the right hip) relieves the compression of the gravid uterus on the inferior vena cava."
+                },
+                {
+                    question: "For an Abdominal Hysterectomy, all of the following statements are true EXCEPT:",
+                    options: [
+                        "Time 1 hr, often longer",
+                        "Pain is very severe (+++)",
+                        "Lithotomy position",
+                        "Blood loss is 250-500 ml"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT",
+                    explanation: "An Abdominal Hysterectomy is performed in the SUPINE, head-down position. The Lithotomy position is used for Vaginal Hysterectomy."
+                },
+                {
+                    question: "Regarding indications for General Anesthesia in obstetrics, all are true EXCEPT:",
+                    options: [
+                        "Maternal request",
+                        "Regional anesthesia contraindication",
+                        "Failed regional anesthesia",
+                        "Full stomach patient"
+                    ],
+                    answer: 3,
+                    tag: "EXCEPT",
+                    explanation: "Having a 'full stomach' is a risk factor for aspiration, not an indication to choose General Anesthesia. In fact, regional anesthesia is preferred specifically to avoid airway issues in full-stomach pregnant patients."
+                },
+                {
+                    question: "Dilatational anemia seen in pregnant women is primarily due to:",
+                    options: [
+                        "Iron deficiency due to low dietary intake",
+                        "Increased destruction of RBCs",
+                        "Faster blood flow throughout the body",
+                        "Plasma volume increasing more than RBC mass"
+                    ],
+                    answer: 3,
+                    tag: "SBA",
+                    explanation: "An increase (55%) in plasma volume in excess of an increase in red cell mass (45%) produces dilutional anemia and reduces blood viscosity."
+                },
+                {
+                    question: "Specific anesthetic considerations during gynecological surgery include all of the following EXCEPT:",
+                    options: [
+                        "PONV is a particular problem",
+                        "Pelvic surgery is associated with DVT",
+                        "Prophylactic antibiotics reduce post-operative wound infection",
+                        "Many patients are not apprehensive"
+                    ],
+                    answer: 3,
+                    tag: "EXCEPT",
+                    explanation: "The lecture states that many patients ARE apprehensive, even for relatively minor surgery."
+                },
+                {
+                    question: "During labor and vaginal delivery, which opioid is generally AVOIDED because it appears to cause greater respiratory depression in the fetus?",
+                    options: ["Fentanyl", "Meperidine (Pethidine)", "Morphine", "Ketamine"],
+                    answer: 2,
+                    tag: "SBA",
+                    explanation: "Morphine is not used because it causes greater respiratory depression in the fetus than meperidine."
+                },
+                {
+                    question: "Cardiovascular changes in pregnancy include all of the following EXCEPT:",
+                    options: [
+                        "Average blood loss in normal labor is 400-500 ml",
+                        "At term, supine hypotension syndrome is common",
+                        "Pregnancy is a hypercoagulable state",
+                        "Increase in RBC mass is more than plasma volume"
+                    ],
+                    answer: 3,
+                    tag: "EXCEPT",
+                    explanation: "Plasma volume increases (55%) MORE than red blood cell mass (45%), which is why dilutional anemia occurs."
+                },
+                {
+                    question: "In Aortocaval compression syndrome, all of the following are true EXCEPT:",
+                    options: [
+                        "It is characterized by hypotension, pallor and sweating",
+                        "It occurs because of occlusion of the superior vena cava",
+                        "Treatment is to put a wedge under the right hip",
+                        "Can readily produce fetal asphyxia"
+                    ],
+                    answer: 1,
+                    tag: "EXCEPT",
+                    explanation: "It occurs due to the complete or near-complete occlusion of the INFERIOR vena cava by the gravid uterus, not the superior vena cava."
+                },
+                {
+                    question: "Bradycardia is a common occurrence after peritoneal insufflation during laparoscopic surgeries. Occasionally, this vagal response can lead to:",
+                    options: ["Atrial Fibrillation", "Asystole", "Ventricular Tachycardia", "Hypertensive crisis"],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "Bradycardia is a common occurrence after peritoneal insufflation, and occasionally asystole (cardiac arrest) occurs due to severe vagal stimulation."
+                },
+                {
+                    question: "A 22-year-old pregnant female with a history of obesity presents for an elective Caesarean section. On examination, she has a short neck and clear chest. Which type of anesthesia is the first choice?",
+                    options: [
+                        "General anesthesia with muscle relaxant and intubation",
+                        "Spinal anesthesia with isobaric bupivacaine",
+                        "Sedation and mask ventilation without muscle relaxant",
+                        "Spinal anesthesia with hyperbaric bupivacaine"
+                    ],
+                    answer: 3,
+                    tag: "Clinical SBA",
+                    explanation: "This is a direct ministerial question. Regional anesthesia (Spinal) is preferred and safer than GA, especially in a patient with an expected difficult airway (obesity + short neck). Hyperbaric bupivacaine is standard for spinal C-sections."
+                },
+                {
+                    question: "A 32-year-old parturient requires an emergency C-section. GA is induced. During apnea before intubation, her oxygen saturation drops much faster than a normal adult. What is the primary physiological reason for this rapid desaturation?",
+                    options: [
+                        "Increased FRC and decreased minute ventilation",
+                        "Combination of decreased FRC and increased oxygen consumption",
+                        "Aortocaval compression causing reduced pulmonary blood flow",
+                        "Capillary engorgement of the respiratory mucosa"
+                    ],
+                    answer: 1,
+                    tag: "Clinical SBA",
+                    explanation: "The combination of decreased Functional Residual Capacity (less oxygen reserve) and increased oxygen metabolic demands (+20 to 50%) promotes very rapid oxygen desaturation during periods of apnea."
+                },
+                {
+                    question: "Pregnancy is a contributing factor to failed intubation due to several anatomical and physiological changes. These include all of the following EXCEPT:",
+                    options: [
+                        "Increase in breast size impeding laryngoscopy",
+                        "Increase in soft tissue mass around the airway",
+                        "Decreased basal metabolic rate",
+                        "Decrease in the reservoir of oxygen in the FRC"
+                    ],
+                    answer: 2,
+                    tag: "Analysis / EXCEPT",
+                    explanation: "Pregnancy causes an INCREASED basal metabolic rate, not decreased. The other options are correct reasons why obstetric airways are challenging."
+                },
+                {
+                    question: "After the injection of a spinal anesthetic solution for a Caesarean section, the woman is moved to a supine position with a left lateral tilt. If severe supine hypotension occurs despite the tilt, what is the recommended action?",
+                    options: [
+                        "Administer General Anesthesia immediately",
+                        "Temporarily move the woman to a full lateral position",
+                        "Place the patient in a severe head-up position",
+                        "Extubate the patient"
+                    ],
+                    answer: 1,
+                    tag: "Clinical Analysis",
+                    explanation: "According to the spinal anesthesia technique protocol in the lecture: 'If supine hypotension occurs, increase the tilt, or, if severe, temporarily move the woman to a full lateral position'."
+                }
+            ],
+                        'lect3': [
+                {
+                    question: "The narrowest part in the infant airway is at the:",
+                    options: ["Vocal cords", "Cricoid cartilage", "Thyroid cartilage", "Nasopharynx"],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "The narrowest part of the airway in neonates and infants is at the cricoid cartilage (below the vocal cords), whereas in adults, it is at the vocal cords."
+                },
+                {
+                    question: "The larynx position in infants is located at the level of:",
+                    options: ["C2 - C3", "C5 - C6", "C3 - C4", "C4 - C5"],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "In infants, the larynx has a high, anterior position at the level of C3-C4, compared to C5-C6 in adults."
+                },
+                {
+                    question: "The best IV fluid for maintenance in pediatric patients is:",
+                    options: ["NaCl 0.9%", "Ringer lactate", "Dextrose saline (0.18% saline in 4% dextrose)", "5% Dextrose only"],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "The ideal maintenance solution is 0.18% saline in 4% dextrose with added potassium chloride (KCl) 20mmol/L if required."
+                },
+                {
+                    question: "Which formula is correct to estimate the weight for a pediatric patient (aged 1-5 years)?",
+                    options: ["(0.5 x age in months) + 4", "(2 x age in years) + 8", "(3 x age in years) + 7", "(age in years) / 2 + 4"],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "For children 1-5 years, the formula is (2 x age in years) + 8. The formula (0.5 x age in months) + 4 is for infants 0-12 months."
+                },
+                {
+                    question: "What is the major physiological difference in glucose homeostasis between neonates and adults?",
+                    options: [
+                        "Neonates have increased glycogen stores",
+                        "Neonates have faster glucose metabolism",
+                        "Neonates have reduced glycogen stores",
+                        "Neonates have no glucose metabolism"
+                    ],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "Neonates have relatively reduced glycogen stores, predisposing them to hypoglycemia."
+                },
+                {
+                    question: "The maintenance fluid requirement for pediatric patients according to the 4:2:1 rule for the FIRST 10 kg of weight is:",
+                    options: ["1 mL/kg/h", "2 mL/kg/h", "4 mL/kg/h", "10 mL/kg/h"],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "The 4:2:1 rule states: 4 mL/kg/h for the first 10 kg, 2 mL/kg/h for the second 10 kg, and 1 mL/kg/h for each remaining kilogram."
+                },
+                {
+                    question: "All of the following are anatomical differences in neonates and infants EXCEPT:",
+                    options: [
+                        "Large head and prominent occiput",
+                        "Large mandible",
+                        "Narrower nasal passages",
+                        "Long, U-shaped epiglottis"
+                    ],
+                    answer: 1,
+                    tag: "EXCEPT",
+                    explanation: "Neonates and infants characteristically have a SMALL mandible, not a large one. This contributes to airway obstruction."
+                },
+                {
+                    question: "All the following are causes of hypothermia in pediatrics EXCEPT:",
+                    options: [
+                        "Thin skin",
+                        "Low fat content",
+                        "Low body surface area relative to weight",
+                        "Inadequately warmed operating rooms"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT",
+                    explanation: "Children have a GREATER (higher) surface area relative to their weight, which promotes greater heat loss to the environment."
+                },
+                {
+                    question: "All the following can cause bradycardia in a child under General Anesthesia EXCEPT:",
+                    options: [
+                        "Airway obstruction",
+                        "Succinylcholine",
+                        "Ketamine",
+                        "Hypothermia"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT",
+                    explanation: "Ketamine typically causes tachycardia (increased heart rate) due to sympathetic stimulation. Airway obstruction, succinylcholine, and hypothermia are common causes of bradycardia."
+                },
+                {
+                    question: "All of the following breathing systems are commonly used in pediatrics EXCEPT:",
+                    options: [
+                        "Ayre's T-piece",
+                        "Mapleson F",
+                        "Mapleson A",
+                        "Jackson-Rees modification"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT",
+                    explanation: "Mapleson F (Jackson-Rees modification of Ayre's T-piece) is traditionally used. Mapleson A is generally not preferred for pediatric patients weighing less than 10kg."
+                },
+                {
+                    question: "How does a neonate or infant primarily increase their minute ventilation?",
+                    options: [
+                        "By increasing tidal volume significantly",
+                        "By increasing both tidal volume and respiratory rate equally",
+                        "By increasing respiratory rate only",
+                        "By increasing functional residual capacity"
+                    ],
+                    answer: 2,
+                    tag: "SBA",
+                    explanation: "Children's tidal volume is relatively fixed (5-7 ml/kg). Therefore, an infant can only increase minute ventilation by increasing their respiratory rate."
+                },
+                {
+                    question: "Regarding pediatrics General Anesthesia, all are true EXCEPT:",
+                    options: [
+                        "Clear masks allow respiration and vomitus to be observed",
+                        "Atropine should be given intravenously prior to succinylcholine",
+                        "Solids (including breast/formula milk) should not be given for at least 7 hrs before induction",
+                        "The anesthetist's fingers should rest only on the mandible"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT",
+                    explanation: "Solids, including breast and formula milk, should not be given for at least 6 HOURS before the anticipated start of induction, not 7 hours."
+                },
+                {
+                    question: "Which of the following is TRUE regarding the cardiovascular system in neonates and infants?",
+                    options: [
+                        "Cardiac output is highly dependent on stroke volume",
+                        "The left ventricle is highly compliant",
+                        "An increase in cardiac output is achieved primarily through an increase in heart rate",
+                        "Bradycardia is easily tolerated and rarely dangerous"
+                    ],
+                    answer: 2,
+                    tag: "Understanding",
+                    explanation: "The infant has a noncompliant left ventricle, meaning they cannot easily increase stroke volume. Therefore, cardiac output is heavily dependent on heart rate."
+                },
+                {
+                    question: "Pharmacological differences prolong the duration of action of drugs like thiopental and fentanyl in pediatrics. Causes include all EXCEPT:",
+                    options: [
+                        "Larger intravascular and extracellular fluid compartments",
+                        "Immaturity of hepatic biotransformation pathways",
+                        "Increased protein for drug binding",
+                        "Smaller muscle mass"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT",
+                    explanation: "Pediatric patients have DECREASED protein for drug binding, which increases the free (active) fraction of the drug."
+                },
+                {
+                    question: "Compared to adults, what happens to the Minimum Alveolar Concentration (MAC) values of volatile anesthetics in neonates and infants?",
+                    options: [
+                        "Decreased in both neonates and infants",
+                        "Increased in neonates, decreased in infants",
+                        "Decreased in neonates, but increased in infants and children",
+                        "It remains exactly the same across all age groups"
+                    ],
+                    answer: 2,
+                    tag: "Understanding",
+                    explanation: "MAC values are decreased in neonates (making them more sensitive), but increased in infants and children compared to adults."
+                },
+                {
+                    question: "In pediatric airway management, why is a straight laryngoscope blade often preferred?",
+                    options: [
+                        "Because infants have a large mouth opening",
+                        "To better lift the long, U-shaped epiglottis and visualize the anterior larynx",
+                        "To prevent damage to the loose teeth",
+                        "Because it prevents vagal stimulation"
+                    ],
+                    answer: 1,
+                    tag: "Understanding",
+                    explanation: "Straight blades are helpful in neonates and infants to directly lift the long, U-shaped epiglottis, making it easier to intubate the high, anterior larynx."
+                },
+                {
+                    question: "A pediatric patient has a diaphragmatic hernia. He is 3 days old and weighs 3 kg. What is the required internal diameter (ID) of the endotracheal tube and the appropriate oral length?",
+                    options: [
+                        "ID 2.5 mm, Length 7 cm",
+                        "ID 3.0 mm, Length 9 cm",
+                        "ID 3.5 mm, Length 7 cm",
+                        "ID 4.0 mm, Length 9 cm"
+                    ],
+                    answer: 1,
+                    tag: "Clinical SBA",
+                    explanation: "For preterm/neonates around 1500-3000g, tube ID is 3.0 mm. Oral length is calculated as (Weight in kg + 6) = 3 + 6 = 9 cm."
+                },
+                {
+                    question: "A 5-kg infant has not received oral or intravenous fluids for 4 hours prior to surgery. Using the 4:2:1 rule, what is the TOTAL volume of fluid (maintenance + 1st hour deficit replacement) that should be given in the FIRST hour of surgery?",
+                    options: ["40 mL", "60 mL", "80 mL", "100 mL"],
+                    answer: 1,
+                    tag: "Clinical Calc",
+                    explanation: "Maintenance = 4 mL/kg x 5 = 20 mL/h. Deficit = 20 mL/h x 4 hrs = 80 mL. You give 50% of the deficit in the 1st hour (40 mL) + the normal maintenance for that hour (20 mL) = 60 mL."
+                },
+                {
+                    question: "A healthy 4-year-old child experiences sudden cardiac arrest shortly after the administration of Succinylcholine. What is the most critical immediate treatment to institute?",
+                    options: [
+                        "Administer Atropine for severe vagal block",
+                        "Immediate treatment for Hyperkalemia",
+                        "Administer a reversal agent like Neostigmine",
+                        "Administer Dantrolene for Malignant Hyperthermia"
+                    ],
+                    answer: 1,
+                    tag: "Clinical SBA",
+                    explanation: "Children are more susceptible to hyperkalemia and arrhythmias associated with succinylcholine. The lecture emphasizes: 'When a child experiences cardiac arrest following administration of succinylcholine, immediate treatment for hyperkalemia should be instituted'."
+                },
+                {
+                    question: "During face mask ventilation of a 1-year-old, the anesthetist's fingers push deeply into the soft tissues behind the chin. What is the most likely consequence of this action?",
+                    options: [
+                        "Improved oxygenation by opening the esophagus",
+                        "Severe airway obstruction",
+                        "Stimulation of the gag reflex causing vomiting",
+                        "Spontaneous intubation"
+                    ],
+                    answer: 1,
+                    tag: "Analysis",
+                    explanation: "Pushing the soft tissues behind the chin backwards will compress the airway, causing severe obstruction. Fingers should rest ONLY on the bony mandible."
+                }
+            ],
+                        'lect4': [
+                {
+                    question: "Which of the following age groups is associated with prolonged arm-brain circulation time?",
+                    options: ["Pediatric patient", "Obese patient", "Pregnant patient", "Geriatric patient"],
+                    answer: 3,
+                    tag: "Recall",
+                    explanation: "In elderly patients, arm-brain circulation time is increased, which delays the onset of induction agents."
+                },
+                {
+                    question: "Hourly monitoring of urine output after major surgery in elderly patients is important to:",
+                    options: ["Assess pain levels", "Monitor kidney function", "Assess level of consciousness", "Prevent urinary tract infections"],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "Renal function may deteriorate rapidly in hypovolemic elderly patients. Close monitoring of hourly urine output is required to monitor kidney function."
+                },
+                {
+                    question: "What is the purpose of prescribing post-operative oxygen therapy for elderly patients?",
+                    options: ["To reduce the risk of infection", "To enhance wound healing", "To enhance oxygen delivery to the tissues", "To prevent hypothermia"],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "Post-operative oxygen therapy is prescribed to enhance oxygen delivery to the tissues and combat age-related declines in PaO2."
+                },
+                {
+                    question: "Which analgesic is commonly prescribed for elderly patients as a simple pain reliever after surgery?",
+                    options: ["Morphine", "Paracetamol", "Ibuprofen", "Ketamine"],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "It is good practice to prescribe a regular simple analgesic such as paracetamol, while using NSAIDs (like Ibuprofen) with caution due to renal and peptic risks."
+                },
+                {
+                    question: "Regarding central nervous system physiological changes in geriatric patients, which is the most common change that will happen?",
+                    options: ["Tremor", "Seizure", "Confusion", "Ataxia"],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "Confusion is a very common CNS change in the elderly, both pre- and post-operatively, due to an age-related decline in CNS function and neurotransmitters."
+                },
+                {
+                    question: "What happens to the Minimum Alveolar Concentration (MAC) requirement in elderly patients?",
+                    options: ["Increases significantly", "Decreases steadily with age", "Remains unchanged", "Fluctuates unpredictably"],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "MAC decreases steadily with age, meaning elderly patients require less volatile anesthetic to achieve the same level of anesthesia."
+                },
+                {
+                    question: "Hypoxemia and airway collapse mostly occur in older patients because of an increase in:",
+                    options: ["Total lung capacity", "Chest wall compliance", "Closing capacity than FRC", "Functional residual capacity (FRC)"],
+                    answer: 2,
+                    tag: "SBA",
+                    explanation: "Closing capacity (CC) increases with age and may become greater than the FRC. When CC > FRC, small airways collapse during normal tidal breathing, leading to hypoxemia."
+                },
+                {
+                    question: "Which of the following physiologic changes occurs in the geriatric patient?",
+                    options: ["Decreased lung compliance", "Increased O2 consumption", "Decreased residual volume", "Increased total lung capacity (TLC)"],
+                    answer: 0,
+                    tag: "Understanding",
+                    explanation: "Elderly patients have decreased lung elasticity (decreased lung compliance), decreased chest wall compliance, and decreased total lung capacity."
+                },
+                {
+                    question: "According to anesthesia of elderly patients, which one is correct?",
+                    options: [
+                        "High MAC is recommended",
+                        "Decrease the requirement dose of anesthetic drugs",
+                        "High dose of propofol is preferred",
+                        "Ketamine is safe in CVS diseases"
+                    ],
+                    answer: 1,
+                    tag: "Understanding",
+                    explanation: "Because of changes in pharmacokinetics/dynamics and prolonged arm-brain circulation time, the dose requirements for induction agents and anesthetics are reduced."
+                },
+                {
+                    question: "By studying preoperative assessment in old age patients, all the following statements are true EXCEPT:",
+                    options: [
+                        "ECG is required on need.",
+                        "Chest X-ray for anyone with symptomatic cardiovascular or respiratory disease.",
+                        "Note the level of cognitive function.",
+                        "(ASA) score should be recorded, it remains a good predictor of outcome."
+                    ],
+                    answer: 0,
+                    tag: "EXCEPT",
+                    explanation: "An ECG is required for ALL elderly patients, not just 'on need'. It is a routine part of their preoperative assessment."
+                },
+                {
+                    question: "All the following are common in elderly EXCEPT:",
+                    options: [
+                        "Ischemic heart disease",
+                        "Diabetes mellitus",
+                        "Increase functional reserve",
+                        "Post-operative confusion"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT",
+                    explanation: "The functional reserve is REDUCED in the elderly, not increased. This reduction is a major factor in their increased morbidity and mortality."
+                },
+                {
+                    question: "During induction of anesthesia for an elderly patient, all of the following are true EXCEPT:",
+                    options: [
+                        "Arm-brain circulation time is increased",
+                        "Induction agent dose requirements increase",
+                        "Drugs should be titrated slowly against effect",
+                        "An induction dose of propofol may result in hypotension"
+                    ],
+                    answer: 1,
+                    tag: "EXCEPT",
+                    explanation: "Induction agent dose requirements DECREASE, they do not increase. Drugs must be titrated slowly."
+                },
+                {
+                    question: "Which of the following correctly describes the changes in body compartments in the elderly?",
+                    options: [
+                        "Increased skeletal muscle mass",
+                        "Increased total body water (TBW)",
+                        "Decreased percentage of body fat",
+                        "Loss of skeletal muscle and increased percentage of body fat"
+                    ],
+                    answer: 3,
+                    tag: "Understanding",
+                    explanation: "Aging causes a loss of skeletal muscle (lean body mass), a decrease in total body water, and an INCREASE in the percentage of body fat."
+                },
+                {
+                    question: "Regarding hepatic function and pharmacology in the elderly, what is the effect of reduced plasma albumin?",
+                    options: [
+                        "It speeds up hepatic drug clearance",
+                        "It increases the bound fraction of drugs",
+                        "It increases the free (active) drug fraction",
+                        "It prevents drug toxicity"
+                    ],
+                    answer: 2,
+                    tag: "Understanding",
+                    explanation: "Reduced plasma albumin results in reduced protein binding of drugs. This increases the free (unbound) drug levels, potentially leading to toxic effects."
+                },
+                {
+                    question: "Why should Ketamine be avoided or used with extreme caution in elderly patients with ischemic heart disease?",
+                    options: [
+                        "It causes profound hypotension",
+                        "It causes severe respiratory depression",
+                        "It causes tachycardia and hypertension, increasing myocardial oxygen consumption",
+                        "It causes severe post-operative delirium in all elderly patients"
+                    ],
+                    answer: 2,
+                    tag: "Understanding",
+                    explanation: "Ketamine stimulates the sympathetic nervous system, causing tachycardia and hypertension. This increases the heart's oxygen demand and can precipitate ischemia."
+                },
+                {
+                    question: "In affluent societies, the net effect of common ischemic heart disease in the elderly is:",
+                    options: [
+                        "Increased cardiac output",
+                        "Reduced cardiac output",
+                        "Increased baroreceptor sensitivity",
+                        "Rheumatic valvular disease"
+                    ],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "Ischemic heart disease is common and its net effect is reduced cardiac output, which compromises blood flow to the kidneys and brain."
+                },
+                {
+                    question: "An 80-year-old male is recovering from major abdominal surgery. The nurse notices he is highly confused and agitated. To prevent postoperative delirium (POCD), which of the following medications should IDEALLY HAVE BEEN AVOIDED during his perioperative care?",
+                    options: [
+                        "Propofol",
+                        "Fentanyl",
+                        "Benzodiazepines and Meperidine",
+                        "Paracetamol"
+                    ],
+                    answer: 2,
+                    tag: "Clinical SBA",
+                    explanation: "To minimize Delirium & Postoperative Cognitive Dysfunction (POCD), the lecture specifically advises to AVOID: Benzodiazepines, meperidine, and anticholinergics."
+                },
+                {
+                    question: "A 75-year-old female with osteoporosis is scheduled for a hip replacement. Which of the following is a significant anesthetic consideration specific to her musculoskeletal condition?",
+                    options: [
+                        "Spinal and epidural techniques will be technically easier",
+                        "She is at high risk for joint dislocation or fractures during intra-operative positioning",
+                        "She will require higher doses of muscle relaxants",
+                        "She cannot be positioned laterally"
+                    ],
+                    answer: 1,
+                    tag: "Clinical Application",
+                    explanation: "Osteoporosis and ligament laxity make the patient prone to fractures or dislocation of joints while anesthetized. Extreme care is needed with positioning and padding."
+                },
+                {
+                    question: "An elderly patient with known atrial fibrillation (AF) has a preoperative heart rate of 130 bpm. Why is it critical to control this rate (to <100/minute) or cardiovert before elective surgery?",
+                    options: [
+                        "To prevent intra-operative hypothermia",
+                        "Because a fast ventricular rate in AF leads to reduced cardiac output",
+                        "To decrease the arm-brain circulation time",
+                        "To prevent sudden bronchospasm"
+                    ],
+                    answer: 1,
+                    tag: "Analysis",
+                    explanation: "The fast ventricular rate in AF limits diastolic filling time, leading to reduced cardiac output. It must be controlled before surgery to ensure adequate tissue perfusion."
+                },
+                {
+                    question: "During surgery on an elderly patient, large volumes of IV fluids are administered rapidly to treat brief hypotension. Shortly after, the patient's oxygen saturation drops and auscultation reveals lung crackles. What is the most likely cause?",
+                    options: [
+                        "Acute renal failure",
+                        "Pulmonary edema due to reduced functional reserve and fluid overload",
+                        "Atelectasis from the surgical incision",
+                        "Anaphylaxis to the IV fluid"
+                    ],
+                    answer: 1,
+                    tag: "Clinical Synthesis",
+                    explanation: "Careful fluid balance is mandatory. Elderly patients have a stiff, non-compliant left ventricle. Excess fluids can easily cause fluid overload and pulmonary edema."
+                }
+            ],
+                        'lect5': [
+                {
+                    question: "Optimal position that provides the best intubation in the obese patient:",
+                    options: ["Trendelenburg position", "Lateral decubitus position", "Supine position", "Sniffing/Ramp position"],
+                    answer: 3,
+                    tag: "Recall",
+                    explanation: "Ramps are recommended to achieve the optimal sniffing position by bringing the patient's chin to a higher point than the chest."
+                },
+                {
+                    question: "Rapid desaturation during apnea in obese patients is primarily secondary to:",
+                    options: ["Decrease in Functional Residual Capacity (FRC)", "Decreased oxygen consumption", "Increased Closing Capacity", "Increase in lung compliance"],
+                    answer: 0,
+                    tag: "Recall",
+                    explanation: "The weight of the chest and abdomen decreases FRC. This reduces the oxygen reserve, leading to rapid desaturation during apnea."
+                },
+                {
+                    question: "Obstructive sleep apnea (OSA) features include:",
+                    options: ["Snoring", "Type II respiratory failure", "Day time somnolence", "All of the above"],
+                    answer: 3,
+                    tag: "Recall",
+                    explanation: "OSA causes snoring, sleep disturbance, day time somnolence, and can lead to right ventricular failure and Type II respiratory failure due to chronic hypoxemia and hypercapnia."
+                },
+                {
+                    question: "The incidence of postoperative wound infection in obese patients compared to non-obese patients is:",
+                    options: ["The same", "Twice as common", "Three times less common", "Four times as common"],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "Wound infection is twice as common in obese as in nonobese patients, partially due to impaired neutrophil function."
+                },
+                {
+                    question: "Awakening of obese patients is more prompt after exposure to which of the following volatile anesthetics?",
+                    options: ["Halothane and Enflurane", "Isoflurane and Propofol", "Desflurane or Sevoflurane", "Nitrous oxide only"],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "Awakening of obese patients is more prompt after exposure to desflurane or sevoflurane than after administration of either isoflurane or propofol."
+                },
+                {
+                    question: "When performing spinal or epidural anesthesia in an obese patient, the local anesthetic dose requirement may be:",
+                    options: ["Up to 50% higher", "Unchanged compared to normal weight patients", "Up to 20% lower", "Up to 50% lower"],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "Local anesthetic requirements for spinal and epidural anesthesia in obese patients may be as much as 20% lower than in nonobese patients."
+                },
+                {
+                    question: "All of the following are respiratory changes in the supine position in an obese patient EXCEPT:",
+                    options: [
+                        "Rapid shallow breathing",
+                        "Decrease in functional residual capacity",
+                        "Increase in lung compliance",
+                        "Increase in work of breathing"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT",
+                    explanation: "Obesity is associated with a DECREASE in lung compliance (lungs are stiffer and harder to inflate), not an increase."
+                },
+                {
+                    question: "By studying Obstructive Sleep Apnea (OSA), the following statements are true EXCEPT:",
+                    options: [
+                        "OSA is cessation of breathing for more than 10 seconds during sleep",
+                        "At least 50% of morbidly obese patients will have OSA",
+                        "Caused by passive collapse of the pharyngeal airway during deeper planes of sleep",
+                        "Treatment includes removal of precipitants, weight loss and nocturnal CPAP"
+                    ],
+                    answer: 1,
+                    tag: "EXCEPT",
+                    explanation: "The correct statistic is that at least 5% (not 50%) of morbidly obese patients will have OSA."
+                },
+                {
+                    question: "All the following disorders are associated with obesity EXCEPT:",
+                    options: [
+                        "Left ventricular (LV) hypertrophy",
+                        "Hypotension",
+                        "Cardiomyopathy",
+                        "Increased work of breathing"
+                    ],
+                    answer: 1,
+                    tag: "EXCEPT",
+                    explanation: "Obesity causes systemic HYPERtension, not hypotension, due to hyperinsulinemia effects on the sympathetic nervous system."
+                },
+                {
+                    question: "Postoperative considerations for Extubation in obese patients are all true EXCEPT:",
+                    options: [
+                        "Delayed until effects of NMBAs completely reversed",
+                        "Stable hemodynamics and fully awake",
+                        "Supine position",
+                        "Adequate tidal volume and supplemental oxygenation"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT",
+                    explanation: "Obese patients should NEVER be extubated or recovered in the supine position. Ideally, they should recover in a head-up to sitting position."
+                },
+                {
+                    question: "Regarding obstructive sleep apnea (OSA), all of the following are true EXCEPT:",
+                    options: [
+                        "Affects at least 5% of morbidly obese patients",
+                        "Causes hypoxia and hypercapnia",
+                        "Tachypnea",
+                        "Causes sleep disturbance and polycythemia"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT",
+                    explanation: "OSA is characterized by apnea (cessation of breathing) and hypopnea, not tachypnea (rapid breathing) during sleep."
+                },
+                {
+                    question: "BMI values are classified by the following statements EXCEPT:",
+                    options: [
+                        "BMI of 25.0-29.9 = overweight",
+                        "BMI of 30.0-34.9 = class I obesity",
+                        "BMI of 20-24.9 = normal",
+                        "BMI of 40.0 or greater = morbid obesity"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT",
+                    explanation: "Normal BMI is technically 18.5 - 24.9. The ministerial question specifically points out '20-24.9' as the intended false statement in its context."
+                },
+                {
+                    question: "Because fat has relatively low blood flow, the loading dose of injectable anesthetic drugs in obese patients should generally be based on:",
+                    options: [
+                        "Total body weight",
+                        "Lean body weight",
+                        "Ideal body weight plus 50%",
+                        "Height only"
+                    ],
+                    answer: 1,
+                    tag: "Understanding",
+                    explanation: "Doses based on total weight may be excessive because fat has poor blood flow. Loading doses should be based on lean body weight."
+                },
+                {
+                    question: "The risk of deep vein thrombosis (DVT) in obese patients undergoing surgery is approximately double. This is due to all of the following EXCEPT:",
+                    options: [
+                        "Polycythemia",
+                        "Increased intra-abdominal pressure",
+                        "Immobilization",
+                        "Decreased blood viscosity"
+                    ],
+                    answer: 3,
+                    tag: "EXCEPT",
+                    explanation: "Polycythemia (increased RBCs) leads to INCREASED blood viscosity, which promotes clotting. Decreased viscosity is false."
+                },
+                {
+                    question: "Regarding airway management in morbidly obese patients, which statement about Laryngeal Mask Airways (LMAs) is correct?",
+                    options: [
+                        "They are the first-line choice for all elective surgeries",
+                        "They guarantee protection against pulmonary aspiration",
+                        "They are acceptable choices for emergency rescue ventilation",
+                        "They are absolutely contraindicated in all situations"
+                    ],
+                    answer: 2,
+                    tag: "Understanding",
+                    explanation: "LMAs are relatively contraindicated for elective use in morbidly obese patients (due to aspiration risk), but they are highly successful and acceptable for EMERGENCY use to establish ventilation."
+                },
+                {
+                    question: "Obesity-induced hypertension is related to the effects of hyperinsulinemia on the sympathetic nervous system. Insulin also activates adipose tissue to release:",
+                    options: [
+                        "Bradykinin",
+                        "Angiotensinogen",
+                        "Aldosterone",
+                        "Renin"
+                    ],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "Insulin activates adipose tissue to release angiotensinogen, contributing to vascular damage, fibrosis, and hypertension."
+                },
+                {
+                    question: "You are using 'ramping' (folded blankets under shoulders, neck, and occiput) to intubate a morbidly obese patient. What is the specific anatomical goal of this maneuver?",
+                    options: [
+                        "To lower the head below the chest (Trendelenburg)",
+                        "To flex the cervical spine completely",
+                        "To bring the patient's chin to a higher point than the chest",
+                        "To compress the large breasts out of the way"
+                    ],
+                    answer: 2,
+                    tag: "Clinical SBA",
+                    explanation: "The idea of the ramp is to achieve the optimal sniffing position by bringing the patient's chin to a higher point than the chest, aligning the airway axes."
+                },
+                {
+                    question: "A 140 kg patient undergoes laparoscopic surgery. The surgeon creates a pneumoperitoneum with an intra-abdominal pressure of 22 mm Hg. What cardiovascular change is most expected?",
+                    options: [
+                        "Increased venous return and increased cardiac output",
+                        "Severe bradycardia and irreversible shock",
+                        "Decreased venous return and decreased cardiac output",
+                        "No change in hemodynamics"
+                    ],
+                    answer: 2,
+                    tag: "Clinical SBA",
+                    explanation: "During laparoscopy in obese patients, an abdominal pressure of 20 mm Hg or more causes DECREASED venous return and decreased cardiac output. (Pressure ≤ 10 mmHg may increase venous return)."
+                },
+                {
+                    question: "A morbidly obese patient has a severe conical shape of the upper arms, making noninvasive blood pressure cuffs fit poorly. The patient has severe cardiopulmonary disease. What is the best monitoring strategy?",
+                    options: [
+                        "Use a pediatric cuff on the forearm",
+                        "Rely solely on pulse oximetry and ECG",
+                        "Estimate blood pressure using palpation",
+                        "Use invasive arterial monitoring (arterial line)"
+                    ],
+                    answer: 3,
+                    tag: "Application",
+                    explanation: "Invasive arterial monitoring should be used for the morbidly obese with severe cardiopulmonary disease and for those in whom a noninvasive cuff fits poorly."
+                },
+                {
+                    question: "In the postoperative period, intramuscular (IM) opioid administration is considered unreliable in morbidly obese patients primarily because of:",
+                    options: [
+                        "Increased sensitivity to opioids in the brain",
+                        "Unpredictable absorption of drugs from fat tissue",
+                        "Excessive hepatic clearance of the drug",
+                        "Rapid renal excretion of opioids"
+                    ],
+                    answer: 1,
+                    tag: "Analysis",
+                    explanation: "The IM route is unreliable owing to the unpredictable absorption of drugs from the large amounts of subcutaneous fat. PCA (IV) or neuraxial routes are preferred."
+                }
+            ],
+                        'lect6': [
+                {
+                    question: "How long should oxygen be administered to patients after thoracotomy?",
+                    options: ["6 hours", "12 hours", "24 hours", "48 hours"],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "Patients who have undergone a thoracotomy will require oxygen in the immediate postoperative period for 24 hours."
+                },
+                {
+                    question: "What is the most common cardiac arrhythmia that occurs after thoracotomy?",
+                    options: ["Ventricular tachycardia", "Atrial fibrillation", "Sinus bradycardia", "Ventricular fibrillation"],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "The most common cardiac arrhythmia after thoracotomy is atrial fibrillation."
+                },
+                {
+                    question: "Which of the following is an indication for one lung ventilation (OLV)?",
+                    options: ["Video-assisted thoracoscopic surgery (VATS)", "Lung protection from blood or pus", "Intensive care ventilation for unilateral lung disease", "All of the above"],
+                    answer: 3,
+                    tag: "Recall",
+                    explanation: "OLV is indicated for surgical access (like VATS), protecting the healthy lung from contamination, and for intensive care ventilation of asymmetric lung disease."
+                },
+                {
+                    question: "Which of the following age groups is most at risk for inhalation of a foreign body?",
+                    options: ["Neonates (0-1 month)", "Children 1 to 3 years", "Adolescents", "Elderly patients"],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "Inhalation of a foreign body (FB) is a potentially life-threatening event, with children in the age range 1 to 3 years most at risk."
+                },
+                {
+                    question: "When performing bronchoscopy for a foreign body removal in a child, which induction agent is recommended because it causes less airway irritation?",
+                    options: ["Propofol", "Ketamine", "Sevoflurane", "Desflurane"],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "Inhalational induction is recommended using either sevoflurane or halothane. Sevoflurane causes less airway irritation and is more cardiovascularly stable."
+                },
+                {
+                    question: "Why should nitrous oxide be AVOIDED in patients with lung cysts or bullae?",
+                    options: ["It causes severe bradycardia", "It decreases lung compliance", "It may distend the cysts because of its high solubility", "It causes profound hypothermia"],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "Nitrous oxide may distend lung cysts because of its much greater solubility than nitrogen and should be avoided to prevent a tension pneumothorax."
+                },
+                {
+                    question: "To treat hypoxemia during one lung ventilation, all of the following interventions are used EXCEPT:",
+                    options: [
+                        "Turn the inspired oxygen up to 100%",
+                        "Applying positive end expiratory pressure (PEEP) to the ventilated lung",
+                        "Application of continuous positive airway pressure (CPAP) to the non-ventilated lung",
+                        "Salbutamol"
+                    ],
+                    answer: 3,
+                    tag: "EXCEPT",
+                    explanation: "Salbutamol (a bronchodilator) is not a primary intervention for hypoxemia during OLV. Interventions include 100% O2, PEEP to the ventilated lung, and CPAP to the collapsed lung."
+                },
+                {
+                    question: "About rigid bronchoscope for foreign body removal, all are true EXCEPT:",
+                    options: [
+                        "Esophageal FB may present with respiratory distress",
+                        "The majority of FBs will not be radio-opaque",
+                        "Sedative premedication should not be used",
+                        "Inhalational induction should not be used"
+                    ],
+                    answer: 3,
+                    tag: "EXCEPT",
+                    explanation: "Inhalational induction IS recommended (using sevoflurane or halothane in 100% oxygen). Spontaneous ventilation during the procedure is also recommended."
+                },
+                {
+                    question: "Factors that may contribute to increased post-operative hypoxemia in patients with thoracic surgery include all EXCEPT:",
+                    options: [
+                        "Poor pain control",
+                        "Oxygen supplementation",
+                        "Lung atelectasis",
+                        "Pneumothorax"
+                    ],
+                    answer: 1,
+                    tag: "EXCEPT",
+                    explanation: "Oxygen supplementation is a TREATMENT for hypoxemia, not a cause. Causes include pneumothorax, atelectasis, sputum retention, poor pain relief, and fluid overload."
+                },
+                {
+                    question: "Regarding the presentation of inhalation of a foreign body in children, all are common signs EXCEPT:",
+                    options: [
+                        "Cough",
+                        "Choking",
+                        "Stridor",
+                        "Hypopnea"
+                    ],
+                    answer: 3,
+                    tag: "EXCEPT",
+                    explanation: "Signs of obstruction include cough, choking, respiratory distress, cyanosis, stridor, and TACHYPNEA (rapid breathing), not hypopnea (shallow/slow breathing)."
+                },
+                {
+                    question: "Techniques for achieving One Lung Ventilation (OLV) include all of the following EXCEPT:",
+                    options: [
+                        "Double lumen tube",
+                        "Bronchial blocker",
+                        "Laryngeal Mask Airway (LMA)",
+                        "Single lumen tube inserted intentionally beyond the carina"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT",
+                    explanation: "An LMA cannot isolate a lung. OLV is achieved by a double lumen tube, a bronchial blocker, or a single lumen tube advanced into a main bronchus."
+                },
+                {
+                    question: "During OLV, blood supply is still determined greatly by gravity. What happens to the non-dependent (top, collapsed) lung?",
+                    options: [
+                        "It receives all the ventilation and no perfusion",
+                        "It receives neither ventilation nor perfusion",
+                        "It receives perfusion but no ventilation, worsening V/Q mismatch",
+                        "It receives ventilation but no perfusion"
+                    ],
+                    answer: 2,
+                    tag: "Understanding",
+                    explanation: "When the top lung is collapsed, there is no ventilation to that lung, but there is still some perfusion. This creates a right-to-left shunt and worsens the V/Q mismatch."
+                },
+                {
+                    question: "Which of the following is NOT a typical indication for One Lung Ventilation?",
+                    options: [
+                        "Video-assisted thoracoscopic surgery (VATS)",
+                        "Lung protection from blood or pus",
+                        "Thymectomy via median sternotomy",
+                        "Intensive care ventilation for independent lung disease"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT",
+                    explanation: "Median sternotomy (e.g., for thymectomy) usually does not require one lung ventilation, unlike VATS or lung resections."
+                },
+                {
+                    question: "During rigid bronchoscopy for a foreign body in a child, why is spontaneous ventilation recommended over controlled mechanical ventilation?",
+                    options: [
+                        "It prevents the child from waking up too early",
+                        "It reduces the risk of hyperinflation of the lung and is less likely to dislodge the FB distally",
+                        "It eliminates the need for any anesthetic gases",
+                        "It allows for the use of muscle relaxants"
+                    ],
+                    answer: 1,
+                    tag: "Understanding",
+                    explanation: "Spontaneous ventilation reduces the risk of pushing the foreign body deeper (distally) into the airway and decreases the risk of pneumothorax from hyperinflation."
+                },
+                {
+                    question: "A 2-year-old child presents with sudden severe stridor and choking. A foreign body aspiration is suspected. You are preparing for rigid bronchoscopy. Which of the following airway management steps is CONTRAINDICATED before the bronchoscope is inserted?",
+                    options: [
+                        "Establishing IV access",
+                        "Administering 100% oxygen",
+                        "Performing endotracheal intubation",
+                        "Administering IV Dexamethasone"
+                    ],
+                    answer: 2,
+                    tag: "Clinical SBA",
+                    explanation: "Intubation should NOT be performed prior to rigid bronchoscopy, due to the risk of dislodging or fragmenting the foreign body, causing complete airway obstruction."
+                },
+                {
+                    question: "You are managing anesthesia for a left thoracotomy. You place a left-sided double-lumen tube (DLT). Five minutes after clamping the left lumen to collapse the lung, the patient's oxygen saturation drops gradually from 99% to 88%. What is the most appropriate INITIAL step?",
+                    options: [
+                        "Convert immediately to two-lung ventilation",
+                        "Inform the surgeon and turn the inspired oxygen up to 100%",
+                        "Administer a large dose of vasopressor",
+                        "Extubate the patient"
+                    ],
+                    answer: 1,
+                    tag: "Clinical SBA",
+                    explanation: "For a GRADUAL desaturation during OLV, you should tell the surgeon early (you may need to reinflate temporarily) and turn the inspired oxygen up to 100%. Convert to two-lung ventilation immediately if the drop is sudden or severe."
+                },
+                {
+                    question: "A patient undergoes a right pneumonectomy. At the end of the surgery, the chest is closed and the chest drain is clamped. The protocol states the clamp should be released for 5 minutes every hour. What is the purpose of this action?",
+                    options: [
+                        "To allow the remaining left lung to expand fully into the right chest",
+                        "To ensure that no air, blood, or excess fluid accumulates under tension in the empty pneumonectomy space",
+                        "To administer intrapleural local anesthetics",
+                        "To prevent postoperative atrial fibrillation"
+                    ],
+                    answer: 1,
+                    tag: "Analysis",
+                    explanation: "Clamps are released for 5 minutes every hour to drain and ensure that no air, blood, or excess fluid accumulates in the pneumonectomy space, which could shift the mediastinum and cause cardiovascular collapse."
+                },
+                {
+                    question: "A patient had a right upper lobectomy. Two weeks postoperatively, he presents with severe respiratory distress. Chest X-ray shows engorgement and increased density of the remaining right middle and lower lobes. What is the most likely diagnosis?",
+                    options: [
+                        "Herniation of the heart",
+                        "Torsion of the remaining lobe",
+                        "Ruptured pulmonary cyst",
+                        "Acute asthma attack"
+                    ],
+                    answer: 1,
+                    tag: "Clinical Synthesis",
+                    explanation: "Torsion of the remaining lobe may occur after lobectomy. The presentation may be up to 2 weeks postoperatively, and chest radiology shows engorgement of the affected lobe."
+                }
+            ],
+                        'lect9': [
+                {
+                    question: "About Nephrectomy, all true EXCEPT:",
+                    options: [
+                        "Attention to the patient's head and airway is very important",
+                        "Lateral position with the flank raised",
+                        "Risk of pneumothorax",
+                        "A chest drain may be inserted before the end of surgery",
+                        "Minimally invasive surgery"
+                    ],
+                    answer: 4,
+                    tag: "EXCEPT (Ministerial)",
+                    explanation: "Nephrectomy is considered a 'Major surgery' in urology, not a minimally invasive surgery."
+                },
+                {
+                    question: "Which one is true about post-operative analgesia for urological surgery:",
+                    options: [
+                        "Epidural analgesia",
+                        "Rectus sheath catheter",
+                        "TAP block",
+                        "Oral paracetamol",
+                        "All of the above"
+                    ],
+                    answer: 4,
+                    tag: "Recall (Ministerial)",
+                    explanation: "Postoperative period analgesia includes epidural, transversus abdominis plane (TAP) block, rectus sheath catheter, and oral paracetamol/NSAIDs."
+                },
+                {
+                    question: "TURP syndrome is a complex syndrome which may involve all the following changes EXCEPT:",
+                    options: [
+                        "Hypo-osmolality",
+                        "Hypernatremia",
+                        "Hyperglycemia",
+                        "Hyperammonemia",
+                        "Intravascular fluid shifts"
+                    ],
+                    answer: 1,
+                    tag: "EXCEPT (Ministerial)",
+                    explanation: "TURP syndrome causes HYPOnatremia (low sodium) due to the massive absorption of hypotonic irrigation fluid, not hypernatremia."
+                },
+                {
+                    question: "Signs of TURP syndrome all true EXCEPT:",
+                    options: [
+                        "Hyper or hypotension",
+                        "Convulsions",
+                        "Tachycardia",
+                        "Visual disturbance",
+                        "Confusion"
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT (Ministerial)",
+                    explanation: "TURP syndrome causes BRADYCARDIA (slow heart rate), not tachycardia, along with confusion, visual disturbances, and blood pressure changes."
+                },
+                {
+                    question: "Choose the correct answer about Nephrectomy:",
+                    options: [
+                        "Attention to the patient's head and airway is very important",
+                        "Lateral position with the flank raised",
+                        "Risk of pneumothorax",
+                        "A chest drain may be inserted before the end of surgery",
+                        "All of the above"
+                    ],
+                    answer: 4,
+                    tag: "Recall (Ministerial)",
+                    explanation: "All these statements are true regarding nephrectomy."
+                },
+                {
+                    question: "What is the potential risk during a lateral position with the flank raised (kidney position) for surgical access, and how can it be addressed?",
+                    options: [
+                        "Risk of brachial plexus injury; addressed by avoiding shoulder abduction",
+                        "Risk of pneumothorax; addressed by manually inflating the lungs before pleural closure",
+                        "Risk of spinal cord compression; addressed by proper padding",
+                        "Risk of airway obstruction; addressed by head and neck support",
+                        "All of the above are equally the primary surgical access risk described"
+                    ],
+                    answer: 1,
+                    tag: "Application (Ministerial)",
+                    explanation: "While other risks exist, the specific surgical access risk mentioned in the text for this position is pneumothorax from pleural perforation, addressed by manually inflating the lungs before closure."
+                },
+                {
+                    question: "Bladder tumor surgery - All true EXCEPT:",
+                    options: [
+                        "Can be done by face mask anesthesia.",
+                        "Need large I.V cannula.",
+                        "Stimulation of femoral nerve leads to jerky movement of the leg.",
+                        "Stimulation of obturator nerve leads to jerky movement of the leg.",
+                        "Lithotomy position is used."
+                    ],
+                    answer: 2,
+                    tag: "EXCEPT (Ministerial)",
+                    explanation: "It is the stimulation of the OBTURATOR nerve, not the femoral nerve, that causes the jerky leg movements during diathermy in bladder tumor surgery."
+                },
+                {
+                    question: "Which of the following is an example of minimally invasive urological surgery?",
+                    options: [
+                        "Nephrectomy",
+                        "Cystectomy",
+                        "Renal transplantation",
+                        "Transurethral resection of the prostate (TURP)"
+                    ],
+                    answer: 3,
+                    tag: "Recall",
+                    explanation: "TURP and cystoscopy are classified as minimally invasive procedures, whereas nephrectomy and cystectomy are major surgeries."
+                },
+                {
+                    question: "During bladder tumor resection using diathermy, what is the best anesthetic action to prevent the risk of bladder perforation from jerky leg movements?",
+                    options: [
+                        "Increase the dose of intravenous opioids",
+                        "Administer temporary muscle paralysis and ventilate the patient",
+                        "Administer Atropine",
+                        "Perform a Femoral nerve block"
+                    ],
+                    answer: 1,
+                    tag: "Application",
+                    explanation: "Paralysis (using muscle relaxants) and ventilation are required to prevent the jerky movements caused by direct obturator nerve stimulation, thus preventing bladder perforation."
+                },
+                {
+                    question: "TURP syndrome is primarily caused by the absorption of which type of irrigating fluid?",
+                    options: [
+                        "Hypertonic Saline",
+                        "Normal Saline (0.9% NaCl)",
+                        "Glycine (a hypotonic solution)",
+                        "Lactated Ringer's"
+                    ],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "TURP syndrome is caused by the absorption of irrigating fluid like Glycine, which is a hypotonic solution, through open prostatic veins."
+                },
+                {
+                    question: "In TURP syndrome, massive hemolysis can occur due to hypo-osmolality. This hemolysis, in combination with hypotension, is most likely to lead to:",
+                    options: [
+                        "Acute renal failure",
+                        "Liver cirrhosis",
+                        "Pulmonary fibrosis",
+                        "Myocardial infarction"
+                    ],
+                    answer: 0,
+                    tag: "Understanding",
+                    explanation: "Hemoglobinemia from massive hemolysis, combined with hypotension, can clog the renal tubules and lead to acute renal failure."
+                },
+                {
+                    question: "When can the signs of TURP syndrome first start to appear?",
+                    options: [
+                        "Only after the operation is completely finished",
+                        "24 to 48 hours after the operation",
+                        "As early as 15 minutes into the resection up to 12 hours after operation",
+                        "Only during the first 5 minutes of surgery"
+                    ],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "Signs of TURP syndrome may occur very quickly (from as early as 15 minutes into the resection) and can present up to 12 hours post-operatively."
+                },
+                {
+                    question: "The treatment for TURP syndrome depends on careful assessment and typically consists of all of the following EXCEPT:",
+                    options: [
+                        "Mannitol",
+                        "Hypertonic saline",
+                        "Loop diuretics",
+                        "Hypotonic saline"
+                    ],
+                    answer: 3,
+                    tag: "EXCEPT",
+                    explanation: "Because the patient is already suffering from water intoxication and hyponatremia, giving hypotonic saline would worsen the condition. Treatment requires Mannitol, Hypertonic saline, or loop diuretics."
+                },
+                {
+                    question: "Why is it difficult to quantify hemorrhage during a TURP procedure?",
+                    options: [
+                        "Because the bleeding is always internal and hidden",
+                        "Because blood is mixed with large volumes of irrigation fluid",
+                        "Because the prostate gland does not have a large blood supply",
+                        "Because the surgery is done without direct vision"
+                    ],
+                    answer: 1,
+                    tag: "Understanding",
+                    explanation: "Hemorrhage is difficult to quantify as blood is continuously mixed with the irrigation fluid. Hematocrit estimation or measuring hemoglobin concentration of the collected fluid can be used to estimate loss."
+                },
+                {
+                    question: "Which urology patients are at the highest risk for developing septicemia and should receive prophylactic intravenous antibiotics?",
+                    options: [
+                        "Only patients undergoing simple circumcision",
+                        "Patients with a urinary tract infection, stones in the bladder, or an indwelling catheter",
+                        "Young, healthy patients undergoing vasectomy",
+                        "Patients without any history of heart disease"
+                    ],
+                    answer: 1,
+                    tag: "Understanding",
+                    explanation: "There is a high risk of septicemia in patients with urinary tract infections, bladder stones, or indwelling catheters. They must receive IV antibiotics."
+                },
+                {
+                    question: "According to the preoperative preparation guidelines (ERAS) for urological surgeries, clear liquids are allowed up to:",
+                    options: [
+                        "6 hours before surgery",
+                        "4 hours before surgery",
+                        "2 hours before surgery",
+                        "Midnight the day before surgery"
+                    ],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "Modern guidelines allow clear liquids up to 2 hours before surgery, and solid food up to 6 hours before."
+                },
+                {
+                    question: "During a nephrectomy, what is the term used to describe the positioning of the operating table to open the space between the ribs and the pelvis?",
+                    options: [
+                        "Trendelenburg position",
+                        "Breaking the table",
+                        "Lithotomy tilt",
+                        "Reverse Trendelenburg"
+                    ],
+                    answer: 1,
+                    tag: "Recall",
+                    explanation: "This maneuver is referred to as 'breaking the table' to achieve the kidney position, raising the flank."
+                },
+                {
+                    question: "Visual disturbances during or after a TURP procedure are primarily a sign of:",
+                    options: [
+                        "Direct optic nerve damage",
+                        "Cerebral edema (from TURP syndrome)",
+                        "Retinal detachment",
+                        "Hyperglycemia"
+                    ],
+                    answer: 1,
+                    tag: "Understanding",
+                    explanation: "Visual disturbances, along with confusion and convulsions, are signs of cerebral edema caused by the severe hypo-osmolality and hyponatremia of TURP syndrome."
+                },
+                {
+                    question: "Which of the following is considered a strategy for 'Prevention of postoperative ileus' in urological surgeries?",
+                    options: [
+                        "Prolonged bed rest",
+                        "Late removal of nasogastric tube",
+                        "Chewing gum and Alvimopan",
+                        "Strict fasting for 48 hours post-op"
+                    ],
+                    answer: 2,
+                    tag: "Recall",
+                    explanation: "Postoperative period guidelines recommend chewing gum or using Alvimopan, along with early oral nutrition and early mobilization, to prevent postoperative ileus."
+                },
+                {
+                    question: "In the 'kidney position', why is it critical that the upper arm must not be abducted extensively at the shoulder?",
+                    options: [
+                        "To prevent restricted breathing",
+                        "To prevent brachial plexus injury",
+                        "To allow the surgeon more room to stand",
+                        "To keep the IV lines from tangling"
+                    ],
+                    answer: 1,
+                    tag: "Understanding",
+                    explanation: "Extensive abduction at the shoulder in the lateral position can cause severe stretching and injury to the brachial plexus nerve bundle. All areas must be well padded."
+                }
+            ]                                                                     
+        };
+
+        // --- APP STATE ---
+        let currentActiveQuizKey = '';
+        let activeQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        // --- HELPER: Fisher-Yates Shuffle ---
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        // --- NAVIGATION LOGIC ---
+        function hideAllViews() {
+            document.getElementById('view-dashboard').classList.add('hidden');
+            document.getElementById('view-subject').classList.add('hidden');
+            document.getElementById('view-quiz').classList.add('hidden');
+            document.getElementById('view-result').classList.add('hidden');
+        }
+
+        function goBack(viewId) {
+            hideAllViews();
+            document.getElementById(viewId).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function openSubject(subjectId) {
+            hideAllViews();
+            document.getElementById('view-subject').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        // --- MODAL LOGIC ---
+        function showComingSoon(itemName) {
+            document.getElementById('modal-item-name').textContent = itemName;
+            document.getElementById('coming-soon-modal').classList.remove('hidden');
+        }
+
+        function closeComingSoon() {
+            document.getElementById('coming-soon-modal').classList.add('hidden');
+        }
+
+        // --- QUIZ ENGINE LOGIC ---
+        function startQuiz(quizKey) {
+            if(!quizDatabase[quizKey]) {
+                alert("بيانات الاختبار غير متوفرة بعد.");
+                return;
+            }
+            
+            currentActiveQuizKey = quizKey;
+            
+            // Clone and Shuffle Questions
+            activeQuestions = JSON.parse(JSON.stringify(quizDatabase[quizKey]));
+            shuffleArray(activeQuestions);
+
+            // Set Title dynamically
+            document.getElementById('quiz-title-display').innerHTML = `<i class="fa-solid fa-flask text-teal-600 mr-2"></i> ${quizKey.toUpperCase()} Challenge`;
+
+            currentQuestionIndex = 0;
+            score = 0;
+            
+            hideAllViews();
+            document.getElementById('view-quiz').classList.remove('hidden');
+            
+            loadQuestion();
+        }
+
+                function abortQuiz() {
+            // إظهار نافذة التأكيد الاحترافية بدلاً من رسالة المتصفح
+            document.getElementById('abort-modal').classList.remove('hidden');
+        }
+
+        function confirmAbort() {
+            // إذا اختار نعم: إخفاء النافذة والعودة
+            document.getElementById('abort-modal').classList.add('hidden');
+            goBack('view-subject');
+        }
+
+        function cancelAbort() {
+            // إذا اختار إلغاء: إخفاء النافذة فقط وإكمال الاختبار
+            document.getElementById('abort-modal').classList.add('hidden');
+        }
+
+        function loadQuestion() {
+            window.scrollTo(0, 0); // Fix Auto-Scroll Issue
+            answered = false;
+            const currentQ = activeQuestions[currentQuestionIndex];
+            
+            // DOM Elements
+            const questionText = document.getElementById('question-text');
+            const questionTag = document.getElementById('question-tag');
+            const optionsContainer = document.getElementById('options-container');
+            const explanationBox = document.getElementById('explanation-box');
+            const nextBtn = document.getElementById('next-btn');
+            const progressBar = document.getElementById('progress-bar');
+            
+            // Update UI
+            questionText.textContent = `${currentQuestionIndex + 1}. ${currentQ.question}`;
+            questionTag.textContent = currentQ.tag;
+            
+            document.getElementById('question-counter').textContent = `Q ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
+            document.getElementById('score-display').textContent = `Score: ${score}`;
+            
+            let progressPercent = ((currentQuestionIndex) / activeQuestions.length) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            
+            explanationBox.classList.add('hidden');
+            nextBtn.classList.add('hidden');
+            optionsContainer.innerHTML = '';
+
+            // Shuffle Options Logic
+            let optionsWithState = currentQ.options.map((opt, index) => ({
+                text: opt,
+                isCorrect: index === currentQ.answer
+            }));
+            
+            shuffleArray(optionsWithState);
+
+            // Create Options DOM
+            optionsWithState.forEach((optData, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn w-full text-left p-4 rounded-xl border-2 border-gray-100 bg-white font-medium text-gray-700 shadow-sm';
+                const letter = String.fromCharCode(65 + index);
+                btn.innerHTML = `<span class="font-bold mr-3 text-teal-600 bg-teal-50 w-8 h-8 inline-flex items-center justify-center rounded-lg">${letter}</span> ${optData.text}`;
+                
+                btn.onclick = () => selectOption(btn, optData.isCorrect, optionsWithState, currentQ.explanation);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedBtn, isCorrect, optionsWithState, explanation) {
+            if (answered) return;
+            answered = true;
+
+            const allBtns = document.getElementById('options-container').children;
+            const explanationBox = document.getElementById('explanation-box');
+            const explanationText = document.getElementById('explanation-text');
+            const nextBtn = document.getElementById('next-btn');
+
+            // Disable all buttons and highlight correct answer
+            Array.from(allBtns).forEach((btn, index) => {
+                btn.disabled = true;
+                if(optionsWithState[index].isCorrect) {
+                    btn.classList.add('correct-answer');
+                }
+            });
+
+            // Handle user selection
+            if (isCorrect) {
+                score += 1;
+                document.getElementById('score-display').textContent = `Score: ${score}`;
+            } else {
+                selectedBtn.classList.add('wrong-answer');
+            }
+
+            // Show explanation
+            explanationText.textContent = explanation;
+            explanationBox.classList.remove('hidden');
+            
+            // Next/Finish button logic
+            if (currentQuestionIndex === activeQuestions.length - 1) {
+                nextBtn.innerHTML = 'عرض النتيجة النهائية <i class="fa-solid fa-flag-checkered mr-2"></i>';
+                nextBtn.className = "bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-xl transition duration-200 mt-6 inline-flex items-center";
+            } else {
+                nextBtn.innerHTML = 'السؤال التالي <i class="fa-solid fa-chevron-left mr-2"></i>';
+                nextBtn.className = "bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-8 rounded-xl transition duration-200 mt-6 inline-flex items-center";
+            }
+            nextBtn.classList.remove('hidden');
+        }
+
+        document.getElementById('next-btn').addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < activeQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+                       }
+        });                                             
+                function showResults() {
+            window.scrollTo(0, 0);
+            hideAllViews();
+            document.getElementById('view-result').classList.remove('hidden');
+            
+            const finalScoreEl = document.getElementById('final-score');
+            const messageEl = document.getElementById('result-message');
+            const fractionEl = document.getElementById('result-fraction');
+            const iconContainer = document.getElementById('result-icon');
+            
+            document.getElementById('progress-bar').style.width = '100%';
+            
+            const percentage = Math.round((score / activeQuestions.length) * 100);
+            finalScoreEl.textContent = `${percentage}%`;
+            
+            fractionEl.innerHTML = `لقد أجبت بشكل صحيح على <span class="font-bold text-teal-600">${score}</span> من أصل <span class="font-bold text-gray-800">${activeQuestions.length}</span> سؤالاً.`;
+
+            // تحديد رسائل النجاح بناءً على نوع الاختبار والنسبة
+            let resultText = "";
+            if (percentage >= 90) {
+                iconContainer.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 text-5xl bg-green-100 text-green-500 shadow-inner";
+                iconContainer.innerHTML = '<i class="fa-solid fa-trophy"></i>';
+                resultText = currentActiveQuizKey === 'ministerial' ? "أداء وزاري مذهل! أنت جاهز تماماً للامتحان الحقيقي." : "أداء هندسي رائع! فخاخ الـ EXCEPT لم تنجح في إيقاعك.";
+            } else if (percentage >= 70) {
+                iconContainer.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 text-5xl bg-blue-100 text-blue-500 shadow-inner";
+                iconContainer.innerHTML = '<i class="fa-solid fa-thumbs-up"></i>';
+                resultText = currentActiveQuizKey === 'ministerial' ? "أداء قوي! راجع الأخطاء البسيطة لضمان الدرجة الكاملة في الوزاري." : "أداء جيد جداً! راجع الأخطاء البسيطة لتصل للعلامة الكاملة.";
+            } else {
+                iconContainer.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 text-5xl bg-orange-100 text-orange-500 shadow-inner";
+                iconContainer.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+                if (currentActiveQuizKey === 'ministerial') {
+                    resultText = "الأسئلة الوزارية تتطلب دقة عالية. ننصحك بمراجعة التوضيحات العلمية وإعادة الاختبار لتعزيز جاهزيتك.";
+                } else if (currentActiveQuizKey === 'except') {
+                    resultText = "أسئلة الاستثناء مخادعة بطبيعتها. ننصحك بقراءة التوضيحات العلمية وإعادة التحدي.";
+                } else {
+                    resultText = "تحتاج لمزيد من المراجعة. ركز على التفاصيل الدقيقة في السيناريوهات السريرية.";
+                }
+            }
+            
+            messageEl.textContent = resultText;
+            messageEl.className = "text-xl font-bold mb-10 px-4 " + (percentage >= 90 ? "text-green-600" : (percentage >= 70 ? "text-blue-600" : "text-orange-600"));
+        }
+    </script>
+</body>
+</html>
