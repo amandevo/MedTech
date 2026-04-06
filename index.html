@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <head>
-        <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VN8V9BM4XF"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -13,7 +12,7 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedTech Hub - Beta</title>
+    <title>MedTech Academy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -72,19 +71,50 @@
 </head>
 <body class="text-gray-800 antialiased min-h-screen flex flex-col">
 
-    <!-- Header (No Version Number Here) -->
+        <!-- Header (No Version Number Here) -->
     <header class="bg-teal-800 text-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-center md:justify-start items-center">
+        <!-- أضفنا justify-between هنا ليفصل بين الشعار والزر -->
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            
+            <!-- الجزء الأول: الشعار واسم المنصة -->
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-teal-800 text-xl shadow-inner">
                     <i class="fa-solid fa-laptop-medical"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold english-text tracking-wide">MedTech Hub</h1>
-                    <p class="text-xs text-teal-200">منصة تقنيات التخدير - المرحلة الثالثة</p>
+                    <h1 class="text-xl font-bold english-text tracking-wide">MedTech Academy</h1>
+                    <p class="text-xs text-teal-200">منصة اكاديمية طبية متكاملة</p>
                 </div>
             </div>
+
+            <!-- الجزء الثاني: زر الوضع الليلي الجديد -->
+            <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-full bg-teal-700 hover:bg-teal-600 flex items-center justify-center transition-colors duration-300 shadow-md">
+                <i class="fa-solid fa-moon text-teal-100" id="theme-icon"></i>
+            </button>
+
         </div>
+            <style>
+        /* هندسة الوضع الليلي الذكية */
+        html.dark { background-color: #0f172a; color: #e2e8f0; }
+        html.dark body { background-color: #0f172a; }
+        
+        /* تحويل البطاقات والخلفيات الفاتحة إلى داكنة */
+        html.dark .bg-white, html.dark .bg-gray-50 { background-color: #1e293b !important; border-color: #334155 !important; }
+        html.dark .bg-gray-100, html.dark .bg-gray-200 { background-color: #334155 !important; }
+        
+        /* تحويل النصوص الداكنة إلى فاتحة */
+        html.dark .text-gray-800, html.dark .text-gray-700 { color: #f8fafc !important; }
+        html.dark .text-gray-600, html.dark .text-gray-500 { color: #cbd5e1 !important; }
+        
+        /* تحويل الحدود (Borders) */
+        html.dark .border-gray-100, html.dark .border-gray-200, html.dark .border-gray-300 { border-color: #475569 !important; }
+        
+        /* الحفاظ على هوية قسم التخدير (التركوازي) ليتناسب مع الأسود */
+        html.dark .bg-teal-50 { background-color: #042f2e !important; color: #2dd4bf !important; }
+        html.dark .bg-teal-100 { background-color: #134e4a !important; color: #5eead4 !important; }
+        html.dark .text-teal-800, html.dark .text-teal-600 { color: #2dd4bf !important; }
+        html.dark .border-teal-500 { border-color: #14b8a6 !important; }
+    </style>
     </header>
 
     <!-- Main Content -->
@@ -93,7 +123,116 @@
         <!-- ========================================== -->
         <!-- VIEW 1: DASHBOARD -->
         <!-- ========================================== -->
-        <div id="view-dashboard" class="fade-in block">
+                        <nav id="breadcrumbs" class="text-sm font-semibold text-gray-500 mb-6 hidden fade-in">
+            <span onclick="goBackToHome()" class="cursor-pointer hover:text-teal-600 transition"><i class="fa-solid fa-house"></i> الأكاديمية</span>
+            <span id="crumb-dept" class="hidden"> / <span onclick="openStages('anesthesia')" class="cursor-pointer hover:text-teal-600 transition">تقنيات التخدير</span></span>
+            <span id="crumb-stage" class="hidden"> / <span onclick="openSemesters()" class="cursor-pointer hover:text-teal-600 transition">المرحلة الثالثة</span></span>
+            <span id="crumb-semester" class="hidden"> / <span class="text-teal-600">الكورس الثاني</span></span>
+        </nav>
+
+        <div id="view-departments" class="fade-in block">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 flex justify-center items-center gap-3">
+                    أكاديمية MedTech الطبية <i class="fa-solid fa-building-columns text-teal-600"></i>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">اختر قسمك الأكاديمي للوصول إلى بيئة المحاكاة والاختبارات المخصصة لمرحلتك.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="openStages('anesthesia')" class="hub-card bg-white rounded-2xl p-6 border-b-4 border-teal-500 shadow-sm hover:shadow-md cursor-pointer text-center group">
+                    <div class="w-16 h-16 bg-teal-50 text-teal-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-syringe"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">تقنيات التخدير</h3>
+                    <p class="text-xs text-gray-500">قسم مفتوح • بيئة محاكاة نشطة</p>
+                </div>
+
+                <div onclick="showComingSoon('قسم الصيدلة')" class="hub-card bg-white rounded-2xl p-6 border-b-4 border-emerald-500 shadow-sm hover:shadow-md cursor-pointer text-center group opacity-80">
+                    <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                        <i class="fa-solid fa-pills"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">الصيدلة</h3>
+                    <p class="text-xs text-gray-400"><i class="fa-solid fa-lock ml-1"></i> قيد التجهيز البرمجي</p>
+                </div>
+
+                <div onclick="showComingSoon('قسم طب الأسنان')" class="hub-card bg-white rounded-2xl p-6 border-b-4 border-cyan-500 shadow-sm hover:shadow-md cursor-pointer text-center group opacity-80">
+                    <div class="w-16 h-16 bg-cyan-50 text-cyan-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                        <i class="fa-solid fa-tooth"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">طب الأسنان</h3>
+                    <p class="text-xs text-gray-400"><i class="fa-solid fa-lock ml-1"></i> قيد التجهيز البرمجي</p>
+                </div>
+
+                <div onclick="showComingSoon('قسم تقنيات المختبرات')" class="hub-card bg-white rounded-2xl p-6 border-b-4 border-indigo-500 shadow-sm hover:shadow-md cursor-pointer text-center group opacity-80">
+                    <div class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">المختبرات الطبية</h3>
+                    <p class="text-xs text-gray-400"><i class="fa-solid fa-lock ml-1"></i> قيد التجهيز البرمجي</p>
+                </div>
+            </div>
+        </div>
+        <!-- ========================================== -->
+        <!-- VIEW: STAGES (واجهة المراحل) -->
+        <!-- ========================================== -->
+        <div id="view-stages" class="hidden fade-in">
+            <div class="text-center mb-10">
+                <div class="w-16 h-16 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
+                    <i class="fa-solid fa-syringe"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">قسم تقنيات التخدير</h2>
+                <p class="text-gray-600 text-lg">الرجاء اختيار المرحلة الدراسية</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div onclick="showComingSoon('المرحلة الأولى')" class="bg-gray-50 border-2 border-gray-100 rounded-xl p-5 text-center cursor-not-allowed opacity-70 transition duration-200">
+                    <h3 class="font-bold text-gray-600 text-lg mb-1">المرحلة الأولى</h3>
+                    <p class="text-xs text-gray-400 font-semibold"><i class="fa-solid fa-lock"></i> مغلق</p>
+                </div>
+                <div onclick="showComingSoon('المرحلة الثانية')" class="bg-gray-50 border-2 border-gray-100 rounded-xl p-5 text-center cursor-not-allowed opacity-70 transition duration-200">
+                    <h3 class="font-bold text-gray-600 text-lg mb-1">المرحلة الثانية</h3>
+                    <p class="text-xs text-gray-400 font-semibold"><i class="fa-solid fa-lock"></i> مغلق</p>
+                </div>
+                <div onclick="openSemesters()" class="bg-white border-2 border-teal-500 hover:bg-teal-50 rounded-xl p-5 text-center cursor-pointer transition duration-200 shadow-sm group">
+                    <h3 class="font-bold text-teal-800 text-lg mb-1 group-hover:scale-105 transition-transform">المرحلة الثالثة</h3>
+                    <p class="text-xs text-teal-600 font-semibold"><i class="fa-solid fa-door-open"></i> الدخول متاح</p>
+                </div>
+                <div onclick="showComingSoon('المرحلة الرابعة')" class="bg-gray-50 border-2 border-gray-100 rounded-xl p-5 text-center cursor-not-allowed opacity-70 transition duration-200">
+                    <h3 class="font-bold text-gray-600 text-lg mb-1">المرحلة الرابعة</h3>
+                    <p class="text-xs text-gray-400 font-semibold"><i class="fa-solid fa-lock"></i> مغلق</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- VIEW: SEMESTERS (واجهة الكورسات) -->
+        <!-- ========================================== -->
+        <div id="view-semesters" class="hidden fade-in">
+             <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">المرحلة الثالثة</h2>
+                <p class="text-gray-600 text-lg">اختر الفصل الدراسي</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                <div onclick="showComingSoon('الكورس الأول')" class="hub-card bg-white rounded-2xl p-6 border-r-4 border-gray-300 shadow-sm cursor-not-allowed opacity-80 flex items-center justify-between">
+                     <div>
+                        <h3 class="text-xl font-bold text-gray-700 mb-1">الكورس الأول</h3>
+                        <p class="text-sm text-gray-400">مواد الفصل الدراسي الأول</p>
+                    </div>
+                    <div class="text-gray-300 text-2xl"><i class="fa-solid fa-lock"></i></div>
+                </div>
+
+                <div onclick="openSubjects()" class="hub-card bg-white rounded-2xl p-6 border-r-4 border-teal-500 shadow-md cursor-pointer hover:bg-teal-50 transition flex items-center justify-between group">
+                    <div>
+                        <h3 class="text-xl font-bold text-teal-800 mb-1">الكورس الثاني</h3>
+                        <p class="text-sm text-teal-600">مواد الفصل الدراسي الثاني (نشط)</p>
+                    </div>
+                    <div class="text-teal-500 text-2xl group-hover:translate-x-[-5px] transition-transform"><i class="fa-solid fa-arrow-left"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-dashboard" class="hidden fade-in">
             <div class="text-center mb-10">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 flex justify-center items-center gap-3">
                     مرحباً بك في طريقك للامتياز <i class="fa-solid fa-graduation-cap text-teal-600"></i>
@@ -117,15 +256,20 @@
                     </div>
                 </div>
 
-                <!-- Card 2: Equipment (Coming Soon) -->
-                <div onclick="showComingSoon('أسس أجهزة التخدير')" class="hub-card bg-white rounded-2xl p-6 border-t-4 border-blue-500 shadow-md cursor-pointer">
-                    <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-2xl mb-4">
-                        <i class="fa-solid fa-desktop"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">أسس أجهزة التخدير</h3>
-                    <p class="text-sm text-gray-500 mb-4">مادة وزارية • سيتم إضافتها قريباً.</p>
-                    <div class="flex items-center text-gray-400 font-semibold text-sm">
-                        قريباً <i class="fa-solid fa-lock mr-2"></i>
+                                <!-- ========================================== -->
+                <!-- CARD 2: EQUIPMENT (تم تفعيلها لامتحان المد) -->
+                <!-- ========================================== -->
+                <div onclick="openEquipSubject()" class="hub-card bg-white rounded-2xl p-6 border-t-4 border-blue-500 shadow-md cursor-pointer relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-full h-full bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-desktop"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">أسس أجهزة التخدير</h3>
+                        <p class="text-sm text-gray-500 mb-4">مادة وزارية • اختبارات المحاور ومحاكاة المد الشاملة.</p>
+                        <div class="flex items-center text-blue-600 font-semibold text-sm">
+                            دخول للمادة <i class="fa-solid fa-arrow-left mr-2"></i>
+                        </div>
                     </div>
                 </div>
 
@@ -183,9 +327,9 @@
         <!-- VIEW 2: SUBJECT DETAILS -->
         <!-- ========================================== -->
         <div id="view-subject" class="hidden fade-in">
-            <button onclick="goBack('view-dashboard')" class="mb-6 flex items-center text-gray-600 hover:text-teal-700 font-semibold transition-colors">
-                <i class="fa-solid fa-arrow-right ml-2"></i> العودة للرئيسية
-            </button>
+                                <button onclick="openSubjects()" class="mb-6 flex items-center text-gray-600 hover:text-teal-700 font-semibold transition-colors">
+            <i class="fa-solid fa-arrow-right ml-2"></i> رجوع
+        </button>
 
             <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 mb-8 flex items-center gap-4">
                 <div class="w-16 h-16 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center text-3xl shrink-0">
@@ -305,6 +449,118 @@
                 </button>
             </div>
         </div>
+        <!-- ========================================== -->
+        <!-- VIEW 2.B: EQUIPMENT SUBJECT DETAILS (واجهة أجهزة التخدير) -->
+        <!-- ========================================== -->
+        <div id="view-subject-equip" class="hidden fade-in">
+            <!-- زر العودة -->
+                  <button onclick="openSubjects()" class="mb-6 flex items-center text-gray-600 hover:text-blue-700 font-semibold transition-colors">
+            <i class="fa-solid fa-arrow-right ml-2"></i> رجوع
+        </button>
+
+            <!-- ترويسة المادة -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 mb-8 flex items-center gap-4 border-b-4 border-blue-500">
+                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-3xl shrink-0">
+                    <i class="fa-solid fa-desktop"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">أسس أجهزة التخدير</h2>
+                    <p class="text-gray-500 mt-1">المنهج الوزاري المدمج (نظري + عملي)</p>
+                </div>
+            </div>
+
+                        <!-- قسم التحديات الشاملة للمِد -->
+            <h3 class="text-xl font-bold text-gray-800 mb-4 border-r-4 border-purple-500 pr-3">تحديات المِد الشاملة</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+                
+                <!-- التحدي الأول: T&F -->
+                <button onclick="startQuiz('equip_mid_tf')" class="hub-card bg-gradient-to-l from-green-50 to-white border border-green-100 rounded-xl p-5 text-right text-green-800 flex justify-between items-center group">
+                    <div>
+                        <h4 class="font-bold text-lg mb-1 english-text">T&F Challenge</h4>
+                        <p class="text-xs text-green-600 opacity-80">30 سؤال صح وخطأ</p>
+                    </div>
+                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                </button>
+
+                <!-- التحدي الثاني: EXCEPT -->
+                <button onclick="startQuiz('equip_mid_except')" class="hub-card bg-gradient-to-l from-red-50 to-white border border-red-100 rounded-xl p-5 text-right text-red-800 flex justify-between items-center group">
+                    <div>
+                        <h4 class="font-bold text-lg mb-1 english-text">EXCEPT Challenge</h4>
+                        <p class="text-xs text-red-600 opacity-80">30 سؤال استثناء دقيق</p>
+                    </div>
+                    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                </button>
+
+                <!-- التحدي الثالث: محاكاة وزارية -->
+                <button onclick="startQuiz('equip_mid_sim')" class="hub-card bg-gradient-to-l from-purple-50 to-white border border-purple-100 rounded-xl p-5 text-right text-purple-800 flex justify-between items-center group">
+                    <div>
+                        <h4 class="font-bold text-lg mb-1">المحاكاة الشاملة</h4>
+                        <p class="text-xs text-purple-600 opacity-80">60 سؤال منوع (MCQ, SBA, Only)</p>
+                    </div>
+                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                </button>
+
+            </div>
+
+            <!-- قسم المحاور الفعالة (الأسابيع 1 إلى 6) -->
+            <div class="flex items-center justify-between mb-4 border-r-4 border-blue-500 pr-3">
+                <h3 class="text-xl font-bold text-gray-800">محاور امتحان المِد (نظري + عملي)</h3>
+                <span class="text-xs font-bold bg-blue-100 text-blue-800 px-3 py-1 rounded-full english-text">Weeks 1-6</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+                <!-- المحور الأول -->
+                <button onclick="startQuiz('equip_mod1')" class="bg-white border border-gray-200 hover:border-blue-500 rounded-xl p-4 text-right transition duration-200 hover:shadow-md group flex items-center gap-4">
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-solid fa-lungs"></i></div>
+                    <div>
+                        <div class="font-bold text-gray-800">أنظمة التنفس والصودا لايم</div>
+                        <div class="text-xs text-gray-500 mt-1 english-text">Breathing Systems & Soda Lime</div>
+                    </div>
+                </button>
+                <!-- المحور الثاني -->
+                <button onclick="startQuiz('equip_mod2')" class="bg-white border border-gray-200 hover:border-blue-500 rounded-xl p-4 text-right transition duration-200 hover:shadow-md group flex items-center gap-4">
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-solid fa-pump-medical"></i>
+</div>
+                    <div>
+                        <div class="font-bold text-gray-800">الإنعاش اليدوي وملحقاته</div>
+                        <div class="text-xs text-gray-500 mt-1 english-text">Manual Resuscitators (AMBU)</div>
+                    </div>
+                </button>
+            </div>
+
+            <!-- قسم المحاور المقفلة (الأسابيع 7 فما فوق) -->
+            <div class="flex items-center justify-between mb-4 border-r-4 border-gray-400 pr-3 opacity-80">
+                <h3 class="text-xl font-bold text-gray-600">محاور الفاينل</h3>
+                <span class="text-xs font-bold bg-gray-200 text-gray-600 px-3 py-1 rounded-full">قيد التجهيز <i class="fa-solid fa-lock ml-1"></i></span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 opacity-70">
+                <button onclick="showComingSoon('أجهزة التنفس الاصطناعي')" class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-right cursor-not-allowed hover:bg-gray-100 transition duration-200 flex items-center gap-3">
+                    <div class="text-gray-400 text-lg shrink-0"><i class="fa-solid fa-fan"></i></div>
+                    <div class="font-bold text-gray-600 text-sm">أجهزة التنفس (Ventilators)</div>
+                </button>
+                <button onclick="showComingSoon('معدات التخدير المناطقي')" class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-right cursor-not-allowed hover:bg-gray-100 transition duration-200 flex items-center gap-3">
+                    <div class="text-gray-400 text-lg shrink-0"><i class="fa-solid fa-syringe"></i></div>
+                    <div class="font-bold text-gray-600 text-sm">معدات التخدير المناطقي</div>
+                </button>
+                <button onclick="showComingSoon('محفزات الأعصاب')" class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-right cursor-not-allowed hover:bg-gray-100 transition duration-200 flex items-center gap-3">
+                    <div class="text-gray-400 text-lg shrink-0"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="font-bold text-gray-600 text-sm">محفزات الأعصاب</div>
+                </button>
+                <button onclick="showComingSoon('جهاز الصدمة الكهربائية')" class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-right cursor-not-allowed hover:bg-gray-100 transition duration-200 flex items-center gap-3">
+                    <div class="text-gray-400 text-lg shrink-0"><i class="fa-solid fa-wave-square"></i></div>
+                    <div class="font-bold text-gray-600 text-sm">جهاز الصدمة (Defibrillator)</div>
+                </button>
+                <button onclick="showComingSoon('مسخنات الدم')" class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-right cursor-not-allowed hover:bg-gray-100 transition duration-200 flex items-center gap-3">
+                    <div class="text-gray-400 text-lg shrink-0"><i class="fa-solid fa-temperature-high"></i></div>
+                    <div class="font-bold text-gray-600 text-sm">مسخنات الدم</div>
+                </button>
+            </div>
+        </div>
 
         <!-- ========================================== -->
         <!-- VIEW 3: QUIZ ENGINE -->
@@ -312,9 +568,15 @@
         <div id="view-quiz" class="hidden fade-in">
             <div class="flex justify-between items-center mb-6">
                 <button onclick="abortQuiz()" class="text-gray-500 hover:text-red-600 font-semibold text-sm flex items-center transition-colors">
-                    <i class="fa-solid fa-times mr-1 ml-2"></i> إنهاء الاختبار
+                    <i class="fa-solid fa-times mr-1 ml-2"></i> إنهاء
                 </button>
-                <span id="quiz-title-display" class="font-bold text-teal-800 bg-teal-100 px-4 py-1 rounded-full text-sm english-text"></span>
+                
+                <!-- إضافة المؤقت الزمني هنا -->
+                <div id="quiz-timer-container" class="hidden flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-1.5 rounded-full font-bold text-sm border-2 border-gray-200 transition-colors duration-300">
+                    <i class="fa-regular fa-clock"></i> <span id="time-remaining" class="english-text tracking-widest">00:00</span>
+                </div>
+
+                <span id="quiz-title-display" class="font-bold text-teal-800 bg-teal-100 px-3 py-1 rounded-full text-xs md:text-sm english-text truncate max-w-[120px] md:max-w-none text-left" dir="ltr"></span>
             </div>
 
             <div class="mb-6">
@@ -366,9 +628,11 @@
                 <button onclick="startQuiz(currentActiveQuizKey)" class="bg-white border-2 border-teal-600 text-teal-700 hover:bg-teal-50 font-bold py-3 px-8 rounded-xl transition duration-200 flex items-center justify-center">
                     <i class="fa-solid fa-rotate-right ml-2"></i> إعادة الاختبار
                 </button>
-                <button onclick="goBack('view-subject')" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-xl shadow-md transition duration-200 flex items-center justify-center">
-                    العودة للمحاضرات <i class="fa-solid fa-list-check mr-2"></i>
-                </button>
+                <!-- الزر المحدث في واجهة النتيجة -->
+<button onclick="returnToSubject()" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-xl shadow-md transition duration-200 flex items-center justify-center">
+    العودة للمحاضرات <i class="fa-solid fa-list-check mr-2"></i>
+</button>
+
             </div>
         </div>
 
@@ -416,7 +680,7 @@
     <footer class="mt-auto bg-gray-50 border-t border-gray-200 py-6 relative">
         <div class="container mx-auto px-4 text-center">
             <p class="text-gray-500 text-sm font-semibold flex items-center justify-center gap-2 mb-1">
-                <i class="fa-regular fa-copyright"></i> جميع الحقوق محفوظة لمنصة MedTech Hub 2026
+                <i class="fa-regular fa-copyright"></i> جميع الحقوق محفوظة لمنصة MedTech Academy 2026
             </p>
             <p class="text-teal-700 text-sm font-bold flex items-center justify-center gap-2 english-text">
                 <i class="fa-solid fa-code"></i> Engineered & Designed by: Ayman Farhan
@@ -424,7 +688,7 @@
         </div>
         <!-- Version Number hidden in corner -->
         <div class="absolute bottom-2 right-4 text-gray-300 text-xs english-text font-bold opacity-70">
-            v1.0.0-beta
+            V1.2.0-Diamond
         </div>
     </footer>
 
@@ -2296,7 +2560,1138 @@
                     tag: "Understanding",
                     explanation: "Extensive abduction at the shoulder in the lateral position can cause severe stretching and injury to the brachial plexus nerve bundle. All areas must be well padded."
                 }
-            ]                                                                     
+            ],
+            'equip_mid_tf': [
+                {
+                    question: "The Magill system (Mapleson A) is a highly efficient breathing system for controlled ventilation.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Systems)",
+                    explanation: "False. The Magill system is highly efficient for SPONTANEOUS ventilation, but it is INEFFICIENT for controlled ventilation, requiring an FGF of 3 times the minute volume to prevent rebreathing."
+                },
+                {
+                    question: "In the Lack system (Coaxial Mapleson A), the fresh gas flows through the inside tube, and exhaled gases flow through the outside tube.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Systems)",
+                    explanation: "False. In the Lack system, the fresh gas flows through the OUTSIDE tube, and the exhaled gases flow through the INSIDE tube (which is wide, 14 mm, to reduce resistance)."
+                },
+                {
+                    question: "Mapleson B and C systems are rarely used today because they are inefficient for both spontaneous and controlled ventilation.",
+                    options: ["True", "False"],
+                    answer: 0,
+                    tag: "T&F (Systems)",
+                    explanation: "True. They are inefficient in both modes because there is a lot of rebreathing, requiring a high FGF (2-3 times the minute volume)."
+                },
+                {
+                    question: "The Bain system is a coaxial modification of the Mapleson D system.",
+                    options: ["True", "False"],
+                    answer: 0,
+                    tag: "T&F (Systems)",
+                    explanation: "True. The Bain system is a coaxial version of Mapleson D, where the inner tube is used for fresh gas flow."
+                },
+                {
+                    question: "In the Mapleson E system (Ayre's T-piece), a reservoir bag and an APL valve are essential components.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Systems)",
+                    explanation: "False. The classic Mapleson E system has NO bag and NO valve. It is specifically used in children to provide low resistance to breathing."
+                },
+                {
+                    question: "The Jackson-Rees modification (Mapleson F) adds a small, closed-ended bag to the Ayre's T-piece.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Systems)",
+                    explanation: "False. Jackson-Rees added a small bag (0.5L) with an OPEN end (double-ended bag) to the outlet of the reservoir limb."
+                },
+                {
+                    question: "In a closed circle anesthesia system, the fresh gas flow (FGF) is set very high (about 5 L/min) to prevent hypercapnia.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Circle System)",
+                    explanation: "False. In a CLOSED circle system, the FGF is just sufficient to replace the volume of gas and vapor taken up by the patient (metabolic flow), meaning no gas leaves via the APL valve."
+                },
+                {
+                    question: "Soda lime consists mainly of calcium hydroxide (94%) and sodium hydroxide (5%).",
+                    options: ["True", "False"],
+                    answer: 0,
+                    tag: "T&F (Soda Lime)",
+                    explanation: "True. It contains 94% calcium hydroxide, 5% sodium hydroxide, and a very small amount of potassium hydroxide (< 0.1%)."
+                },
+                {
+                    question: "When soda lime is exhausted, a color indicator dye (like ethyl violet) changes the granules from purple to white.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Soda Lime)",
+                    explanation: "False. The ethyl violet dye changes from WHITE to PURPLE/VIOLET when the soda lime is exhausted (when pH drops below 10)."
+                },
+                {
+                    question: "One kilogram of fresh soda lime can absorb more than 120 liters of carbon dioxide.",
+                    options: ["True", "False"],
+                    answer: 0,
+                    tag: "T&F (Soda Lime)",
+                    explanation: "True. 1 kg of soda lime has the capacity to absorb more than 120 L of CO2."
+                },
+                {
+                    question: "Silica (0.2%) is added to soda lime to increase its carbon dioxide absorption capacity.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Soda Lime)",
+                    explanation: "False. Silica is added to HARDEN the absorbents and reduce powder/dust formation during transport, not to increase absorption."
+                },
+                {
+                    question: "The APL valve allows room air to enter the breathing system to prevent hypoxia.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Valves)",
+                    explanation: "False. The APL valve allows exhaled gases and excess FGF to LEAVE the system. It strictly does NOT allow room air to enter."
+                },
+                {
+                    question: "During spontaneous ventilation, the APL valve should be kept fully open and requires a pressure of less than 1 cm H2O to actuate.",
+                    options: ["True", "False"],
+                    answer: 0,
+                    tag: "T&F (Valves)",
+                    explanation: "True. During spontaneous breathing, a very small positive pressure (less than 1 cm H2O) generated by the patient's exhalation is enough to open the fully opened valve."
+                },
+                {
+                    question: "The standard adult reservoir bag has a capacity of 5 liters.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Bags)",
+                    explanation: "False. The standard adult size for a reservoir bag is 2 Liters."
+                },
+                {
+                    question: "According to the Law of Laplace, as a rubber reservoir bag becomes grossly overinflated, the pressure inside it continues to rise infinitely.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Bags)",
+                    explanation: "False. According to Laplace's law (P = 2T/r), the pressure will FALL as the bag's radius increases. This limits the maximum pressure to about 40 cm H2O, acting as a safety feature."
+                },
+                {
+                    question: "The Humphrey ADE block features a lever that allows switching between spontaneous and controlled ventilation.",
+                    options: ["True", "False"],
+                    answer: 0,
+                    tag: "T&F (Humphrey)",
+                    explanation: "True. The lever isolates or connects the reservoir bag and APL valve depending on the selected mode."
+                },
+                {
+                    question: "When using Sevoflurane in a circle system with soda lime, Compound A can be produced due to the degradation of the anesthetic agent.",
+                    options: ["True", "False"],
+                    answer: 0,
+                    tag: "T&F (Hazards)",
+                    explanation: "True. Sevoflurane degradation by soda lime produces Compound A, which is associated with renal toxicity in rats."
+                },
+                {
+                    question: "Amsorb is a CO2 absorbent that reacts strongly with volatile anesthetic agents, producing carbon monoxide.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Absorbents)",
+                    explanation: "False. Amsorb is unique because it has NO effect on anesthetic agents (it does not produce Compound A or Carbon Monoxide)."
+                },
+                {
+                    question: "During a high-pressure leak test of the breathing system, the APL valve must be fully open.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Procedures)",
+                    explanation: "False. To perform a high-pressure leak test, the APL valve must be CLOSED entirely, and the patient end occluded."
+                },
+                {
+                    question: "A manual resuscitator (AMBU bag) can only deliver a maximum of 21% inspired oxygen (FiO2) unless connected to an anesthesia machine.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (AMBU)",
+                    explanation: "False. While it delivers 21% (room air) on its own, adding an oxygen reservoir and oxygen source can increase the FiO2 up to 100% (at 15 L/min flow)."
+                },
+                {
+                    question: "The pressure limiting device (pop-off valve) in a pediatric AMBU bag opens at a pressure of 60 cm H2O.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (AMBU)",
+                    explanation: "False. The pediatric/infant pop-off valve opens at 45 cm H2O to prevent barotrauma. The 60 cm H2O limit is for adults."
+                },
+                {
+                    question: "A manual resuscitator is designed to be inflated at rest (self-inflating).",
+                    options: ["True", "False"],
+                    answer: 0,
+                    tag: "T&F (AMBU)",
+                    explanation: "True. AMBU bags are self-inflating bags, meaning they return to their inflated shape automatically after being squeezed."
+                },
+                {
+                    question: "The capacity of an adult AMBU bag is approximately 1500 - 1600 mL.",
+                    options: ["True", "False"],
+                    answer: 0,
+                    tag: "T&F (AMBU)",
+                    explanation: "True. The adult AMBU bag has a capacity of around 1500-1600 mL and delivers a tidal volume of about 600 mL."
+                },
+                {
+                    question: "Low-flow anesthesia is generally defined as using a fresh gas flow (FGF) of less than 2 L/min.",
+                    options: ["True", "False"],
+                    answer: 0,
+                    tag: "T&F (Circle System)",
+                    explanation: "True. For practical considerations, FGF less than 2 L/min is considered low-flow anesthesia."
+                },
+                {
+                    question: "Uncontrolled diabetes and heavy smoking are considered absolute contraindications for low-flow anesthesia.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Circle System)",
+                    explanation: "False. Uncontrolled diabetes and heavy smoking are RELATIVE contraindications. Absolute contraindications include inhalational injury, septicemia, and using old machines."
+                },
+                {
+                    question: "Normal production of CO2 in a 70 kg adult is approximately 4000 mL/minute.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Physiology)",
+                    explanation: "False. Normal CO2 production is 200 mL/minute. The 4000 mL/min (4L) refers to the normal alveolar ventilation required to eliminate that CO2."
+                },
+                {
+                    question: "In a circle system, the fresh gas flow (FGF) should be positioned distal to the inspiratory unidirectional valve.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Circle System)",
+                    explanation: "False. The FGF from the machine is positioned distal to the soda lime canister, but PROXIMAL to the inspiratory valve."
+                },
+                {
+                    question: "The Magill system is not suitable for pediatric patients under 25 kg due to the increased dead space at the patient end.",
+                    options: ["True", "False"],
+                    answer: 0,
+                    tag: "T&F (Systems)",
+                    explanation: "True. The geometry at the patient end (including the heavy APL valve) increases dead space and drag, making it unsuitable for small children."
+                },
+                {
+                    question: "One of the advantages of the circle system is that it completely eliminates the risk of hypercapnia.",
+                    options: ["True", "False"],
+                    answer: 1,
+                    tag: "T&F (Circle System)",
+                    explanation: "False. There is a REAL danger of hypercapnia in a circle system if the CO2 absorber is inactive, if unidirectional valves are incompetent, or if the bypass is used incorrectly."
+                },
+                {
+                    question: "The neonatal AMBU bag is capable of delivering a tidal volume of 20-50 mL.",
+                    options: ["True", "False"],
+                    answer: 0,
+                    tag: "T&F (AMBU)",
+                    explanation: "True. The neonatal version (capacity ~240 mL) is designed to deliver small tidal volumes of 20-50 mL for infants up to 7 kg."
+                }
+            ],
+                        'equip_mid_except': [
+                {
+                    question: "Essential properties of an ideal breathing system include all the following EXCEPT:",
+                    options: ["Deliver gases to alveoli in the set concentration", "Effectively eliminate carbon dioxide", "Have minimal apparatus dead space", "Have high resistance to breathing"],
+                    answer: 3,
+                    tag: "EXCEPT (Properties)",
+                    explanation: "An ideal breathing system must have LOW resistance to breathing, not high resistance, to prevent patient fatigue."
+                },
+                {
+                    question: "Desirable features of a breathing system include all the following EXCEPT:",
+                    options: ["Conservation of heat and moisture", "Economy of fresh gas", "Lightweight and convenient design", "Total reliance on room air for ventilation"],
+                    answer: 3,
+                    tag: "EXCEPT (Properties)",
+                    explanation: "Breathing systems rely on the fresh gas flow (FGF) from the anesthesia machine, not room air. In fact, systems like APL valves are designed to PREVENT room air from entering."
+                },
+                {
+                    question: "The Mapleson classification (A to F) depends on the relative positions of all the following components EXCEPT:",
+                    options: ["The APL valve", "The reservoir bag", "The fresh gas flow (FGF) inlet", "The CO2 absorbent canister"],
+                    answer: 3,
+                    tag: "EXCEPT (Mapleson)",
+                    explanation: "Mapleson systems are NON-rebreathing systems that do NOT contain a CO2 absorbent canister. The classification depends only on the positions of the APL, bag, and FGF."
+                },
+                {
+                    question: "Disadvantages of the Magill system (Mapleson A) include all the following EXCEPT:",
+                    options: ["Inefficient for controlled ventilation", "Heaviness of the APL valve at the patient's end", "Not suitable for children under 25 kg", "High resistance during spontaneous ventilation"],
+                    answer: 3,
+                    tag: "EXCEPT (Mapleson A)",
+                    explanation: "The Magill system is actually VERY EFFICIENT for spontaneous ventilation (requires FGF equal to alveolar minute volume, ~70 mL/kg/min)."
+                },
+                {
+                    question: "Regarding the Lack system (Coaxial Mapleson A), all the following are true EXCEPT:",
+                    options: ["It consists of a tube inside a tube", "The outer tube carries the fresh gas flow (FGF)", "The inner tube carries the exhaled gases", "The APL valve is mounted at the patient's end"],
+                    answer: 3,
+                    tag: "EXCEPT (Lack System)",
+                    explanation: "In the Lack system, the APL valve and the bag are mounted at the MACHINE END to eliminate the drag and heaviness at the patient's end."
+                },
+                {
+                    question: "Mapleson D system characteristics include all the following EXCEPT:",
+                    options: ["Fresh gas inlet is near the patient end", "It is efficient for controlled ventilation", "Requires FGF equal to minute volume (MV) for normocarbia", "It is highly efficient for spontaneous ventilation"],
+                    answer: 3,
+                    tag: "EXCEPT (Mapleson D)",
+                    explanation: "Mapleson D is INEFFICIENT for spontaneous ventilation because exhaled alveolar gas may pass to the bag and be rebreathed unless FGF is very high."
+                },
+                {
+                    question: "Hazards specific to the Bain system (coaxial Mapleson D) include all the following EXCEPT:",
+                    options: ["Kinking of the inner tube causing abstraction of FGF", "Disconnection of the inner tube increasing dead space", "Hypoxemia and hypercapnia if the inner tube is disconnected", "Increased resistance from unidirectional valves"],
+                    answer: 3,
+                    tag: "EXCEPT (Bain System)",
+                    explanation: "The Bain system is a Mapleson system and does NOT contain unidirectional valves. The hazards are related to the inner tube (kinking or disconnection)."
+                },
+                {
+                    question: "The Mapleson E (Ayre's T-piece) is characterized by all the following EXCEPT:",
+                    options: ["It has a T-shaped tubing with three open ports", "It has no APL valve", "It has no reservoir bag", "It is heavily used for adults weighing over 80 kg"],
+                    answer: 3,
+                    tag: "EXCEPT (Mapleson E)",
+                    explanation: "Ayre's T-piece is specifically used in CHILDREN because it offers low resistance to breathing and minimal dead space. If a patient weighs >25 kg, they will inspire room air."
+                },
+                {
+                    question: "The Humphrey ADE block provides multiple modes of ventilation. All statements are true EXCEPT:",
+                    options: ["Lever up (spontaneous) mimics the Magill system", "Lever down (ventilator) mimics the Mapleson E system", "It incorporates an APL valve and a 2-L reservoir bag", "It requires continuous electrical power to switch modes"],
+                    answer: 3,
+                    tag: "EXCEPT (Humphrey)",
+                    explanation: "The Humphrey block uses a simple MECHANICAL lever to switch between spontaneous and controlled ventilation. It does not require electrical power."
+                },
+                {
+                    question: "Components of a traditional circle breathing system include all the following EXCEPT:",
+                    options: ["CO2 absorbent canister", "Inspiratory and expiratory unidirectional valves", "Adjustable pressure limiting (APL) valve", "Coaxial inner tube for fresh gas delivery"],
+                    answer: 3,
+                    tag: "EXCEPT (Circle System)",
+                    explanation: "Coaxial inner tubes are characteristic of the Bain and Lack systems, not the traditional circle system which uses separate inspiratory and expiratory corrugated tubes."
+                },
+                {
+                    question: "Advantages of the circle breathing system include all the following EXCEPT:",
+                    options: ["Economy of fresh gas (FGF can be 500-1000 mL)", "Conservation of heat and moisture (humidification)", "Reduction in atmospheric pollution", "Complete elimination of disconnection and leakage risks"],
+                    answer: 3,
+                    tag: "EXCEPT (Circle System)",
+                    explanation: "Because of the many connections in a circle system, there is actually an INCREASED risk of leaks and disconnection compared to simpler systems."
+                },
+                {
+                    question: "Causes of hypercapnia (high CO2) in a circle system include all the following EXCEPT:",
+                    options: ["Exhausted or inactive CO2 absorber", "Incompetent unidirectional valves", "Incorrect use of absorber bypass", "Using a fresh gas flow (FGF) of 5 Liters/min"],
+                    answer: 3,
+                    tag: "EXCEPT (Circle System)",
+                    explanation: "Using a very high FGF (like 5 L/min) would actually flush out the CO2 and prevent hypercapnia, even if the absorber is failing. Hypercapnia occurs with low flows combined with absorber failure."
+                },
+                {
+                    question: "Soda lime composition includes all the following chemicals EXCEPT:",
+                    options: ["Calcium hydroxide (94%)", "Sodium hydroxide (5%)", "Silica (0.2%)", "Barium hydroxide (20%)"],
+                    answer: 3,
+                    tag: "EXCEPT (Soda Lime)",
+                    explanation: "Barium hydroxide is found in Baralyme, not Soda lime. Soda lime relies mainly on Calcium hydroxide."
+                },
+                {
+                    question: "Regarding the color indicator in CO2 absorbents, all the following are true EXCEPT:",
+                    options: ["Ethyl violet changes from white to purple", "Titan yellow changes from pink to white", "Color change occurs when pH drops below 10", "Amsorb changes from purple to white"],
+                    answer: 3,
+                    tag: "EXCEPT (Soda Lime)",
+                    explanation: "Amsorb does not change from purple to white. The known color changes are Ethyl violet (white to purple) and Titan yellow (pink to white) due to absorbent exhaustion."
+                },
+                {
+                    question: "Compound A is a toxic byproduct associated with all the following factors EXCEPT:",
+                    options: ["It is produced when Sevoflurane is used", "It is produced by the reaction with Soda lime", "It has nephrotoxic effects in rats", "It is highly produced when using Amsorb"],
+                    answer: 3,
+                    tag: "EXCEPT (Absorbents)",
+                    explanation: "Amsorb has NO effect on anesthetic agents and does NOT produce Compound A or carbon monoxide."
+                },
+                {
+                    question: "Relative contraindications for low-flow anesthesia include all the following EXCEPT:",
+                    options: ["Heavy-smoking patients", "Alcoholic patients", "Uncontrolled diabetes", "Septicemia"],
+                    answer: 3,
+                    tag: "EXCEPT (Low-Flow)",
+                    explanation: "Septicemia is an ABSOLUTE contraindication for low-flow anesthesia, along with inhalational injury and using old machines."
+                },
+                {
+                    question: "The APL (Adjustable Pressure Limiting) valve features all the following EXCEPT:",
+                    options: ["It allows exhaled gases to leave the breathing system", "It allows excess fresh gas to leave the system", "It is a spring-loaded, one-way valve", "It opens automatically to let room air in during hypoxia"],
+                    answer: 3,
+                    tag: "EXCEPT (APL Valve)",
+                    explanation: "The APL valve strictly DOES NOT allow room air to enter the breathing system under any circumstances."
+                },
+                {
+                    question: "Problems associated with the APL valve in practice include all the following EXCEPT:",
+                    options: ["Scavenging system malfunction may cause it to remain open", "Water vapor condensation may cause the valve disc to stick", "If closed during assisted ventilation, it can expose the patient to excessive pressure", "It usually shatters if the pressure exceeds 10 cm H2O"],
+                    answer: 3,
+                    tag: "EXCEPT (APL Valve)",
+                    explanation: "The APL valve does not shatter at 10 cm H2O. In fact, some designs have a pressure relief safety mechanism that actuates at a high pressure of about 60 cm H2O."
+                },
+                {
+                    question: "Characteristics of the standard reservoir bag include all the following EXCEPT:",
+                    options: ["It accommodates FGF during expiration", "It acts as a visual monitor of the ventilatory pattern", "The standard adult size is 2 Liters", "It provides a highly accurate measurement of tidal volume"],
+                    answer: 3,
+                    tag: "EXCEPT (Reservoir Bag)",
+                    explanation: "The reservoir bag serves as a very INACCURATE guide to the patient's tidal volume, though it is good for monitoring the general pattern of breathing."
+                },
+                {
+                    question: "Manual resuscitators (AMBU bags) are used in all the following situations EXCEPT:",
+                    options: ["Patient resuscitation", "Transport of the patient", "Standby measure for anesthesia machine failure", "Delivering precise percentages of volatile anesthetics like Isoflurane"],
+                    answer: 3,
+                    tag: "EXCEPT (AMBU Bag)",
+                    explanation: "AMBU bags are not vaporizers and cannot deliver precise concentrations of volatile anesthetics. They are used for manual ventilation with air/oxygen."
+                },
+                {
+                    question: "Components of a standard manual resuscitator (AMBU bag) include all the following EXCEPT:",
+                    options: ["Self-inflating bag", "Non-rebreathing valve", "Bag refill valve", "Soda lime canister"],
+                    answer: 3,
+                    tag: "EXCEPT (AMBU Bag)",
+                    explanation: "A manual resuscitator does NOT contain a Soda lime canister. It uses a non-rebreathing valve to prevent CO2 rebreathing directly."
+                },
+                {
+                    question: "Pressure limiting devices (pop-off valves) on pediatric AMBU bags have all the following characteristics EXCEPT:",
+                    options: ["They open at a pressure of 45 cm H2O", "They prevent lung injury due to barotrauma", "They prevent gastric inflation", "They open at 60 cm H2O like adult bags"],
+                    answer: 3,
+                    tag: "EXCEPT (AMBU Bag)",
+                    explanation: "Pediatric pop-off valves open at 45 cm H2O for safety, whereas in adults, the opening pressure is kept at 60 cm H2O."
+                },
+                {
+                    question: "Regarding the sizes and capacities of AMBU bags, all the following are true EXCEPT:",
+                    options: ["Adult bag capacity is approx 1,600 mL", "Adult bag delivers a tidal volume of approx 600 mL", "Neonatal bag delivers a tidal volume of approx 20-50 mL", "Child bag has a capacity of 1,500 mL"],
+                    answer: 3,
+                    tag: "EXCEPT (AMBU Bag)",
+                    explanation: "The child-size AMBU bag has a capacity of 500 mL, not 1,500 mL."
+                },
+                {
+                    question: "A high-pressure leak test of the breathing system involves all the following steps EXCEPT:",
+                    options: ["Closing the APL valve entirely", "Occluding the patient end of the circuit", "Pressing the oxygen flush to fill the circuit to 30 cmH2O", "Opening the APL valve fully to allow gas escape"],
+                    answer: 3,
+                    tag: "EXCEPT (Procedures)",
+                    explanation: "To perform a high-pressure leak test, the APL valve MUST BE CLOSED ENTIRELY to build up pressure and check for leaks. Opening it defeats the purpose of the test."
+                },
+                {
+                    question: "The low-pressure check of the anesthesia circuit involves verifying all the following EXCEPT:",
+                    options: ["The oxygen flowmeter bobbin moves freely", "Hoses have no cracks or leaks", "Unidirectional valves move correctly", "The oxygen flush button generates 30 cmH2O pressure"],
+                    answer: 3,
+                    tag: "EXCEPT (Procedures)",
+                    explanation: "Pressing the oxygen flush to generate 30 cmH2O is part of the HIGH-PRESSURE leak test, not the low-pressure check."
+                },
+                {
+                    question: "Requirements for the safe conduct of low-flow anesthesia include all the following EXCEPT:",
+                    options: ["An experienced anesthetist", "Calibration of the flowmeter down to 50 mL/min", "Gas monitoring (O2, EtCO2)", "A system leak exceeding 500 mL/min"],
+                    answer: 3,
+                    tag: "EXCEPT (Low-Flow)",
+                    explanation: "For safe low-flow anesthesia, the system MUST be leak-free, or have a minimal leak NOT exceeding 200 mL/min."
+                },
+                {
+                    question: "During spontaneous ventilation with a Humphrey ADE block, all the following occur EXCEPT:",
+                    options: ["The lever is placed in the 'up' mode", "The system functions similar to a Magill system", "The reservoir bag and APL valve are connected to the breathing system", "The reservoir bag and APL valve are completely isolated"],
+                    answer: 3,
+                    tag: "EXCEPT (Humphrey)",
+                    explanation: "Isolating the bag and APL valve occurs when the lever is DOWN (controlled ventilation mode, mimicking Mapleson E), not during spontaneous ventilation."
+                },
+                {
+                    question: "Carbon monoxide (CO) production in the breathing circuit is associated with all the following EXCEPT:",
+                    options: ["Using Desflurane", "Using Isoflurane", "Using extremely dry Soda lime or Baralyme", "Using Amsorb"],
+                    answer: 3,
+                    tag: "EXCEPT (Hazards)",
+                    explanation: "Amsorb does NOT produce Carbon Monoxide when exposed to volatile agents, unlike dry Soda lime or Baralyme."
+                },
+                {
+                    question: "The Jackson-Rees modification (Mapleson F) is characterized by all the following EXCEPT:",
+                    options: ["It attaches a small 0.5L bag to the Ayre's T-piece", "The bag has an open end", "It acts as a visual monitor for breathing", "It utilizes a heavy APL valve at the patient end"],
+                    answer: 3,
+                    tag: "EXCEPT (Mapleson F)",
+                    explanation: "Mapleson F (like Mapleson E) does NOT use an APL valve at the patient end, keeping resistance and dead space minimal for pediatric use."
+                },
+                {
+                    question: "According to Laplace's Law (P = 2T/r) applied to the reservoir bag, all the following are true EXCEPT:",
+                    options: ["Pressure falls as the bag's radius increases", "It acts as a safety pressure limit", "It limits the system pressure to about 40 cm H2O", "Pressure increases infinitely until the bag explodes"],
+                    answer: 3,
+                    tag: "EXCEPT (Physics)",
+                    explanation: "Due to the properties of the rubber and Laplace's law, as the bag massively overinflates (radius increases), the pressure drops or plateaus at ~40 cm H2O, preventing it from increasing infinitely."
+                }
+            ],
+                        'equip_mid_sim': [
+                {
+                    question: "An ideal breathing system must fulfill all the following objectives EXCEPT:",
+                    options: ["Delivery of oxygen", "Removal of carbon dioxide", "Delivery of inhaled anesthetic agents", "Provide high resistance to ensure deep breaths"],
+                    answer: 3,
+                    tag: "Simulation (Basics)",
+                    explanation: "An ideal breathing system must have LOW resistance. High resistance causes patient fatigue during spontaneous ventilation."
+                },
+                {
+                    question: "According to McMohan's classification (1951), a breathing system with a CO2 absorber is classified as:",
+                    options: ["Open system", "Semi-closed system", "Semi-open system", "Closed system"],
+                    answer: 3,
+                    tag: "Simulation (Classification)",
+                    explanation: "A closed system features total rebreathing and MUST utilize a CO2 absorber (like the circle system)."
+                },
+                {
+                    question: "For a 70 kg adult, the normal production of CO2 is approximately:",
+                    options: ["100 mL/minute", "200 mL/minute", "500 mL/minute", "1000 mL/minute"],
+                    answer: 1,
+                    tag: "Simulation (Physiology)",
+                    explanation: "Normal CO2 production is 200 mL/min. To eliminate this as a 5% gas mixture, an alveolar ventilation of 4000 mL/min (4 L/min) is required."
+                },
+                {
+                    question: "In an afferent reservoir system with adequate FGF, the apparatus dead space extends up to:",
+                    options: ["The fresh gas inlet", "The reservoir bag", "The expiratory valve positioned near the patient", "The endotracheal tube only"],
+                    answer: 2,
+                    tag: "Simulation (Dead Space)",
+                    explanation: "In an afferent system, the dead space extends up to the expiratory (APL) valve located near the patient."
+                },
+                {
+                    question: "The Magill system (Mapleson A) is highly efficient for spontaneous ventilation. What is the required Fresh Gas Flow (FGF) to prevent rebreathing?",
+                    options: ["Equal to alveolar minute volume (~70 mL/kg/min)", "Two times the minute volume", "Three times the minute volume", "Five times the minute volume"],
+                    answer: 0,
+                    tag: "Simulation (Mapleson A)",
+                    explanation: "Mapleson A is very efficient for spontaneous breathing, requiring an FGF equal to the patient's alveolar minute volume (approx 70 mL/kg/min)."
+                },
+                {
+                    question: "A 4-year-old child weighing 16 kg is scheduled for surgery. The anesthetist decides NOT to use the Magill system. What is the primary reason?",
+                    options: ["It requires too much fresh gas", "The APL valve is at the machine end", "Increased dead space and drag at the patient end", "It causes profound hypothermia"],
+                    answer: 2,
+                    tag: "Simulation (SBA)",
+                    explanation: "The Magill system is not suitable for children under 25-30 kg because the heavy APL valve at the patient's end increases dead space and drag."
+                },
+                {
+                    question: "The Lack system was designed to solve the physical drag problem of the Magill system. It achieves this by:",
+                    options: ["Removing the APL valve completely", "Mounting both the reservoir bag and APL valve at the machine end", "Using a T-piece instead of a valve", "Using an extremely short corrugated tube"],
+                    answer: 1,
+                    tag: "Simulation (Lack System)",
+                    explanation: "The Lack system is a coaxial Mapleson A. It places the APL valve and bag at the machine end to eliminate weight at the patient's end."
+                },
+                {
+                    question: "In the Lack system, the inner tube has a wide diameter of 14 mm. What is the physiological purpose of this design?",
+                    options: ["To increase the speed of fresh gas flow", "To reduce resistance to expiration", "To warm the fresh gas", "To act as a CO2 absorber"],
+                    answer: 1,
+                    tag: "Simulation (Lack System)",
+                    explanation: "The exhaled gases flow through the inside tube. It is made wide (14 mm) specifically to reduce resistance to expiration."
+                },
+                {
+                    question: "Which of the following Mapleson systems are rarely used in modern anesthesia due to inefficiency in both spontaneous and controlled ventilation?",
+                    options: ["Mapleson A and D", "Mapleson D and E", "Mapleson B and C", "Mapleson E and F"],
+                    answer: 2,
+                    tag: "Simulation (Mapleson)",
+                    explanation: "Mapleson B and C are rarely used because they require a very high FGF (2-3 times the minute volume) to prevent massive rebreathing in any mode."
+                },
+                {
+                    question: "The Bain system is a coaxial version of which Mapleson classification?",
+                    options: ["Mapleson A", "Mapleson C", "Mapleson D", "Mapleson F"],
+                    answer: 2,
+                    tag: "Simulation (Bain System)",
+                    explanation: "The Bain system is a coaxial modification of Mapleson D, where the inner tube delivers fresh gas and the outer tube carries away exhaled gas."
+                },
+                {
+                    question: "During a surgical procedure using a Bain circuit, the patient suddenly develops hypoxemia and severe hypercapnia. The fresh gas flow is adequate. What is the most likely mechanical failure?",
+                    options: ["The APL valve is stuck open", "The inner tube has become disconnected at the machine end", "The outer tube has a tiny puncture", "The soda lime is exhausted"],
+                    answer: 1,
+                    tag: "Simulation (SBA - Troubleshooting)",
+                    explanation: "Disconnection of the inner tube in a Bain circuit causes a massive increase in dead space, leading to immediate hypoxemia and hypercapnia."
+                },
+                {
+                    question: "Which breathing system is described as a T-shaped tubing with NO bag and NO valve, making it ideal for pediatric patients to minimize resistance?",
+                    options: ["Mapleson A", "Mapleson C", "Mapleson D", "Mapleson E (Ayre's T-piece)"],
+                    answer: 3,
+                    tag: "Simulation (Mapleson E)",
+                    explanation: "Ayre's T-piece (Mapleson E) has no bag and no valve, providing minimal resistance and dead space for children."
+                },
+                {
+                    question: "The Jackson-Rees modification (Mapleson F) differs from the Ayre's T-piece by adding:",
+                    options: ["A heavy APL valve", "A CO2 absorber", "A small (0.5L) open-ended bag to the outlet", "A coaxial inner tube"],
+                    answer: 2,
+                    tag: "Simulation (Mapleson F)",
+                    explanation: "Jackson-Rees added a 0.5L open-ended (double-ended) bag to act as a visual monitor for breathing and to allow controlled ventilation."
+                },
+                {
+                    question: "The Humphrey ADE block is a versatile system. When the lever is UP (spontaneous mode), it functions similarly to which system?",
+                    options: ["Mapleson A (Magill)", "Mapleson D", "Mapleson E", "Circle system"],
+                    answer: 0,
+                    tag: "Simulation (Humphrey)",
+                    explanation: "With the lever UP, the bag and APL valve are connected, mimicking the Mapleson A (Magill) system for efficient spontaneous ventilation."
+                },
+                {
+                    question: "In the Humphrey ADE block, when the lever is DOWN (ventilator mode), the system functions similarly to:",
+                    options: ["Mapleson A", "Mapleson B", "Mapleson C", "Mapleson E"],
+                    answer: 3,
+                    tag: "Simulation (Humphrey)",
+                    explanation: "With the lever DOWN, the bag and APL valve are isolated from the circuit, mimicking the Mapleson E system."
+                },
+                {
+                    question: "In a circle breathing system, which component ensures the one-way flow of gases and prevents massive rebreathing of CO2?",
+                    options: ["The APL valve", "The reservoir bag", "The inspiratory and expiratory unidirectional valves", "The corrugated tubes"],
+                    answer: 2,
+                    tag: "Simulation (Circle System)",
+                    explanation: "The unidirectional (check) valves force the gas to move in one direction, pushing exhaled gas through the CO2 absorber before it reaches the patient again."
+                },
+                {
+                    question: "Soda lime has a pH of approximately:",
+                    options: ["7.0 (Neutral)", "4.5 (Acidic)", "10.0 (Basic)", "13.5 (Highly Basic)"],
+                    answer: 3,
+                    tag: "Simulation (Soda Lime)",
+                    explanation: "Soda lime is a strong base with a pH of 13.5, consisting mostly of calcium hydroxide (94%) and sodium hydroxide (5%)."
+                },
+                {
+                    question: "To reduce powder formation and harden the granules of soda lime, manufacturers add 0.2% of:",
+                    options: ["Calcium chloride", "Silica", "Potassium hydroxide", "Barium hydroxide"],
+                    answer: 1,
+                    tag: "Simulation (Soda Lime)",
+                    explanation: "Silica (0.2%) is added specifically to harden the granules and prevent them from disintegrating into dust during transport."
+                },
+                {
+                    question: "A color indicator dye is added to soda lime to show exhaustion. If Ethyl Violet is used, the color changes from:",
+                    options: ["Pink to White", "White to Purple/Violet", "Green to Violet", "Purple to White"],
+                    answer: 1,
+                    tag: "Simulation (Soda Lime)",
+                    explanation: "Ethyl violet changes from white to purple when the soda lime is exhausted (when the pH drops below 10)."
+                },
+                {
+                    question: "Titan yellow dye in CO2 absorbents indicates exhaustion by changing color from:",
+                    options: ["White to purple", "Pink to white", "Green to violet", "Blue to red"],
+                    answer: 1,
+                    tag: "Simulation (Soda Lime)",
+                    explanation: "Titan yellow is another indicator dye that changes from pink to white when the absorbent is exhausted."
+                },
+                {
+                    question: "Which of the following CO2 absorbents DOES NOT contain Silica and relies on Calcium Chloride?",
+                    options: ["Standard Soda Lime", "Baralyme", "Amsorb", "Lithium Lime"],
+                    answer: 2,
+                    tag: "Simulation (Absorbents)",
+                    explanation: "Amsorb contains Calcium hydroxide (83%) and Calcium Chloride, but has NO Silica, NO NaOH, and NO KOH."
+                },
+                {
+                    question: "What is the absorption capacity of standard Soda Lime?",
+                    options: ["6 - 12 L CO2 / 100g", "9 - 18 L CO2 / 100g", "14 - 24 L CO2 / 100g", "50 L CO2 / 100g"],
+                    answer: 2,
+                    tag: "Simulation (Absorbents)",
+                    explanation: "Standard Soda lime has the highest absorption capacity: 14-24 (average 20) Liters of CO2 per 100 grams."
+                },
+                {
+                    question: "By reducing the fresh gas flow (FGF) in a circle system from 3 L/min to 1 L/min, the consumption of volatile anesthetics is reduced by approximately:",
+                    options: ["10%", "25%", "50%", "90%"],
+                    answer: 2,
+                    tag: "Simulation (Circle System)",
+                    explanation: "Reducing the FGF from 3.0 L/min to 1.0 L/min results in saving about 50% of the total consumption of any volatile anesthetic agent."
+                },
+                {
+                    question: "In anesthetic practice, 'Low flow anesthesia' is defined as a fresh gas flow (FGF) of:",
+                    options: ["Less than 250 mL/min", "250 - 500 mL/min", "500 - 1000 mL/min", "1 - 2 L/min"],
+                    answer: 2,
+                    tag: "Simulation (Flow Rates)",
+                    explanation: "Minimal flow is 250-500 mL/min. Low flow is 500-1000 mL/min. Medium flow is 1-2 L/min. (Though practically, anything < 2L/min is considered low-flow techniques)."
+                },
+                {
+                    question: "A patient with a history of severe alcoholism requires surgery. The anesthetist decides to use high-flow anesthesia rather than low-flow. Why?",
+                    options: ["Alcoholics require massive doses of oxygen", "Alcoholism is a relative contraindication for low-flow anesthesia", "Low flow causes acute liver failure", "Alcohol evaporates and destroys soda lime"],
+                    answer: 1,
+                    tag: "Simulation (SBA - Contraindications)",
+                    explanation: "Alcoholic patients, heavy smokers, uncontrolled diabetics, and hepatic disease patients are RELATIVE contraindications for low-flow anesthesia due to trace gas accumulation (like acetone)."
+                },
+                {
+                    question: "Which of the following is an ABSOLUTE contraindication to using low-flow anesthesia?",
+                    options: ["Patient age > 80 years", "Septicemia", "Obesity", "Hypertension"],
+                    answer: 1,
+                    tag: "Simulation (Contraindications)",
+                    explanation: "Absolute contraindications for low-flow anesthesia include Septicemia, Inhalational injury, and using an old/leaky machine."
+                },
+                {
+                    question: "During low-flow anesthesia with Sevoflurane, a toxic compound is produced upon reaction with soda lime. This compound is called:",
+                    options: ["Carbon Monoxide", "Compound B", "Compound A (fluoromethyl-2-1-triflouromythyl)", "Cyanide"],
+                    answer: 2,
+                    tag: "Simulation (Hazards)",
+                    explanation: "Sevoflurane degrades in soda lime to form Compound A, which has been shown to have nephrotoxic effects in rats."
+                },
+                {
+                    question: "Which volatile anesthetic is most notorious for producing Carbon Monoxide when reacting with extremely dry soda lime or baralyme?",
+                    options: ["Halothane", "Desflurane", "Nitrous Oxide", "Propofol"],
+                    answer: 1,
+                    tag: "Simulation (Hazards)",
+                    explanation: "Desflurane (and to a lesser extent Enflurane and Isoflurane) can produce carbon monoxide when exposed to desiccated (dry) absorbents."
+                },
+                {
+                    question: "The APL (Adjustable Pressure Limiting) valve is designed to perform which critical function?",
+                    options: ["Allow room air into the circuit", "Prevent the patient from exhaling", "Allow exhaled gases and excess FGF to leave the system", "Mix oxygen with volatile agents"],
+                    answer: 2,
+                    tag: "Simulation (APL Valve)",
+                    explanation: "The APL valve (spill valve/relief valve) is a one-way valve that lets excess gas escape to the scavenging system and prevents room air from entering."
+                },
+                {
+                    question: "During spontaneous ventilation, what pressure is typically required to actuate (open) the APL valve?",
+                    options: ["Less than 1 cm H2O", "10 cm H2O", "30 cm H2O", "60 cm H2O"],
+                    answer: 0,
+                    tag: "Simulation (APL Valve)",
+                    explanation: "During spontaneous breathing, the valve is fully open, and the patient generates a slight positive pressure (less than 1 cm H2O) to push gases out."
+                },
+                {
+                    question: "If a malfunction in the scavenging system causes excessive NEGATIVE pressure, what is the expected hazard?",
+                    options: ["The APL valve will shatter", "The APL valve will be sucked shut, causing barotrauma", "The APL valve will remain open throughout respiration, causing a massive increase in dead space", "The soda lime will explode"],
+                    answer: 2,
+                    tag: "Simulation (SBA - Troubleshooting)",
+                    explanation: "Excessive negative suction from scavenging pulls the APL valve open constantly, allowing fresh gas to be sucked away and increasing dead space drastically."
+                },
+                {
+                    question: "To prevent the APL valve disc from sticking due to water vapor condensation, the disc is usually made of:",
+                    options: ["Heavy stainless steel", "Hydrophobic (water-repelling) material", "Hydrophilic sponge", "Silica glass"],
+                    answer: 1,
+                    tag: "Simulation (APL Valve)",
+                    explanation: "The disc is made of hydrophobic material to prevent the surface tension of condensed exhaled water vapor from making the valve stick."
+                },
+                {
+                    question: "The standard size of a reservoir bag for an adult patient is:",
+                    options: ["0.5 L", "1.0 L", "2.0 L", "5.0 L"],
+                    answer: 2,
+                    tag: "Simulation (Reservoir Bag)",
+                    explanation: "The standard adult size is 2 L. Volumes from 0.5 to 6 L exist for different patient sizes and specific induction techniques."
+                },
+                {
+                    question: "A 2 L rubber reservoir bag is grossly overinflated because the APL valve was accidentally left closed. According to Laplace's Law, what happens to the pressure inside the bag?",
+                    options: ["It increases exponentially until the lungs rupture", "It falls as the bag's radius increases, limiting pressure to about 40 cm H2O", "It remains exactly at 0 cm H2O", "It causes the fresh gas flow to reverse"],
+                    answer: 1,
+                    tag: "Simulation (Physics)",
+                    explanation: "Laplace's Law states Pressure = 2(Tension)/radius. As the bag balloons out (radius increases), the pressure actually drops or plateaus, acting as a safety limit (~40 cm H2O)."
+                },
+                {
+                    question: "What is the standard diameter for ADULT breathing corrugated tubing?",
+                    options: ["10 mm", "15 mm", "22 mm", "30 mm"],
+                    answer: 2,
+                    tag: "Simulation (Tubing)",
+                    explanation: "Adult tubing is 22 mm wide. Pediatric tubing is 15 mm wide to reduce bulk and dead space."
+                },
+                {
+                    question: "Manual resuscitators (AMBU bags) are inflated at rest. This characteristic is called:",
+                    options: ["Pressure-limited", "Self-inflating", "Hydrophobic", "Coaxial"],
+                    answer: 1,
+                    tag: "Simulation (AMBU)",
+                    explanation: "AMBU bags are self-inflating, meaning they automatically recoil to their original shape after being squeezed, drawing in fresh gas/air."
+                },
+                {
+                    question: "An adult AMBU bag has a capacity of approximately 1600 mL. What is the typical tidal volume it delivers with a normal squeeze?",
+                    options: ["100 mL", "250 mL", "600 mL", "1500 mL"],
+                    answer: 2,
+                    tag: "Simulation (AMBU)",
+                    explanation: "An adult AMBU bag delivers a tidal volume of about 600 mL per squeeze."
+                },
+                {
+                    question: "A neonate weighing 4 kg requires resuscitation. Which AMBU bag capacity is most appropriate?",
+                    options: ["240 mL (Neonatal)", "500 mL (Child)", "1600 mL (Adult)", "3000 mL (Jumbo)"],
+                    answer: 0,
+                    tag: "Simulation (SBA - Pediatrics)",
+                    explanation: "The neonatal bag (approx 240 mL capacity) delivers a safe tidal volume of 20-50 mL, suitable for infants up to 7 kg."
+                },
+                {
+                    question: "Without an oxygen reservoir attached, a manual resuscitator (AMBU bag) delivers a Fraction of Inspired Oxygen (FiO2) of at least:",
+                    options: ["0.21 (21%)", "0.50 (50%)", "0.80 (80%)", "1.00 (100%)"],
+                    answer: 0,
+                    tag: "Simulation (AMBU)",
+                    explanation: "On its own, drawing room air, it delivers 21% O2. An oxygen reservoir and 15 L/min flow are required to achieve near 100% O2."
+                },
+                {
+                    question: "To prevent barotrauma and gastric inflation in pediatric patients, the AMBU bag is equipped with a pressure limiting (pop-off) valve that opens at:",
+                    options: ["15 cm H2O", "30 cm H2O", "45 cm H2O", "60 cm H2O"],
+                    answer: 2,
+                    tag: "Simulation (AMBU)",
+                    explanation: "The pediatric/infant pop-off valve opens at 45 cm H2O. In adults, the safety valve (if present) is usually set at 60 cm H2O."
+                },
+                {
+                    question: "During a Breathing System Check, you occlude the patient end, CLOSE the APL valve entirely, and press the oxygen flush to reach 30 cmH2O. What test are you performing?",
+                    options: ["Low-pressure check", "High-pressure leak test", "Flowmeter calibration", "Soda lime exhaustion test"],
+                    answer: 1,
+                    tag: "Simulation (Procedures)",
+                    explanation: "This is the classic High-Pressure Leak Test. The system must hold the 30 cmH2O pressure without dropping, indicating no leaks."
+                },
+                {
+                    question: "Which of the following actions is part of the 'Low-Pressure Check' of an anesthesia machine?",
+                    options: ["Pressing the oxygen flush button", "Closing the APL valve to 60 cmH2O", "Ensuring the oxygen flowmeter bobbin moves freely", "Occluding the Y-piece"],
+                    answer: 2,
+                    tag: "Simulation (Procedures)",
+                    explanation: "Checking the flowmeters, verifying unidirectional valves, and inspecting hoses for cracks belong to the low-pressure/circuit check."
+                },
+                {
+                    question: "After completing the breathing system checks, what MUST be done to the APL valve before connecting the patient for spontaneous breathing?",
+                    options: ["Leave it completely closed", "Open it fully", "Set it to exactly 30 cmH2O", "Remove it from the machine"],
+                    answer: 1,
+                    tag: "Simulation (Procedures)",
+                    explanation: "Finalizing the check requires opening the APL valve to the FULLY OPEN position so the patient can breathe spontaneously without massive resistance."
+                },
+                {
+                    question: "In a circle system, the canister is positioned vertically rather than horizontally. Why?",
+                    options: ["To look aesthetically pleasing", "To save space on the trolley", "To prevent exhaled gas from passing through unfilled portions (channeling)", "To keep the soda lime cool"],
+                    answer: 2,
+                    tag: "Simulation (Circle System)",
+                    explanation: "Vertical positioning ensures gravity keeps the granules packed tightly, preventing gas from finding an 'easy path' (channeling) over the top of the granules without being scrubbed."
+                },
+                {
+                    question: "What is the primary consequence of uneven filling of the soda lime canister?",
+                    options: ["Production of Carbon Monoxide", "Passage of gases without CO2 absorption (channeling)", "Explosion of the canister", "Immediate sticking of the unidirectional valves"],
+                    answer: 1,
+                    tag: "Simulation (Troubleshooting)",
+                    explanation: "Uneven filling creates low-resistance pathways. Gas will flow through these empty spaces without interacting with the soda lime, leading to hypercapnia."
+                },
+                {
+                    question: "Why is a high fresh gas flow (several Liters/min) required during the INITIAL 15 minutes of closed-circle anesthesia?",
+                    options: ["To prevent the patient from waking up", "To dry out the soda lime", "To denitrogenate the circle system and the patient's FRC", "To cool down the exothermic reaction"],
+                    answer: 2,
+                    tag: "Simulation (Low-Flow)",
+                    explanation: "Initial high flow flushes out the nitrogen from the patient's lungs (FRC) and the machine circuit. Without this, unacceptable levels of nitrogen would build up in a closed system."
+                },
+                {
+                    question: "The reaction inside the soda lime canister when absorbing CO2 produces:",
+                    options: ["Oxygen and cold air", "Water and heat (exothermic reaction)", "Nitrogen and Carbon Monoxide", "Compound A exclusively"],
+                    answer: 1,
+                    tag: "Simulation (Chemistry)",
+                    explanation: "The neutralization of CO2 by the strong bases in soda lime is an exothermic reaction, producing heat and water (which helps humidify the inspired gas)."
+                },
+                {
+                    question: "Which of the following Mapleson configurations is the LEAST efficient for spontaneous ventilation, requiring the highest FGF?",
+                    options: ["Mapleson A", "Mapleson B and C", "Mapleson D", "Mapleson E"],
+                    answer: 1,
+                    tag: "Simulation (Mapleson Efficiency)",
+                    explanation: "Mapleson B and C require 2 to 3 times the minute volume even for spontaneous breathing, making them highly inefficient and rarely used."
+                },
+                {
+                    question: "A patient under general anesthesia with a circle system begins to show a rising EtCO2 on the monitor. The inspiratory valve is observed to be stuck open. What is the result?",
+                    options: ["Decreased dead space", "Massive rebreathing of CO2 (hypercapnia)", "Hypothermia", "Immediate pneumothorax"],
+                    answer: 1,
+                    tag: "Simulation (SBA - Valves)",
+                    explanation: "If a unidirectional valve is incompetent (stuck open), exhaled CO2-rich gas flows back into the inspiratory limb and is inhaled again, bypassing the absorber and causing hypercapnia."
+                },
+                {
+                    question: "Which of the following represents an advantage of the 'Bag in Bottle' ventilator concept (often attached to modern circle systems)?",
+                    options: ["It removes the need for soda lime", "The driving gas and the fresh gas remain completely separate", "It uses room air instead of compressed oxygen", "It has no moving parts"],
+                    answer: 1,
+                    tag: "Simulation (Ventilator Intro)",
+                    explanation: "In a double-circuit (bellows in a box) system, the driving gas compresses the outside of the bellows, keeping it completely separated from the patient's fresh gas inside."
+                },
+                {
+                    question: "To safely conduct low-flow anesthesia, all of the following are mandatory EXCEPT:",
+                    options: ["An efficient CO2 absorbent", "A leak-free system (leak < 200 mL/min)", "Continuous gas monitoring (O2, EtCO2)", "A Mapleson C breathing circuit"],
+                    answer: 3,
+                    tag: "Simulation (Low-Flow)",
+                    explanation: "Low-flow anesthesia CANNOT be conducted on a Mapleson circuit. It absolutely requires a CIRCLE system with a CO2 absorber."
+                },
+                {
+                    question: "Which breathing system allows for easy scavenging of waste gases by physically locating the APL valve far away from the patient's face?",
+                    options: ["Magill System (Mapleson A)", "Mapleson C", "Ayre's T-piece (Mapleson E)", "Lack System (Coaxial Mapleson A)"],
+                    answer: 3,
+                    tag: "Simulation (Lack System)",
+                    explanation: "The Lack system was designed to move the heavy APL valve and bag to the machine end, which removes drag from the patient's face and makes connecting a scavenging hose much easier."
+                },
+                {
+                    question: "In pediatric anesthesia, Mapleson E and F are preferred because:",
+                    options: ["They have very high compliance", "They have heavy, reliable valves", "They offer low resistance to breathing and minimal dead space", "They absorb CO2 very effectively without soda lime"],
+                    answer: 2,
+                    tag: "Simulation (Pediatrics)",
+                    explanation: "Infants and small children get fatigued easily. Mapleson E and F lack heavy valves and bags near the airway, ensuring very low resistance and small dead space."
+                },
+                {
+                    question: "A resident asks why the inner tube of a Bain system is often colored (e.g., green or blue) while the outer tube is transparent. The correct answer is:",
+                    options: ["For aesthetic purposes only", "To prevent light from degrading the fresh gas", "To easily detect if the inner tube becomes disconnected or kinked", "To absorb infrared heat"],
+                    answer: 2,
+                    tag: "Simulation (Bain System)",
+                    explanation: "Making the inner tube colored and the outer tube transparent allows the anesthetist to visually inspect the inner tube and immediately spot life-threatening kinks or disconnections."
+                },
+                {
+                    question: "If an adult patient is ventilated using an AMBU bag at a flow of 25 L/min, what is the approximate inspiratory resistance encountered?",
+                    options: ["0.4 cm H2O", "5.0 cm H2O", "15.0 cm H2O", "45.0 cm H2O"],
+                    answer: 0,
+                    tag: "Simulation (AMBU)",
+                    explanation: "A high-quality AMBU bag has very low resistance. At 25 L/min flow, inspiratory resistance is about 0.4 cm H2O, and expiratory is about 0.6 cm H2O."
+                },
+                {
+                    question: "In the Humphrey ADE block, the safety pressure relief valve is designed to open at a pressure in excess of:",
+                    options: ["10 cm H2O", "25 cm H2O", "40 cm H2O", "60 cm H2O"],
+                    answer: 3,
+                    tag: "Simulation (Humphrey)",
+                    explanation: "The safety pressure relief valve on the Humphrey block, similar to adult pop-off valves, actuates at pressures >60 cm H2O to prevent severe barotrauma."
+                },
+                {
+                    question: "A patient undergoing an MRI requires general anesthesia. The machine must be kept outside the scanner's magnetic field. Which breathing system configuration is highly suitable?",
+                    options: ["A Magill system with a 1-meter tube", "A Bain system with a 540 cm (5.4 meters) extended coaxial tube", "A Mapleson C system", "An Ayre's T-piece"],
+                    answer: 1,
+                    tag: "Simulation (SBA - Clinical Choice)",
+                    explanation: "The Bain system can be supplied in extended lengths up to 540 cm specifically for MRI use, keeping the metal machine safely outside the magnetic field."
+                },
+                {
+                    question: "The chemical formula for the primary active ingredient in Soda Lime is:",
+                    options: ["NaOH", "KOH", "Ca(OH)2", "Ba(OH)2"],
+                    answer: 2,
+                    tag: "Simulation (Chemistry)",
+                    explanation: "Calcium hydroxide Ca(OH)2 makes up 94% of Soda Lime."
+                },
+                {
+                    question: "Which of the following statements about the 'Minimal-flow anesthesia' category is correct?",
+                    options: ["FGF is 2 - 3 L/min", "FGF is 1 - 2 L/min", "FGF is 500 - 1000 mL/min", "FGF is reduced to 250 - 500 mL/min"],
+                    answer: 3,
+                    tag: "Simulation (Flow Rates)",
+                    explanation: "Minimal flow is strictly defined as 250 - 500 mL/min. (Metabolic flow is ~250 mL/min)."
+                },
+                {
+                    question: "You are checking an anesthesia machine before the first case of the day. You occlude the Y-piece, close the APL valve, and press the O2 flush. The pressure drops rapidly from 30 cmH2O to 0. What is your diagnosis?",
+                    options: ["The flowmeter is broken", "The scavenging system is turned off", "There is a major leak in the breathing circuit or machine", "The soda lime is completely exhausted"],
+                    answer: 2,
+                    tag: "Simulation (SBA - Checks)",
+                    explanation: "A rapid drop in pressure during the High-Pressure Leak Test indicates a significant leak in the system that must be fixed before connecting a patient."
+                }
+            ],
+                        'equip_mod1': [
+                {
+                    question: "Which of the following is NOT an essential property of an ideal breathing system?",
+                    options: ["Deliver gases to alveoli in the set concentration", "Effectively eliminate carbon dioxide", "Have minimal apparatus dead space", "Have high resistance to gas flow"],
+                    answer: 3,
+                    tag: "Mod 1 (Properties)",
+                    explanation: "An ideal breathing system MUST have low resistance to minimize the patient's work of breathing."
+                },
+                {
+                    question: "According to the Mapleson classification, which system is also known as the Magill attachment?",
+                    options: ["Mapleson A", "Mapleson C", "Mapleson D", "Mapleson E"],
+                    answer: 0,
+                    tag: "Mod 1 (Mapleson A)",
+                    explanation: "Mapleson A is famously known as the Magill system. It is highly efficient for spontaneous ventilation."
+                },
+                {
+                    question: "The Lack system is a coaxial modification of which Mapleson system?",
+                    options: ["Mapleson A", "Mapleson B", "Mapleson D", "Mapleson E"],
+                    answer: 0,
+                    tag: "Mod 1 (Lack)",
+                    explanation: "The Lack system is a coaxial Mapleson A. It places the APL valve and reservoir bag at the machine end to reduce drag on the patient."
+                },
+                {
+                    question: "In the Lack system, which tube carries the fresh gas flow (FGF)?",
+                    options: ["The inner tube", "The outer tube", "A separate parallel tube", "It relies entirely on the reservoir bag"],
+                    answer: 1,
+                    tag: "Mod 1 (Lack)",
+                    explanation: "In the Lack system, FGF travels through the OUTER tube, while exhaled gases flow through the wide inner tube (14 mm) to reduce expiratory resistance."
+                },
+                {
+                    question: "Which of the following Mapleson systems are considered inefficient for BOTH spontaneous and controlled ventilation and are rarely used?",
+                    options: ["Mapleson A and D", "Mapleson D and E", "Mapleson B and C", "Mapleson E and F"],
+                    answer: 2,
+                    tag: "Mod 1 (Mapleson)",
+                    explanation: "Mapleson B and C require a very high FGF (2-3 times the minute volume) to prevent rebreathing, making them highly inefficient."
+                },
+                {
+                    question: "The Bain system is a coaxial modification of:",
+                    options: ["Mapleson A", "Mapleson C", "Mapleson D", "Mapleson F"],
+                    answer: 2,
+                    tag: "Mod 1 (Bain)",
+                    explanation: "The Bain system is a coaxial Mapleson D. It is lightweight and warms/humidifies the fresh gas flow."
+                },
+                {
+                    question: "In the Bain system, the inner tube is responsible for carrying:",
+                    options: ["Exhaled gases", "Fresh gas flow (FGF)", "Carbon dioxide only", "Scavenging vacuum"],
+                    answer: 1,
+                    tag: "Mod 1 (Bain)",
+                    explanation: "In the Bain system, the INNER tube carries the FGF, which is the exact opposite of the Lack system."
+                },
+                {
+                    question: "A major hazard specific to the Bain system that can lead to severe hypoxemia and hypercapnia is:",
+                    options: ["Exhaustion of soda lime", "Disconnection of the inner tube at the machine end", "Sticking of the unidirectional valves", "Heavy drag at the patient end"],
+                    answer: 1,
+                    tag: "Mod 1 (Bain Hazards)",
+                    explanation: "If the inner tube disconnects, the entire corrugated tube becomes massive dead space, leading to rapid rebreathing of CO2 and hypoxia."
+                },
+                {
+                    question: "Mapleson E (Ayre's T-piece) is widely used in pediatric anesthesia because it lacks which components?",
+                    options: ["Corrugated tubing and fresh gas inlet", "A bag and an APL valve", "A fresh gas inlet and an expiratory limb", "A T-piece connector"],
+                    answer: 1,
+                    tag: "Mod 1 (Mapleson E)",
+                    explanation: "Ayre's T-piece has NO bag and NO APL valve, which minimizes resistance to breathing and dead space, making it perfect for children."
+                },
+                {
+                    question: "The Jackson-Rees modification (Mapleson F) adds which component to the Ayre's T-piece?",
+                    options: ["A closed 2-liter reservoir bag", "A heavy APL valve", "An open-ended 0.5 L bag to the reservoir limb", "A coaxial inner tube"],
+                    answer: 2,
+                    tag: "Mod 1 (Mapleson F)",
+                    explanation: "Mapleson F adds a small, open-ended bag (0.5L) to act as a visual monitor for breathing and allow for controlled ventilation."
+                },
+                {
+                    question: "In the Humphrey ADE system, setting the lever UP (spontaneous mode) connects the bag and APL valve, making it function like:",
+                    options: ["Mapleson A (Magill)", "Mapleson D", "Mapleson E", "A closed circle system"],
+                    answer: 0,
+                    tag: "Mod 1 (Humphrey)",
+                    explanation: "With the lever UP, it functions like the highly efficient Mapleson A system for spontaneous breathing."
+                },
+                {
+                    question: "To safely conduct low-flow anesthesia, the system MUST have:",
+                    options: ["A Mapleson D circuit", "A leak exceeding 500 mL", "A circle system with an efficient CO2 absorber", "A completely dry soda lime canister"],
+                    answer: 2,
+                    tag: "Mod 1 (Low Flow)",
+                    explanation: "Low-flow anesthesia relies on rebreathing exhaled gases, which absolutely requires a circle system equipped with an efficient CO2 absorber."
+                },
+                {
+                    question: "Minimal-flow anesthesia is defined as using a fresh gas flow (FGF) of:",
+                    options: ["Less than 250 mL/min", "250 - 500 mL/min", "500 - 1000 mL/min", "1 - 2 L/min"],
+                    answer: 1,
+                    tag: "Mod 1 (Flow Rates)",
+                    explanation: "Minimal flow is 250-500 mL/min. Low flow is 500-1000 mL/min."
+                },
+                {
+                    question: "Which of the following is an ABSOLUTE contraindication for low-flow anesthesia?",
+                    options: ["Heavy smoking", "Alcoholism", "Septicemia", "Uncontrolled diabetes"],
+                    answer: 2,
+                    tag: "Mod 1 (Low Flow)",
+                    explanation: "Septicemia, inhalational injury, and old/leaky machines are absolute contraindications. The others are relative."
+                },
+                {
+                    question: "The primary chemical component of Soda Lime is:",
+                    options: ["Sodium hydroxide (5%)", "Potassium hydroxide (<0.1%)", "Calcium hydroxide (94%)", "Barium hydroxide (20%)"],
+                    answer: 2,
+                    tag: "Mod 1 (Soda Lime)",
+                    explanation: "Soda lime is 94% Calcium hydroxide, 5% Sodium hydroxide, and <0.1% Potassium hydroxide."
+                },
+                {
+                    question: "What is the purpose of adding Silica (0.2%) to Soda Lime?",
+                    options: ["To increase CO2 absorption capacity", "To act as a color indicator", "To harden the granules and reduce powder formation", "To prevent the production of Compound A"],
+                    answer: 2,
+                    tag: "Mod 1 (Soda Lime)",
+                    explanation: "Silica is added to harden the absorbents, preventing them from disintegrating into dust during transport, which would increase breathing resistance."
+                },
+                {
+                    question: "When Ethyl Violet is used as a dye in soda lime, it changes color when the pH drops below 10. The color change is from:",
+                    options: ["Pink to white", "White to purple/violet", "Green to violet", "Purple to white"],
+                    answer: 1,
+                    tag: "Mod 1 (Soda Lime)",
+                    explanation: "Ethyl violet is white when fresh (high pH 13.5) and turns purple/violet when exhausted (pH < 10)."
+                },
+                {
+                    question: "The absorption capacity of 100g of standard Soda Lime is approximately:",
+                    options: ["6 - 12 Liters of CO2", "9 - 18 Liters of CO2", "14 - 24 Liters of CO2", "30 - 40 Liters of CO2"],
+                    answer: 2,
+                    tag: "Mod 1 (Soda Lime)",
+                    explanation: "Soda lime has the highest capacity, absorbing 14-24 (average 20) Liters of CO2 per 100g."
+                },
+                {
+                    question: "Which volatile anesthetic degrades in the presence of soda lime to produce Compound A?",
+                    options: ["Halothane", "Isoflurane", "Sevoflurane", "Desflurane"],
+                    answer: 2,
+                    tag: "Mod 1 (Hazards)",
+                    explanation: "Sevoflurane reacts with the strong bases in soda lime to produce Compound A, which is nephrotoxic in rats."
+                },
+                {
+                    question: "Which CO2 absorbent does NOT contain Silica, Sodium Hydroxide, or Potassium Hydroxide, and does NOT produce Compound A or Carbon Monoxide?",
+                    options: ["Soda Lime", "Baralyme", "Amsorb", "Lithium Lime"],
+                    answer: 2,
+                    tag: "Mod 1 (Absorbents)",
+                    explanation: "Amsorb (Calcium hydroxide + Calcium chloride) has no strong alkalis, so it has absolutely no effect on anesthetic agents."
+                },
+                {
+                    question: "The APL (Adjustable Pressure Limiting) valve is designed to:",
+                    options: ["Allow room air into the breathing system", "Allow exhaled gases and excess FGF to leave the system", "Measure the tidal volume accurately", "Absorb excess moisture"],
+                    answer: 1,
+                    tag: "Mod 1 (APL Valve)",
+                    explanation: "The APL valve allows waste gases to exit to the scavenging system and strictly prevents room air from entering."
+                },
+                {
+                    question: "During spontaneous ventilation, the APL valve should be left fully open. The pressure required to actuate it in this state is:",
+                    options: ["Less than 1 cm H2O", "10 cm H2O", "30 cm H2O", "60 cm H2O"],
+                    answer: 0,
+                    tag: "Mod 1 (APL Valve)",
+                    explanation: "A very slight positive pressure (< 1 cm H2O) generated by the patient's exhalation is enough to open the fully open APL valve."
+                },
+                {
+                    question: "To prevent water vapor condensation from making the APL valve disc stick, the disc is usually made of:",
+                    options: ["Hydrophilic material", "Hydrophobic (water-repelling) material", "Heavy stainless steel", "Porous sponge"],
+                    answer: 1,
+                    tag: "Mod 1 (APL Valve)",
+                    explanation: "A hydrophobic material prevents water from condensing on the disc and causing it to stick via surface tension."
+                },
+                {
+                    question: "The standard adult reservoir bag has a capacity of:",
+                    options: ["0.5 L", "1.0 L", "2.0 L", "5.0 L"],
+                    answer: 2,
+                    tag: "Mod 1 (Reservoir Bag)",
+                    explanation: "The standard adult size is 2 Liters, while 0.5 L is the smallest size used for pediatrics."
+                },
+                {
+                    question: "According to Laplace's Law (P = 2T/r), what happens when a rubber reservoir bag becomes grossly overinflated?",
+                    options: ["The pressure increases infinitely until it explodes", "The pressure falls as the bag's radius increases, limiting system pressure to ~40 cm H2O", "The pressure drops to exactly zero", "The bag becomes completely rigid"],
+                    answer: 1,
+                    tag: "Mod 1 (Physics)",
+                    explanation: "As the bag expands significantly (radius increases), the pressure actually drops or plateaus at around 40 cm H2O, providing a built-in safety limit against severe barotrauma."
+                }
+            ],
+
+            'equip_mod2': [
+                {
+                    question: "The term 'AMBU' in AMBU bag stands for:",
+                    options: ["Automated Medical Breathing Unit", "Artificial Mandatory Breathing Unit", "Advanced Mask Breathing Utility", "Airway Management Balloon Unit"],
+                    answer: 1,
+                    tag: "Mod 2 (AMBU)",
+                    explanation: "AMBU stands for Artificial Mandatory Breathing Unit (or Air Mask Bag Unit)."
+                },
+                {
+                    question: "What is the capacity and typical delivered tidal volume of an ADULT manual resuscitator (AMBU bag)?",
+                    options: ["Capacity 500 mL, delivers 200 mL", "Capacity 1600 mL, delivers 600 mL", "Capacity 2000 mL, delivers 1000 mL", "Capacity 3000 mL, delivers 1500 mL"],
+                    answer: 1,
+                    tag: "Mod 2 (AMBU)",
+                    explanation: "The adult AMBU bag has a total capacity of approximately 1500-1600 mL and typically delivers a tidal volume of 600 mL per squeeze."
+                },
+                {
+                    question: "A manual resuscitator is considered a 'self-inflating bag'. This means:",
+                    options: ["It requires a high-pressure oxygen source to inflate", "It is inflated at rest and returns to shape after squeezing", "It inflates only when the patient inhales", "It inflates only when the APL valve is closed"],
+                    answer: 1,
+                    tag: "Mod 2 (AMBU)",
+                    explanation: "Self-inflating bags have an internal memory that causes them to return to their inflated shape automatically, drawing in air/oxygen without needing a compressed gas source."
+                },
+                {
+                    question: "The capacity of a CHILD-sized AMBU bag is approximately:",
+                    options: ["240 mL", "500 mL", "1000 mL", "1600 mL"],
+                    answer: 1,
+                    tag: "Mod 2 (AMBU)",
+                    explanation: "The child-size AMBU bag has a capacity of 500 mL and is used for patients weighing between 7 kg and 30 kg."
+                },
+                {
+                    question: "For an infant weighing 5 kg, the NEONATAL AMBU bag should be used. What is its typical delivered tidal volume?",
+                    options: ["5 - 10 mL", "20 - 50 mL", "100 - 150 mL", "200 - 250 mL"],
+                    answer: 1,
+                    tag: "Mod 2 (AMBU)",
+                    explanation: "The neonatal AMBU bag (capacity ~240 mL) is designed to deliver small, precise tidal volumes of 20-50 mL."
+                },
+                {
+                    question: "To prevent barotrauma and gastric inflation in infants and children, pediatric AMBU bags are equipped with a pressure limiting (pop-off) valve. At what pressure does it open?",
+                    options: ["15 cm H2O", "30 cm H2O", "45 cm H2O", "60 cm H2O"],
+                    answer: 2,
+                    tag: "Mod 2 (Valves)",
+                    explanation: "The pediatric and infant pop-off valves are strictly calibrated to open at 45 cm H2O to prevent lung injury."
+                },
+                {
+                    question: "If an adult AMBU bag is equipped with a pressure relief (pop-off) valve, the opening pressure is typically kept at:",
+                    options: ["30 cm H2O", "45 cm H2O", "60 cm H2O", "80 cm H2O"],
+                    answer: 2,
+                    tag: "Mod 2 (Valves)",
+                    explanation: "In adults, the opening pressure limit for safety mechanisms is kept at 60 cm H2O."
+                },
+                {
+                    question: "Without any oxygen source attached, an AMBU bag delivering room air provides a Fraction of Inspired Oxygen (FiO2) of:",
+                    options: ["0.10", "0.21", "0.50", "1.00"],
+                    answer: 1,
+                    tag: "Mod 2 (Oxygen)",
+                    explanation: "Room air contains 21% oxygen, so an AMBU bag without supplemental oxygen delivers an FiO2 of 0.21."
+                },
+                {
+                    question: "To deliver an FiO2 close to 1.0 (100% oxygen) using a manual resuscitator, you must use an oxygen flow of up to 15 L/min AND:",
+                    options: ["A soda lime canister", "An oxygen reservoir attachment", "A high-pressure APL valve", "A coaxial inner tube"],
+                    answer: 1,
+                    tag: "Mod 2 (Oxygen)",
+                    explanation: "An oxygen reservoir bag or tube must be attached to the intake valve to collect oxygen between breaths; otherwise, room air will dilute the mixture."
+                },
+                {
+                    question: "Which of the following is NOT a standard component of a manual resuscitator (AMBU bag)?",
+                    options: ["Self-inflating bag", "Non-rebreathing valve", "Bag refill valve", "Adjustable Pressure Limiting (APL) valve dial"],
+                    answer: 3,
+                    tag: "Mod 2 (Components)",
+                    explanation: "Standard AMBU bags use a simple non-rebreathing (duckbill or leaf) valve, not the complex dial-adjustable APL valve found on anesthesia machines."
+                },
+                {
+                    question: "What is the primary function of the non-rebreathing valve in an AMBU bag?",
+                    options: ["To mix oxygen with room air", "To direct fresh gas to the patient and vent exhaled gas to the atmosphere", "To absorb carbon dioxide", "To limit the peak inspiratory pressure"],
+                    answer: 1,
+                    tag: "Mod 2 (Valves)",
+                    explanation: "The non-rebreathing valve ensures that when the bag is squeezed, gas goes to the patient, and when the patient exhales, the gas goes out to the atmosphere, preventing rebreathing."
+                },
+                {
+                    question: "Manual resuscitators (AMBU bags) are designed to have low resistance to flow. At a flow of 25 L/min, the typical inspiratory resistance is approximately:",
+                    options: ["0.4 cm H2O", "5.0 cm H2O", "15 cm H2O", "45 cm H2O"],
+                    answer: 0,
+                    tag: "Mod 2 (Physics)",
+                    explanation: "High-quality AMBU bags offer very low resistance (0.4 cm H2O for inspiration and 0.6 cm H2O for expiration at 25 L/min)."
+                },
+                {
+                    question: "Which of the following situations is a manual resuscitator NOT typically used for?",
+                    options: ["Patient transport", "Emergency resuscitation", "Administering precise concentrations of Sevoflurane", "Standby for anesthesia machine failure"],
+                    answer: 2,
+                    tag: "Mod 2 (Usage)",
+                    explanation: "AMBU bags are not vaporizers. They cannot be used to administer precise concentrations of volatile inhalational anesthetics."
+                },
+                {
+                    question: "The bag refill valve on an AMBU bag operates during which phase of manual ventilation?",
+                    options: ["When the bag is squeezed (Inspiration)", "When the bag is released (Rest/Exhalation)", "Only when the pop-off valve opens", "Continuous throughout the cycle"],
+                    answer: 1,
+                    tag: "Mod 2 (Valves)",
+                    explanation: "When the bag is released, its self-inflating memory pulls it open, creating negative pressure inside that opens the refill valve to draw in fresh gas/air."
+                },
+                {
+                    question: "If a patient weighs 28 kg, which size of manual resuscitator is the most appropriate according to the standard classifications?",
+                    options: ["Neonatal (240 mL capacity)", "Child (500 mL capacity)", "Adult (1600 mL capacity)", "Jumbo (3000 mL capacity)"],
+                    answer: 1,
+                    tag: "Mod 2 (SBA)",
+                    explanation: "The Child size (500 mL capacity) is specifically designed for patients weighing between 7 kg and 30 kg."
+                }
+            ]                                                         
         };
 
         // --- APP STATE ---
@@ -2305,6 +3700,9 @@
         let currentQuestionIndex = 0;
         let score = 0;
         let answered = false;
+        let timerInterval;
+        let timeRemaining = 0;
+        let currentSubject = ''; // متغير جديد لتذكر المادة المفتوحة (تخدير أم أجهزة)
 
         // --- HELPER: Fisher-Yates Shuffle ---
         function shuffleArray(array) {
@@ -2317,27 +3715,96 @@
             return array;
         }
 
-        // --- NAVIGATION LOGIC ---
+                // --- NAVIGATION LOGIC ---
         function hideAllViews() {
+            clearInterval(timerInterval); 
+            
+            document.getElementById('view-departments').classList.add('hidden');
+            document.getElementById('view-stages').classList.add('hidden');
+            document.getElementById('view-semesters').classList.add('hidden');
             document.getElementById('view-dashboard').classList.add('hidden');
             document.getElementById('view-subject').classList.add('hidden');
+            document.getElementById('view-subject-equip').classList.add('hidden'); 
             document.getElementById('view-quiz').classList.add('hidden');
             document.getElementById('view-result').classList.add('hidden');
         }
 
-        function goBack(viewId) {
+        function goBackToHome() {
             hideAllViews();
-            document.getElementById(viewId).classList.remove('hidden');
+            document.getElementById('breadcrumbs').classList.add('hidden');
+            document.getElementById('view-departments').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function openStages(deptId) {
+            hideAllViews();
+            document.getElementById('breadcrumbs').classList.remove('hidden');
+            document.getElementById('crumb-dept').classList.remove('hidden');
+            document.getElementById('crumb-stage').classList.add('hidden');
+            document.getElementById('crumb-semester').classList.add('hidden');
+            
+            document.getElementById('view-stages').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function openSemesters() {
+            hideAllViews();
+            document.getElementById('breadcrumbs').classList.remove('hidden');
+            document.getElementById('crumb-dept').classList.remove('hidden');
+            document.getElementById('crumb-stage').classList.remove('hidden');
+            document.getElementById('crumb-semester').classList.add('hidden');
+
+            document.getElementById('view-semesters').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function openSubjects() {
+            hideAllViews();
+            document.getElementById('breadcrumbs').classList.remove('hidden');
+            document.getElementById('crumb-dept').classList.remove('hidden');
+            document.getElementById('crumb-stage').classList.remove('hidden');
+            document.getElementById('crumb-semester').classList.remove('hidden');
+
+            document.getElementById('view-dashboard').classList.remove('hidden');
             window.scrollTo(0, 0);
         }
 
         function openSubject(subjectId) {
             hideAllViews();
+            document.getElementById('breadcrumbs').classList.add('hidden'); 
             document.getElementById('view-subject').classList.remove('hidden');
+            window.scrollTo(0, 0);
+            updateProgressUI();
+        }
+
+        function openEquipSubject() {
+            hideAllViews();
+            document.getElementById('breadcrumbs').classList.add('hidden'); 
+            document.getElementById('view-subject-equip').classList.remove('hidden');
+            window.scrollTo(0, 0);
+            updateProgressUI();
+        }
+
+        // دالة العودة الدقيقة للمحاضرات (الحل الجذري الذكي)
+        function returnToSubject() {
+            hideAllViews();
+            document.getElementById('breadcrumbs').classList.add('hidden'); 
+
+            // فحص ذكي يعتمد على مفتاح الاختبار الحالي الذي كان يخوضه الطالب
+            if (currentActiveQuizKey.includes('equip')) {
+                // إذا كان الاختبار يخص الأجهزة، عد لواجهة الأجهزة
+                document.getElementById('view-subject-equip').classList.remove('hidden');
+            } else if (currentActiveQuizKey !== '') {
+                // إذا كان الاختبار يخص التخدير، عد لواجهة التخدير
+                document.getElementById('view-subject').classList.remove('hidden');
+            } else {
+                // حالة الطوارئ
+                document.getElementById('view-dashboard').classList.remove('hidden');
+            }
             window.scrollTo(0, 0);
         }
 
-        // --- MODAL LOGIC ---
+        // --- MODAL & ABORT LOGIC ---
         function showComingSoon(itemName) {
             document.getElementById('modal-item-name').textContent = itemName;
             document.getElementById('coming-soon-modal').classList.remove('hidden');
@@ -2345,6 +3812,15 @@
 
         function closeComingSoon() {
             document.getElementById('coming-soon-modal').classList.add('hidden');
+        }
+
+        function abortQuiz() {
+            document.getElementById('abort-modal').classList.remove('hidden');
+        }
+
+                function confirmAbort() {
+            document.getElementById('abort-modal').classList.add('hidden');
+            returnToSubject();
         }
 
         // --- QUIZ ENGINE LOGIC ---
@@ -2368,7 +3844,59 @@
             
             hideAllViews();
             document.getElementById('view-quiz').classList.remove('hidden');
+           // إعداد وبدء المؤقت (دقيقة لكل سؤال)
+            startTimer(activeQuestions.length * 60);
+        function startTimer(seconds) {
+            clearInterval(timerInterval); // تنظيف أي مؤقت سابق
+            timeRemaining = seconds;
             
+            const timerContainer = document.getElementById('quiz-timer-container');
+            const timeDisplay = document.getElementById('time-remaining');
+            
+            // إعادة ضبط شكل المؤقت
+            timerContainer.className = "flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-1.5 rounded-full font-bold text-sm border-2 border-gray-200 transition-colors duration-300";
+            timerContainer.classList.remove('hidden');
+
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                // تأثير الأدرينالين في آخر 60 ثانية
+                if (timeRemaining === 60) {
+                    timerContainer.className = "flex items-center gap-2 bg-red-100 text-red-700 px-4 py-1.5 rounded-full font-bold text-sm border-2 border-red-500 animate-pulse";
+                }
+
+                // سحب الورقة عند انتهاء الوقت
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    forceSubmitQuiz();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const timeDisplay = document.getElementById('time-remaining');
+            let minutes = Math.floor(timeRemaining / 60);
+            let seconds = timeRemaining % 60;
+            timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function forceSubmitQuiz() {
+            // إنهاء إجباري وإظهار النتائج
+            showResults();
+            
+            // تعديل رسالة النتيجة لتوضيح أن الوقت انتهى
+            const messageEl = document.getElementById('result-message');
+            const iconContainer = document.getElementById('result-icon');
+            
+            iconContainer.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 text-5xl bg-red-100 text-red-600 shadow-inner";
+            iconContainer.innerHTML = '<i class="fa-solid fa-stopwatch"></i>';
+            messageEl.textContent = "انتهى الوقت! تم سحب ورقة الاختبار تلقائياً. إدارة الوقت هي جزء أساسي من النجاح.";
+            messageEl.className = "text-xl font-bold mb-10 px-4 text-red-600";
+        }
+
             loadQuestion();
         }
 
@@ -2380,7 +3908,7 @@
         function confirmAbort() {
             // إذا اختار نعم: إخفاء النافذة والعودة
             document.getElementById('abort-modal').classList.add('hidden');
-            goBack('view-subject');
+            returnToSubject();
         }
 
         function cancelAbort() {
@@ -2483,10 +4011,12 @@
                 showResults();
                        }
         });                                             
-                function showResults() {
-            window.scrollTo(0, 0);
+                                function showResults() {
+            clearInterval(timerInterval); 
+            
             hideAllViews();
             document.getElementById('view-result').classList.remove('hidden');
+            window.scrollTo(0, 0);
             
             const finalScoreEl = document.getElementById('final-score');
             const messageEl = document.getElementById('result-message');
@@ -2500,7 +4030,6 @@
             
             fractionEl.innerHTML = `لقد أجبت بشكل صحيح على <span class="font-bold text-teal-600">${score}</span> من أصل <span class="font-bold text-gray-800">${activeQuestions.length}</span> سؤالاً.`;
 
-            // تحديد رسائل النجاح بناءً على نوع الاختبار والنسبة
             let resultText = "";
             if (percentage >= 90) {
                 iconContainer.className = "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 text-5xl bg-green-100 text-green-500 shadow-inner";
@@ -2524,7 +4053,66 @@
             
             messageEl.textContent = resultText;
             messageEl.className = "text-xl font-bold mb-10 px-4 " + (percentage >= 90 ? "text-green-600" : (percentage >= 70 ? "text-blue-600" : "text-orange-600"));
+
+            // أمر حفظ التقدم إذا كانت النسبة 50 أو أكثر
+            if (percentage >= 50) {
+                localStorage.setItem('medtech_passed_' + currentActiveQuizKey, 'true');
+            }
         }
+                // ==========================================
+        // نظام الوضع الليلي (Dark Mode)
+        // ==========================================
+        function toggleDarkMode() {
+            const htmlEl = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            // التبديل بين الوضعين
+            if (htmlEl.classList.contains('dark')) {
+                htmlEl.classList.remove('dark');
+                localStorage.setItem('theme', 'light'); // حفظ الخيار
+                themeIcon.className = 'fa-solid fa-moon text-gray-600 transition-all duration-300';
+            } else {
+                htmlEl.classList.add('dark');
+                localStorage.setItem('theme', 'dark'); // حفظ الخيار
+                themeIcon.className = 'fa-solid fa-sun text-yellow-400 transition-all duration-300';
+            }
+        }
+        function updateProgressUI() {
+            const quizElements = document.querySelectorAll('[onclick^="startQuiz("]');
+            
+            quizElements.forEach(el => {
+                const match = el.getAttribute('onclick').match(/'([^']+)'/);
+                if (match && match[1]) {
+                    const quizKey = match[1];
+                    
+                    if (localStorage.getItem('medtech_passed_' + quizKey) === 'true') {
+                        if (!el.querySelector('.progress-check')) {
+                            el.innerHTML += `
+                                <div class="progress-check mt-3 flex items-center justify-center gap-1 text-green-600 bg-green-50 rounded-lg py-1 px-2 text-sm font-bold border border-green-200">
+                                    <i class="fa-solid fa-circle-check"></i> تم الاجتياز بنجاح
+                                </div>
+                            `;
+                            el.style.borderColor = '#22c55e';
+                        }
+                    }
+                }
+            });
+        }
+
+        // فحص الذاكرة عند تحميل الصفحة لتطبيق لون الطالب المفضل
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const htmlEl = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+
+            if (savedTheme === 'dark') {
+                htmlEl.classList.add('dark');
+                if(themeIcon) themeIcon.className = 'fa-solid fa-sun text-yellow-400 transition-all duration-300';
+            }
+        }
+        
+        // استدعاء التهيئة فور فتح الموقع
+        initTheme();
     </script>
 </body>
 </html>
