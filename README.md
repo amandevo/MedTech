@@ -1,9 +1,9 @@
-# 🩺 MedTech Hub - Anesthesia Exam Simulator
+# 🩺 MedTech Academy
 
 ## 📌 About The Project (عن المشروع)
-**MedTech Hub** is an advanced, interactive web-based platform tailored for Anesthesia Technology students. It acts as a comprehensive exam simulator, preparing students for critical Mid-Course and Final Ministerial examinations through a highly structured and smart Quiz Engine.
+**MedTech Academy** is an advanced, interactive web-based platform tailored for students. It acts as a comprehensive exam simulator, preparing students for critical Mid-Course and Final Ministerial examinations through a highly structured and smart Quiz Engine.
 
-منصة تفاعلية ذكية لطلاب تقنيات التخدير، مصممة هندسياً لمحاكاة الامتحانات الوزارية بطريقة احترافية. توفر المنصة بيئة اختبار متقدمة خالية من التشتت، مع محرك أسئلة ذكي يدعم خلط البيانات عشوائياً وتقييم الأداء فورياً.
+منصة تفاعلية ذكية، مصممة هندسياً لمحاكاة الامتحانات الجامعية والوزارية بطريقة احترافية. توفر المنصة بيئة اختبار متقدمة خالية من التشتت، مع محرك أسئلة ذكي يدعم خلط البيانات عشوائياً وتقييم الأداء فورياً.
 
 ## ✨ Key Features (المميزات الرئيسية)
 *   **🧠 Smart Quiz Engine:** Built with Vanilla JavaScript to randomly shuffle questions and options on every attempt.
@@ -20,7 +20,7 @@
 *   FontAwesome (Icons)
 
 ## 🎓 Target Audience
-Third-year Anesthesia Technologies students preparing for their theoretical and clinical examinations.
+Students, specifically university students in any medical department.
 
 ---
-*Built with ❤️ and precise engineering.*
+*Built with precise engineering.*
