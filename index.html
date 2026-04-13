@@ -304,9 +304,7 @@
             <div class="w-14 h-14 bg-red-100 text-red-600 rounded-xl flex items-center justify-center text-2xl">
                 <i class="fa-solid fa-kit-medical"></i>
             </div>
-            <!-- شارة التنبيه -->
-            <span class="bg-red-100 text-red-600 text-xs py-1 px-3 rounded-full font-bold animate-pulse">جديد</span>
-        </div>
+        </div>            
         
         <h3 class="text-xl font-bold text-gray-800 mb-2">أسس الجراحة</h3>
         <p class="text-sm text-gray-500 mb-4">مادة جامعية • بنك أسئلة شامل يضم تحديات واختبارات، بالإضافة إلى ملخصات مركّزة بطرق ذكية.</p>
@@ -318,16 +316,25 @@
 </div>
 
                 <!-- Card 5: Internal Medicine (Coming Soon) -->
-                <div onclick="showComingSoon('الطب الباطني')" class="hub-card bg-white rounded-2xl p-6 border-t-4 border-emerald-500 shadow-md cursor-pointer">
-                    <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-2xl mb-4">
-                        <i class="fa-solid fa-stethoscope"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">الطب الباطني</h3>
-                    <p class="text-sm text-gray-500 mb-4">مادة جامعية • سيتم إضافتها قريباً.</p>
-                    <div class="flex items-center text-gray-400 font-semibold text-sm">
-                        قريباً <i class="fa-solid fa-lock mr-2"></i>
-                    </div>
-                </div>
+                <div onclick="openInternalSubject()" class="hub-card bg-white rounded-2xl p-6 border-t-4 border-emerald-500 shadow-md cursor-pointer relative overflow-hidden group">
+    <div class="absolute top-0 left-0 w-full h-full bg-emerald-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    
+    <div class="relative z-10">
+        <div class="flex justify-between items-start mb-4">
+            <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-2xl">
+                <i class="fa-solid fa-stethoscope"></i>
+            </div>
+            <span class="bg-emerald-100 text-emerald-600 text-xs py-1 px-3 rounded-full font-bold animate-pulse">جديد</span>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-800 mb-2">الطب الباطني</h3>
+        <p class="text-sm text-gray-500 mb-4">مادة جامعية • بنك أسئلة شامل يضم تحديات واختبارات، بالإضافة إلى ملخصات مركّزة بطرق ذكية.</p>
+        
+        <div class="flex items-center text-emerald-600 font-semibold text-sm">
+            دخول للمادة <i class="fa-solid fa-arrow-left mr-2"></i>
+        </div>
+    </div>
+</div>
 
                 <!-- Card 6: Ministerial Hub (Coming Soon) -->
                 <div onclick="showComingSoon('التحدي الوزاري الشامل')" class="hub-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 border-t-4 border-yellow-400 shadow-xl cursor-pointer text-white">
@@ -999,6 +1006,104 @@
             </div>
         </div>
         
+        <!-- ========================================== -->
+    <!-- VIEW 2.D: INTERNAL SUBJECT DETAILS (واجهة الباطنية) -->
+        <!-- ========================================== -->
+        <div id="view-subject-internal" class="view hidden fade-in">
+            
+        <!-- زر العودة الخاص بواجهة الباطنية -->
+            <button onclick="openSubjects()" class="mb-6 flex items-center text-gray-600 hover:text-red-700 font-semibold transition-colors">
+                <i class="fa-solid fa-arrow-right ml-2"></i> رجوع
+            </button>
+            
+               <!-- ترويسة المادة -->
+    <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 mb-8 flex items-center gap-4 border-b-4 border-emerald-500">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl shrink-0">
+            <i class="fa-solid fa-stethoscope"></i>
+        </div>
+        <div>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800">الطب الباطني</h2>
+            <p class="text-gray-500 mt-1">مادة جامعية • ملخصات ذكية وتحديات شاملة</p>
+        </div>
+    </div>
+
+    <h3 class="text-xl font-bold text-gray-800 mb-4 border-r-4 border-emerald-500 pr-3">تحديات المِد الشاملة</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+        
+        <button onclick="startQuiz('internal_except_challenge')" class="hub-card bg-gradient-to-l from-red-50 to-white border border-red-100 rounded-xl p-5 text-right text-red-800 flex justify-between items-center group">
+            <div>
+                <h4 class="font-bold text-lg mb-1 english-text">EXCEPT Challenge</h4>
+                <p class="text-xs text-red-600 opacity-80">60 سؤال استثناء دقيق</p>
+            </div>
+            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-colors">
+                <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+        </button>
+
+        <button onclick="startQuiz('internal_tricky_challenge')" class="hub-card bg-gradient-to-l from-orange-50 to-white border border-orange-100 rounded-xl p-5 text-right text-orange-800 flex justify-between items-center group">
+            <div>
+                <h4 class="font-bold text-lg mb-1 english-text">Tricky Challenge</h4>
+                <p class="text-xs text-orange-600 opacity-80">60 سؤال (Not, Only, All/None)</p>
+            </div>
+            <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                <i class="fa-solid fa-skull-crossbones"></i>
+            </div>
+        </button>
+
+        <button onclick="startQuiz('internal_mid_simulator')" class="hub-card bg-gradient-to-l from-emerald-50 to-white border border-emerald-100 rounded-xl p-5 text-right text-emerald-800 flex justify-between items-center group">
+            <div>
+                <h4 class="font-bold text-lg mb-1">المحاكاة الشاملة</h4>
+                <p class="text-xs text-emerald-600 opacity-80">60 سؤال شامل لكل الأنواع</p>
+            </div>
+            <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                <i class="fa-solid fa-crown"></i>
+            </div>
+        </button>
+    </div>
+
+    <div class="flex items-center justify-between mb-4 border-r-4 border-emerald-500 pr-3">
+        <h3 class="text-xl font-bold text-gray-800">محاضرات امتحان المِد</h3>
+        <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full english-text">Mid-Course</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+        
+        <button onclick="showActionModal('internal_lec1', 'المحاضرة الأولى: Pulmonary Tuberculosis')" class="bg-white border border-gray-200 hover:border-emerald-500 rounded-xl p-4 text-right transition duration-200 hover:shadow-md group flex items-center gap-4">
+            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-solid fa-lungs-virus"></i></div>
+            <div>
+                <div class="font-bold text-gray-800 text-sm english-text">Pulmonary TB</div>
+                <div class="text-xs text-gray-500 mt-1">التدرن الرئوي (السل)</div>
+            </div>
+        </button>
+
+        <button onclick="showActionModal('internal_lec2', 'المحاضرة الثانية: Bronchial Asthma')" class="bg-white border border-gray-200 hover:border-emerald-500 rounded-xl p-4 text-right transition duration-200 hover:shadow-md group flex items-center gap-4">
+            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-solid fa-lungs"></i></div>
+            <div>
+                <div class="font-bold text-gray-800 text-sm english-text">Bronchial Asthma</div>
+                <div class="text-xs text-gray-500 mt-1">الربو القصبي</div>
+            </div>
+        </button>
+
+        <button onclick="showActionModal('internal_lec3', 'المحاضرة الثالثة: Pneumonia')" class="bg-white border border-gray-200 hover:border-emerald-500 rounded-xl p-4 text-right transition duration-200 hover:shadow-md group flex items-center gap-4">
+            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-solid fa-bacterium"></i></div>
+            <div>
+                <div class="font-bold text-gray-800 text-sm english-text">Pneumonia</div>
+                <div class="text-xs text-gray-500 mt-1">التهاب الرئة</div>
+            </div>
+        </button>
+        
+    </div>
+
+    <div class="flex items-center justify-between mb-4 border-r-4 border-gray-400 pr-3 opacity-80">
+        <h3 class="text-xl font-bold text-gray-600">محاضرات ما بعد المِد</h3>
+        <span class="text-xs font-bold bg-gray-200 text-gray-600 px-3 py-1 rounded-full">قيد التجهيز <i class="fa-solid fa-lock ml-1"></i></span>
+    </div>
+    <div class="bg-gray-50 border border-gray-200 border-dashed rounded-xl p-6 text-center text-gray-500 mb-10">
+        <i class="fa-solid fa-spinner fa-spin text-2xl mb-3 text-gray-400"></i>
+        <h4 class="font-bold mb-1">سيتم إضافة المحاضرات تباعاً</h4>
+        <p class="text-sm">يتم تحديث هذا القسم برمجياً فور رفع أستاذ المادة للمحاضرات الجديدة.</p>
+    </div>
+</div>
+        
     </main>
            <!-- التذييل (حقوق المطور) -->
     <!-- Footer (Engineered & Designed by) -->
@@ -1014,7 +1119,7 @@
         <!-- رقم الاصدار -->
         <!-- Version Number hidden in corner -->
         <div class="absolute bottom-2 right-4 text-gray-300 text-xs english-text font-bold opacity-70">
-            V1.4.1-Diamond
+            V1.5.0
         </div>
     </footer>
 
@@ -10427,7 +10532,3082 @@
         tag: "Lec 4 (Testicular Cancer Prognosis) - Easy",
         explanation: "Testicular cancer is one of the most curable malignancies, with cure rates as high as 90% and a >95% 5-year survival rate."
     }
-]
+],
+
+'internal_except_challenge': [
+    {
+        question: "All of the following are clinical features of active pulmonary TB (Secondary), EXCEPT:",
+        options: [
+            "Fever, often with an evening rise",
+            "Weight gain and increased appetite",
+            "Drenching night sweats",
+            "Chronic cough and hemoptysis"
+        ],
+        answer: 1,
+        tag: "EXCEPT Challenge (TB) - Easy",
+        explanation: "Active pulmonary TB typically causes weight loss and anorexia, not weight gain and increased appetite."
+    },
+    {
+        question: "According to the transmission methods of Tuberculosis, it can be spread by all of the following, EXCEPT:",
+        options: [
+            "Coughing",
+            "Sneezing",
+            "Sharing utensils and clothes",
+            "Singing"
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (TB) - Easy",
+        explanation: "Tuberculosis is NOT transmitted by sharing food, utensils, clothes, bed sheets, or kissing."
+    },
+    {
+        question: "All of the following are considered risk factors that weaken the immune system for TB, EXCEPT:",
+        options: [
+            "HIV infection",
+            "Diabetes mellitus",
+            "Hypertension",
+            "Chronic kidney disease"
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (TB) - Medium",
+        explanation: "Hypertension is not listed as an immune-weakening risk factor for TB, whereas HIV, diabetes, and CKD are prominent factors."
+    },
+    {
+        question: "Which of the following statements about Primary TB is FALSE?",
+        options: [
+            "It is the first stage of a tuberculosis infection.",
+            "It usually has no clinical symptoms.",
+            "It commonly involves the upper lobes causing cavitations.",
+            "It is characterized by the formation of the Ghon complex."
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (TB) - Medium",
+        explanation: "Involvement of the upper lobes causing cavitations or fibrotic scars is a classic feature of Secondary TB, not Primary TB."
+    },
+    {
+        question: "The standard intensive phase regimen for drug-sensitive TB includes all of the following medications, EXCEPT:",
+        options: [
+            "Isoniazid (H)",
+            "Rifampicin (R)",
+            "Streptomycin (S)",
+            "Pyrazinamide (Z)"
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (TB) - Hard",
+        explanation: "The intensive phase (HRZE) consists of Isoniazid, Rifampicin, Pyrazinamide, and Ethambutol. Streptomycin is not part of this standard 4-drug regimen."
+    },
+    {
+        question: "All of the following are recognized side effects of Isoniazid, EXCEPT:",
+        options: [
+            "Peripheral neuropathy",
+            "Optic neuropathy",
+            "Loss of appetite",
+            "Increase in hepatic enzymes"
+        ],
+        answer: 1,
+        tag: "EXCEPT Challenge (TB) - Hard",
+        explanation: "Optic neuropathy is the most common side effect of Ethambutol, not Isoniazid."
+    },
+    {
+        question: "Regarding the diagnosis of TB, which of the following statements is FALSE?",
+        options: [
+            "Sputum Smear Microscopy has high sensitivity.",
+            "Culture is the gold standard for diagnosis.",
+            "GeneXpert detects rifampicin resistance.",
+            "GeneXpert tests provide results within 2 hours."
+        ],
+        answer: 0,
+        tag: "EXCEPT Challenge (TB) - Hard",
+        explanation: "Sputum Smear Microscopy is rapid and cheap but has low sensitivity, unlike NAAT (GeneXpert) which has high sensitivity."
+    },
+    {
+        question: "Side effects of Rifampin include all of the following, EXCEPT:",
+        options: [
+            "Skin rash",
+            "Brown urine",
+            "Yellowish skin or eyes (jaundice)",
+            "Painful or swollen joints"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (TB) - Medium",
+        explanation: "Painful or swollen joints are side effects associated with Ethambutol or Pyrazinamide, not Rifampin."
+    },
+    {
+        question: "Behavioral and social determinants that act as risk factors for TB include all of the following, EXCEPT:",
+        options: [
+            "Smoking",
+            "Alcohol use disorder",
+            "Silicosis",
+            "Obesity"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (TB) - Medium",
+        explanation: "Malnutrition is a risk factor for TB, but obesity is not mentioned as a behavioral or social determinant."
+    },
+    {
+        question: "Which of the following statements about the Mycobacterium tuberculosis complex is FALSE?",
+        options: [
+            "It is an acid-fast bacillus (AFB).",
+            "It is a strict anaerobe.",
+            "Its cell wall is unique and rich in mycolic acid.",
+            "It is resistant to drying and many disinfectants."
+        ],
+        answer: 1,
+        tag: "EXCEPT Challenge (TB) - Easy",
+        explanation: "Mycobacterium tuberculosis is a strict aerobe, not an anaerobe."
+    },
+    {
+        question: "Environmental and occupational triggers for bronchial asthma include all of the following, EXCEPT:",
+        options: [
+            "Tobacco smoke",
+            "Cold air",
+            "Workplace chemicals and dusts",
+            "Warm humid air"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Asthma) - Easy",
+        explanation: "Cold air is a known environmental trigger for asthma attacks, not warm humid air."
+    },
+    {
+        question: "All of the following are common clinical manifestations of an asthma attack, EXCEPT:",
+        options: [
+            "Wheezing",
+            "Chest tightness",
+            "Bradycardia",
+            "Tachypnea"
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (Asthma) - Easy",
+        explanation: "Asthma attacks typically cause tachycardia (increased heart rate), not bradycardia."
+    },
+    {
+        question: "The pathophysiology of asthma involves all of the following mechanisms, EXCEPT:",
+        options: [
+            "Chronic inflammation",
+            "Alveolar consolidation",
+            "Airway remodeling",
+            "Bronchoconstriction"
+        ],
+        answer: 1,
+        tag: "EXCEPT Challenge (Asthma) - Medium",
+        explanation: "Alveolar consolidation is a pathophysiological feature of pneumonia, not asthma."
+    },
+    {
+        question: "Long-Term Controllers (Preventers) used in the management of asthma include all of the following, EXCEPT:",
+        options: [
+            "Inhaled Corticosteroids (ICS)",
+            "Short-Acting B2-Agonists (SABA)",
+            "Long-Acting B2-Agonists (LABA)",
+            "Leukotriene Receptor Antagonists"
+        ],
+        answer: 1,
+        tag: "EXCEPT Challenge (Asthma) - Medium",
+        explanation: "Short-Acting B2-Agonists (SABA) are short-term relievers used for rapid rescue, not long-term controllers."
+    },
+    {
+        question: "Recognized complications of bronchial asthma include all of the following, EXCEPT:",
+        options: [
+            "Infections",
+            "Spontaneous pneumothorax",
+            "Lung abscess",
+            "Emphysema and cor pulmonale"
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (Asthma) - Medium",
+        explanation: "Lung abscess is a complication of pneumonia, whereas spontaneous pneumothorax and emphysema are complications of asthma."
+    },
+    {
+        question: "Which of the following statements about Status Asthmaticus is FALSE?",
+        options: [
+            "It is a severe, progressive attack.",
+            "It persists for more than 6 hours.",
+            "It responds rapidly to standard bronchodilators.",
+            "It requires management of precipitating factors alongside therapy."
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (Asthma) - Hard",
+        explanation: "Status Asthmaticus is defined by its persistence despite the use of bronchodilators and standard asthma therapy."
+    },
+    {
+        question: "Inflammatory mediators in asthma cause all of the following pathophysiological changes, EXCEPT:",
+        options: [
+            "Bronchodilation",
+            "Mucous hypersecretion",
+            "Microvascular leakage",
+            "Bronchial hyper-responsiveness"
+        ],
+        answer: 0,
+        tag: "EXCEPT Challenge (Asthma) - Hard",
+        explanation: "Asthma mediators cause bronchoconstriction, not bronchodilation."
+    },
+    {
+        question: "Regarding the diagnosis of asthma, which of the following statements is FALSE?",
+        options: [
+            "Spirometry is the gold standard.",
+            "Reversibility is defined as an increase in FEV1 by > 12% and > 200 mL.",
+            "A normal chest x-ray reliably excludes the diagnosis of asthma.",
+            "Peak Expiratory Flow (PEF) is used to monitor variability and flow limitations."
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (Asthma) - Hard",
+        explanation: "A normal chest X-ray is typically seen in mild and moderate cases of asthma and does not exclude the diagnosis."
+    },
+    {
+        question: "ECG changes seen in severe cases of asthma can include all of the following, EXCEPT:",
+        options: [
+            "Sinus tachycardia",
+            "ST segment depression",
+            "T wave inversion",
+            "Atrial fibrillation"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Asthma) - Medium",
+        explanation: "Atrial fibrillation is not mentioned as a standard ECG finding in asthma. Sinus tachycardia, ST depression, and T wave inversion are."
+    },
+    {
+        question: "Risk factors or triggers that can induce asthma include all of the following, EXCEPT:",
+        options: [
+            "Exercise",
+            "Aspirin",
+            "High dietary protein intake",
+            "Viral respiratory infections"
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (Asthma) - Easy",
+        explanation: "Dietary triggers include eggs, fish, and milk. High protein intake in general is not classified as an asthma trigger."
+    },
+    {
+        question: "The typical clinical presentation of pneumonia includes all of the following symptoms, EXCEPT:",
+        options: [
+            "Sudden onset",
+            "Productive cough with mucopurulent sputum",
+            "Gradual weight loss over several months",
+            "Fever and rigors"
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (Pneumonia) - Easy",
+        explanation: "Gradual weight loss over months is a classic symptom of Tuberculosis, not acute pneumonia."
+    },
+    {
+        question: "Common bacterial causes of Community Acquired Pneumonia (CAP) include all of the following, EXCEPT:",
+        options: [
+            "Streptococcus pneumoniae",
+            "Haemophilus influenzae",
+            "Mycobacterium tuberculosis",
+            "Mycoplasma pneumoniae"
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (Pneumonia) - Easy",
+        explanation: "Mycobacterium tuberculosis is the causative agent of TB, not a standard cause of bacterial Community Acquired Pneumonia."
+    },
+    {
+        question: "Atypical pneumonia is characterized by all of the following clinical features, EXCEPT:",
+        options: [
+            "Gradual onset",
+            "Dry cough",
+            "Lobar consolidation on chest X-ray",
+            "Afebrile presentation or lack of high fever"
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (Pneumonia) - Medium",
+        explanation: "Atypical pneumonia typically shows patchy unilateral or bilateral infiltrates on CXR, not classic lobar consolidation."
+    },
+    {
+        question: "Known complications of pneumonia include all of the following, EXCEPT:",
+        options: [
+            "Bacteremia",
+            "Empyema",
+            "Spontaneous pneumothorax",
+            "Lung abscess"
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (Pneumonia) - Medium",
+        explanation: "Spontaneous pneumothorax is a complication mainly associated with asthma and emphysema, whereas pneumonia complications include pleural effusion, empyema, and abscess."
+    },
+    {
+        question: "Which of the following statements about Hospital Acquired Pneumonia (HAP) is FALSE?",
+        options: [
+            "It occurs more than 48 hours after hospital admission.",
+            "It is commonly caused by Gram-negative enterobacteria or Staph. aureus.",
+            "It is usually caused by typical community respiratory viruses like Influenza.",
+            "The most common cause is micro aspiration of oropharyngeal bacteria."
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (Pneumonia) - Medium",
+        explanation: "HAP is typically bacterial (Gram-negative enterobacteria, S. aureus) rather than viral."
+    },
+    {
+        question: "Risk factors associated with Community Acquired Pneumonia (CAP) include all of the following, EXCEPT:",
+        options: [
+            "Influenza infection",
+            "Smoking",
+            "Splenectomy",
+            "Hyperthyroidism"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Pneumonia) - Hard",
+        explanation: "Hyperthyroidism is not a recognized risk factor for CAP. Splenectomy, smoking, and influenza are established risk factors."
+    },
+    {
+        question: "Regarding the treatment of pneumonia, which of the following statements is FALSE?",
+        options: [
+            "CAP antibiotics should ideally be started within 4 hours.",
+            "Penicillin derivatives are the preferred choice when Streptococcus pneumoniae is suspected.",
+            "Azithromycin is ineffective and contraindicated for penicillin-resistant pneumonia.",
+            "Broad-spectrum antibiotics like piperacillin-tazobactam are recommended for HAP."
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (Pneumonia) - Hard",
+        explanation: "Azithromycin is actually the indicated treatment (500mg twice daily) for penicillin-resistant pneumonia."
+    },
+    {
+        question: "Which of the following statements about Streptococcus pneumoniae is FALSE?",
+        options: [
+            "It is the most common cause of CAP.",
+            "It is a Gram-negative nonmotile rod.",
+            "It typically shows a lobar infiltrate on CXR.",
+            "It is a Gram-positive diplococci."
+        ],
+        answer: 1,
+        tag: "EXCEPT Challenge (Pneumonia) - Hard",
+        explanation: "Streptococcus pneumoniae is a Gram-positive diplococci. Haemophilus influenzae is the Gram-negative rod."
+    },
+    {
+        question: "Aspiration pneumonia is commonly seen in patients with all of the following conditions, EXCEPT:",
+        options: [
+            "Stroke",
+            "Myasthenia",
+            "Impaired consciousness",
+            "Hyperactive gag reflex"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Pneumonia) - Medium",
+        explanation: "Aspiration pneumonia occurs when protective airway reflexes are lost or weakened (e.g., bulbar palsy), not when they are hyperactive."
+    },
+    {
+        question: "Standard investigations for diagnosing pneumonia include all of the following, EXCEPT:",
+        options: [
+            "Chest X-ray",
+            "Sputum gram stain and culture",
+            "Spirometry (FEV1 and FVC)",
+            "CBC with differential"
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (Pneumonia) - Easy",
+        explanation: "Spirometry is a lung function test used as the gold standard for diagnosing asthma, not acute pneumonia."
+    },
+    {
+        question: "The Ghon focus in primary TB typically forms in a subpleural area, usually involving all of the following locations, EXCEPT:",
+        options: [
+            "The upper part of the upper lobe",
+            "The lower part of the upper lobe",
+            "The upper part of the lower lobe",
+            "A subpleural area"
+        ],
+        answer: 0,
+        tag: "EXCEPT Challenge (TB) - Hard",
+        explanation: "A Ghon focus usually forms in the lower part of the upper lobe or the upper part of the lower lobe."
+    },
+    {
+        question: "Pulmonary symptoms of active secondary TB include all of the following, EXCEPT:",
+        options: [
+            "Chronic cough",
+            "Hemoptysis",
+            "Pleuritic chest pain",
+            "Acute dry cough resolving in a few days"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (TB) - Medium",
+        explanation: "The cardinal symptom is a chronic cough that is initially dry but later becomes productive, not a fast-resolving acute cough."
+    },
+    {
+        question: "Preventive measures for someone with active TB to protect others include all of the following, EXCEPT:",
+        options: [
+            "Limiting contact with others",
+            "Covering the mouth when coughing",
+            "Wearing a mask",
+            "Sharing a well-ventilated bedroom with family members"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (TB) - Easy",
+        explanation: "A patient with active TB should sleep in a separate room to protect others, rather than sharing a bedroom."
+    },
+    {
+        question: "Regarding Tuberculosis testing, which of the following statements is FALSE?",
+        options: [
+            "The skin test is also known as the Mantoux test.",
+            "The blood test is called the interferon-gamma release assay (IGRA).",
+            "The skin test measures the response of TB proteins mixed with a small amount of your blood.",
+            "In the skin test, induration is examined after 48-72 hours."
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (TB) - Medium",
+        explanation: "The blood test (IGRA) measures the response in your blood, while the skin test involves injecting fluid into the skin of the lower arm."
+    },
+    {
+        question: "Side effects of Ethambutol include all of the following, EXCEPT:",
+        options: [
+            "Hepatotoxicity",
+            "Optic neuropathy",
+            "Painful or swollen joints",
+            "Headache and confusion"
+        ],
+        answer: 0,
+        tag: "EXCEPT Challenge (TB) - Hard",
+        explanation: "Hepatotoxicity is the most common side effect of Pyrazinamide, while Ethambutol is known for optic neuropathy."
+    },
+    {
+        question: "The standard continuation phase of drug-sensitive TB treatment includes all of the following drugs, EXCEPT:",
+        options: [
+            "Isoniazid",
+            "Rifampicin",
+            "Pyrazinamide"
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (TB) - Easy",
+        explanation: "The continuation phase (4 months) consists of only Isoniazid and Rifampicin (HR)."
+    },
+    {
+        question: "Which of the following statements about Primary or Latent TB treatment is FALSE?",
+        options: [
+            "It may require preventive treatment.",
+            "Treatment aims to prevent progression to active disease.",
+            "It rarely requires any treatment or medication since it is not active.",
+            "It may require prolonged treatment."
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (TB) - Medium",
+        explanation: "Primary or latent TB often requires preventive or prolonged medication so it does not become active."
+    },
+    {
+        question: "Sputum Smear Microscopy using Ziehl-Neelsen stain is characterized by all of the following, EXCEPT:",
+        options: [
+            "It is rapid.",
+            "It is relatively cheap.",
+            "It has high sensitivity for detecting TB.",
+            "It identifies infectious smear-positive patients."
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (TB) - Hard",
+        explanation: "Sputum Smear Microscopy is rapid and cheap but has a notably low sensitivity."
+    },
+    {
+        question: "Epidemiological and social determinants for TB include all of the following, EXCEPT:",
+        options: [
+            "Living in well-spaced rural communities",
+            "Close contact with an infectious TB patient",
+            "Origin from high TB-burden countries",
+            "Congregate settings like prisons or homeless shelters"
+        ],
+        answer: 0,
+        tag: "EXCEPT Challenge (TB) - Medium",
+        explanation: "Risk factors include poverty, overcrowding, and living in congregate settings, not well-spaced rural living."
+    },
+    {
+        question: "The Ghon Complex consists of all of the following components, EXCEPT:",
+        options: [
+            "The Ghon focus",
+            "Involved hilar lymph nodes",
+            "Involved mediastinal lymph nodes",
+            "Pulmonary cavitations"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (TB) - Hard",
+        explanation: "The Ghon Complex is the combination of the Ghon focus and the involved regional lymph nodes. Cavitations are a feature of secondary TB."
+    },
+    {
+        question: "Airway remodeling in chronic asthma leads to all of the following structural changes, EXCEPT:",
+        options: [
+            "Goblet cell hyperplasia",
+            "Subepithelial fibrosis",
+            "Smooth muscle hypertrophy",
+            "Subepithelial atrophy"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Asthma) - Medium",
+        explanation: "Remodeling leads to subepithelial fibrosis, smooth muscle hypertrophy, and goblet cell hyperplasia, not atrophy."
+    },
+    {
+        question: "Endogenous allergens that cause intrinsic asthma include all of the following, EXCEPT:",
+        options: [
+            "Pollen",
+            "Septic focus",
+            "Internal infections"
+        ],
+        answer: 0,
+        tag: "EXCEPT Challenge (Asthma) - Easy",
+        explanation: "Pollen is an exogenous inhalant that causes extrinsic asthma, whereas a septic focus is endogenous."
+    },
+    {
+        question: "Drugs known to act as risk factors or triggers for bronchial asthma include all of the following, EXCEPT:",
+        options: [
+            "Aspirin",
+            "Penicillin",
+            "Paracetamol"
+        ],
+        answer: 2,
+        tag: "EXCEPT Challenge (Asthma) - Medium",
+        explanation: "Aspirin and penicillin are explicitly listed as drug risk factors for triggering asthma."
+    },
+    {
+        question: "Medications used in asthma management include anti-allergic and other agents. These include all of the following, EXCEPT:",
+        options: [
+            "Montelukast (Anti-leukotrienes)",
+            "Phenergan (Antihistamine)",
+            "Periactin (Antihistamine + anti-serotonin)",
+            "Carbapenems"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Asthma) - Hard",
+        explanation: "Carbapenems are broad-spectrum antibiotics used for hospital-acquired pneumonia, not for standard asthma management."
+    },
+    {
+        question: "Severe exacerbations of asthma may be treated with all of the following, EXCEPT:",
+        options: [
+            "Oxygen",
+            "Magnesium sulfate",
+            "Short courses of oral corticosteroids",
+            "Long courses of oral corticosteroids"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Asthma) - Medium",
+        explanation: "Severe exacerbations are treated with short courses of oral corticosteroids, not long courses."
+    },
+    {
+        question: "Patient education in asthma management is crucial for all of the following, EXCEPT:",
+        options: [
+            "Proper inhaler technique",
+            "Avoiding triggers",
+            "Recognizing worsening symptoms",
+            "Performing independent intubation at home"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Asthma) - Easy",
+        explanation: "Patient education focuses on inhaler technique, avoiding triggers, and recognizing worsening symptoms."
+    },
+    {
+        question: "Regarding Sodium cromoglycate (Intal) in asthma management, which of the following statements is FALSE?",
+        options: [
+            "It is used at a dose of 2-4 capsules per day.",
+            "It stabilizes mast cells.",
+            "It prevents the release of mediators from mast cells.",
+            "It actively promotes the release of bronchodilating mediators."
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Asthma) - Hard",
+        explanation: "Sodium cromoglycate works by stabilizing and preventing the release of mediators from mast cells, not promoting them."
+    },
+    {
+        question: "The definition of asthma involves paroxysmal attacks consisting of all of the following symptoms, EXCEPT:",
+        options: [
+            "Dyspnea",
+            "Cough",
+            "Wheezing",
+            "Hemoptysis"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Asthma) - Medium",
+        explanation: "Asthma attacks consist of dyspnea, cough, and wheezing. Hemoptysis is a classic symptom of pulmonary TB, not asthma."
+    },
+    {
+        question: "Hormonal factors can precipitate asthma attacks during all of the following periods, EXCEPT:",
+        options: [
+            "Pregnancy",
+            "Menstruation",
+            "Menopause",
+            "Early childhood development"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Asthma) - Easy",
+        explanation: "Asthma attacks triggered by hormones specifically occur during pregnancy, menstruation, or menopause."
+    },
+    {
+        question: "In the management of Status Asthmaticus, the treatment of precipitating factors includes all of the following, EXCEPT:",
+        options: [
+            "Avoiding allergens",
+            "Managing psychological factors",
+            "Giving suitable antibiotics if bacterial infection is suspected",
+            "Routine administration of broad-spectrum antiviral medications"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Asthma) - Medium",
+        explanation: "Management includes avoiding allergens, managing psychological factors, and using antibiotics only if a bacterial infection is suspected."
+    },
+    {
+        question: "Pneumonia is defined as an acute infection leading to all of the following, EXCEPT:",
+        options: [
+            "Consolidation of the greater part or lobes of the lung",
+            "Alveolar filling with fluid",
+            "Air space disease",
+            "Normal alveolar air spaces without exudation"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Pneumonia) - Easy",
+        explanation: "Pneumonia results in alveolar filling with fluid, causing air space disease through consolidation and exudation."
+    },
+    {
+        question: "Atypical pneumonia can be caused by all of the following organisms, EXCEPT:",
+        options: [
+            "Mycoplasma pneumoniae",
+            "Chlamydia pneumoniae",
+            "Legionella pneumophila",
+            "Haemophilus influenzae"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Pneumonia) - Medium",
+        explanation: "Atypical pathogens include Mycoplasma, Chlamydia, Legionella, and Viruses. Haemophilus influenzae is a typical pathogen."
+    },
+    {
+        question: "Aspiration pneumonia is caused by mixed flora, which typically includes all of the following, EXCEPT:",
+        options: [
+            "Mouth anaerobes",
+            "Stomach contents",
+            "Enterobacterium",
+            "Legionella pneumophila"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Pneumonia) - Hard",
+        explanation: "Aspiration pneumonia flora includes mouth anaerobes (Peptostreptococcus, Actinomyces), stomach contents, and enterobacterium."
+    },
+    {
+        question: "Regarding Hospital Acquired Pneumonia (HAP), which of the following statements is FALSE?",
+        options: [
+            "It occurs more than 48 hours after admission.",
+            "It is usually treated with narrow-spectrum oral penicillin.",
+            "Guidelines recommend piperacillin-tazobactam (TZP) and carbapenems.",
+            "Micro aspiration of bacteria in seriously ill patients is the most common cause."
+        ],
+        answer: 1,
+        tag: "EXCEPT Challenge (Pneumonia) - Hard",
+        explanation: "HAP requires broad-spectrum antibiotics like piperacillin-tazobactam and carbapenems, not narrow-spectrum oral penicillins."
+    },
+    {
+        question: "Appropriate antibiotic choices for aspiration pneumonia in patients without a toxic appearance include all of the following, EXCEPT:",
+        options: [
+            "Ceftriaxone plus azithromycin",
+            "Levofloxacin",
+            "Moxifloxacin",
+            "Oral Amoxicillin monotherapy"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Pneumonia) - Medium",
+        explanation: "Appropriate choices for non-toxic aspiration pneumonia are Ceftriaxone plus azithromycin, levofloxacin, or moxifloxacin."
+    },
+    {
+        question: "Standard investigations for diagnosing pneumonia include evaluating blood parameters through all of the following, EXCEPT:",
+        options: [
+            "Blood Urea",
+            "Serum creatinine",
+            "CBC with differential",
+            "Lipid profile"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Pneumonia) - Easy",
+        explanation: "Standard blood investigations for pneumonia include Blood Urea, Serum creatinine, CBC with differential, and Blood Culture."
+    },
+    {
+        question: "A chest X-ray in pneumonia is used for all of the following purposes, EXCEPT:",
+        options: [
+            "To demonstrate infiltrates to establish the diagnosis",
+            "To detect complications like pleural effusion",
+            "To identify multilobar disease",
+            "To confirm the specific bacterial strain causing the infection"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Pneumonia) - Medium",
+        explanation: "CXR demonstrates infiltrates and detects structural complications, but sputum/blood cultures are needed to identify the specific bacterial strain."
+    },
+    {
+        question: "Which of the following statements about Haemophilus influenzae in pneumonia is FALSE?",
+        options: [
+            "It is a nonmotile rod.",
+            "It is a Gram-negative bacterium.",
+            "It frequently causes secondary infections on top of viral diseases.",
+            "It is a motile, Gram-positive rod."
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Pneumonia) - Hard",
+        explanation: "Haemophilus influenzae is a nonmotile, Gram-negative rod."
+    },
+    {
+        question: "Pneumonia in immunocompromised patients is characterized by all of the following, EXCEPT:",
+        options: [
+            "The immune system isn't working as well as it should.",
+            "The patient cannot effectively fight off the infection.",
+            "It is often caused by unusual pathogens with limited virulence in healthy individuals.",
+            "The immune system rapidly clears the infection without targeted antibiotics."
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Pneumonia) - Medium",
+        explanation: "Immunocompromised patients cannot fight off infections effectively, leading them to get sick more severely, often from unusual pathogens."
+    },
+    {
+        question: "The clinical presentation of typical pneumococcal pneumonia includes all of the following signs upon auscultation, EXCEPT:",
+        options: [
+            "Rales",
+            "Crackles",
+            "Localized bronchial breath sounds",
+            "Normal clear breath sounds in the involved lobe"
+        ],
+        answer: 3,
+        tag: "EXCEPT Challenge (Pneumonia) - Easy",
+        explanation: "Auscultatory findings typically include rales (crackles) and localized bronchial breath sounds in the involved segment or lobe."
+    }
+],
+
+'internal_tricky_challenge': [
+    {
+        question: "Which of the following is/are considered the MOST common behavioral or social risk factor(s) for Tuberculosis?",
+        options: [
+            "Smoking",
+            "Alcohol use disorder",
+            "Living in congregate settings (e.g., prisons)",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (TB) - Medium",
+        explanation: "Smoking, alcohol use disorder, and living in congregate settings are all explicitly listed as behavioral and social risk factors for TB."
+    },
+    {
+        question: "What is the recommended INITIAL test that detects TB DNA and rifampicin resistance within 2 hours?",
+        options: [
+            "Sputum Smear Microscopy",
+            "Solid Culture",
+            "Liquid Culture",
+            "None of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (TB) - Hard",
+        explanation: "None of the above. The correct initial test that detects TB DNA and rifampicin resistance within 2 hours is the GeneXpert MTB/RIF (NAAT)."
+    },
+    {
+        question: "The 'Ghon Complex' in Primary TB is formed by the combination of the Ghon focus and which of the following?",
+        options: [
+            "Involved hilar lymph nodes",
+            "Involved mediastinal lymph nodes",
+            "Apical cavitations",
+            "Both A & B"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (TB) - Hard",
+        explanation: "Primary TB is characterized by a Ghon focus associated with regional hilar or mediastinal lymphadenopathy. Thus, both A & B are correct components."
+    },
+    {
+        question: "Which of the following does NOT transmit Mycobacterium tuberculosis?",
+        options: [
+            "Kissing",
+            "Sharing toothbrushes and bed sheets",
+            "Sharing food or drinks",
+            "All of the above do NOT transmit TB"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (TB) - Medium",
+        explanation: "TB is NOT transmitted by kissing, sharing food, drinks, bed sheets, or toothbrushes. It is exclusively airborne via droplet nuclei."
+    },
+    {
+        question: "The peripheral neuropathy side effect caused by Isoniazid is ONLY due to the lowering of which of the following?",
+        options: [
+            "Pyridoxine level",
+            "Mycolic acid",
+            "Hepatic enzymes",
+            "None of the above"
+        ],
+        answer: 0,
+        tag: "Tricky Challenge (TB) - Medium",
+        explanation: "Isoniazid causes peripheral neuropathy specifically because it lowers the pyridoxine (Vitamin B6) level in the body."
+    },
+    {
+        question: "The continuation phase of the standard drug-sensitive TB regimen consists ONLY of:",
+        options: [
+            "Isoniazid and Pyrazinamide",
+            "Rifampicin and Ethambutol",
+            "Isoniazid and Rifampicin",
+            "All of the above"
+        ],
+        answer: 2,
+        tag: "Tricky Challenge (TB) - Medium",
+        explanation: "The continuation phase (4 months) strictly consists of only two drugs: Isoniazid and Rifampicin (HR)."
+    },
+    {
+        question: "Which of the following drugs is MOST commonly associated with optic neuropathy?",
+        options: [
+            "Isoniazid",
+            "Ethambutol",
+            "Pyrazinamide",
+            "Both A & B"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (TB) - Medium",
+        explanation: "Optic neuropathy is the most common and classic side effect of Ethambutol."
+    },
+    {
+        question: "Which of the following is TRUE regarding the pathology of Secondary TB?",
+        options: [
+            "It commonly involves the upper lobes",
+            "It causes opacities, cavitations, or fibrotic scars",
+            "It typically presents without any symptoms",
+            "Both A & B"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (TB) - Hard",
+        explanation: "Secondary TB commonly involves the upper lobes and causes opacities, cavitations, and scarring. Primary TB is the one that is typically asymptomatic."
+    },
+    {
+        question: "The MOST common cause of hepatotoxicity among the following first-line anti-TB drugs is:",
+        options: [
+            "Isoniazid",
+            "Pyrazinamide",
+            "Ethambutol",
+            "Both A & B"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (TB) - Hard",
+        explanation: "While Isoniazid can cause liver issues, hepatotoxicity is explicitly noted as the 'most common' side effect of Pyrazinamide."
+    },
+    {
+        question: "Regarding the Mycobacterium tuberculosis complex, it is known to be ONLY:",
+        options: [
+            "A strict anaerobe",
+            "A strict aerobe",
+            "Resistant to drying due to mycolic acid",
+            "Both B & C"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (TB) - Hard",
+        explanation: "Mycobacterium tuberculosis is a strict aerobe (not anaerobe) and is highly resistant to drying and disinfectants due to its lipid-rich mycolic acid cell wall."
+    },
+    {
+        question: "Which of the following mediators is/are responsible for bronchial hyper-responsiveness and inflammation in asthma?",
+        options: [
+            "Mast cells",
+            "T-lymphocytes",
+            "Eosinophils",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Asthma) - Hard",
+        explanation: "The pathophysiology of asthma involves a complex interaction and infiltration of eosinophils, mast cells, and T-lymphocytes."
+    },
+    {
+        question: "In severe cases of asthma, the MOST common ECG findings include:",
+        options: [
+            "ST segment depression",
+            "T wave inversion",
+            "Sinus bradycardia",
+            "Both A & B"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Asthma) - Medium",
+        explanation: "Severe cases of asthma show ST segment depression and T wave inversion on an ECG. Sinus tachycardia is seen, not bradycardia."
+    },
+    {
+        question: "Reversibility in spirometry for asthma diagnosis is defined ONLY when FEV1 increases by:",
+        options: [
+            "> 10% and > 200 mL",
+            "> 15% and > 100 mL",
+            "> 12% and > 150 mL",
+            "None of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Asthma) - Hard",
+        explanation: "None of the above. Reversibility is strictly defined as an increase in FEV1 by > 12% AND > 200 mL."
+    },
+    {
+        question: "Which of the following medications is considered the cornerstone Long-Term Controller for reducing inflammation?",
+        options: [
+            "Long-Acting B2-Agonists (LABA)",
+            "Inhaled Corticosteroids (ICS)",
+            "Short-Acting B2-Agonists (SABA)",
+            "Both A & B"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Asthma) - Medium",
+        explanation: "Inhaled Corticosteroids (ICS) are the absolute cornerstone of treatment for long-term control and reducing inflammation."
+    },
+    {
+        question: "Status Asthmaticus is a severe, prolonged attack that persists for more than 6 hours despite the INITIAL use of:",
+        options: [
+            "Bronchodilators",
+            "All standard therapy of asthma",
+            "Short courses of oral antibiotics",
+            "Both A & B"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Asthma) - Hard",
+        explanation: "Status Asthmaticus persists despite the administration of bronchodilators and all standard asthma therapies."
+    },
+    {
+        question: "Sodium cromoglycate (Intal) works ONLY by:",
+        options: [
+            "Reversing bronchoconstriction rapidly",
+            "Stabilizing mast cells to prevent mediator release",
+            "Acting as a Leukotriene Receptor Antagonist",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Asthma) - Hard",
+        explanation: "Sodium cromoglycate (Intal) functions specifically by stabilizing mast cells and preventing the release of inflammatory mediators."
+    },
+    {
+        question: "Which of the following complications can arise from bronchial asthma?",
+        options: [
+            "Spontaneous pneumothorax",
+            "Anxiety state",
+            "Cor pulmonale and Emphysema",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Asthma) - Medium",
+        explanation: "All listed options (Infections, Emphysema, cor pulmonale, spontaneous pneumothorax, and anxiety state) are recognized complications of asthma."
+    },
+    {
+        question: "Intrinsic asthma is caused by endogenous allergens which may include ONLY:",
+        options: [
+            "Septic focus",
+            "Pollen",
+            "Dust mites",
+            "Both B & C"
+        ],
+        answer: 0,
+        tag: "Tricky Challenge (Asthma) - Medium",
+        explanation: "A septic focus is an example of an endogenous allergen causing intrinsic asthma. Pollen and dust mites are exogenous."
+    },
+    {
+        question: "Hormonal factors can precipitate asthma attacks ONLY during which of the following periods?",
+        options: [
+            "Pregnancy",
+            "Menstruation",
+            "Menopause",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Asthma) - Medium",
+        explanation: "Asthma attacks triggered by hormones can occur during pregnancy, menstruation, and menopause."
+    },
+    {
+        question: "Airway remodeling from chronic inflammation in asthma leads to which of the following structural changes?",
+        options: [
+            "Goblet cell hyperplasia",
+            "Subepithelial fibrosis",
+            "Smooth muscle hypertrophy",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Asthma) - Medium",
+        explanation: "Airway remodeling includes goblet cell hyperplasia, subepithelial fibrosis, smooth muscle hypertrophy, and increased collagen deposition."
+    },
+    {
+        question: "Which of the following is the MOST common typical organism causing Community Acquired Pneumonia (CAP)?",
+        options: [
+            "Haemophilus influenzae",
+            "Streptococcus pneumoniae",
+            "Staphylococcus aureus",
+            "Both A & B"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Pneumonia) - Medium",
+        explanation: "Streptococcus pneumoniae is explicitly listed as the single most common typical cause of Community Acquired Pneumonia."
+    },
+    {
+        question: "Hospital Acquired Pneumonia (HAP) is defined as pneumonia developing ONLY after how many hours post-admission?",
+        options: [
+            "> 12 hours",
+            "> 24 hours",
+            "> 72 hours",
+            "None of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Pneumonia) - Hard",
+        explanation: "None of the above. HAP is defined as pneumonia occurring > 48 hours after hospital admission."
+    },
+    {
+        question: "Atypical pneumonia MOST commonly presents with which of the following clinical features?",
+        options: [
+            "Gradual onset",
+            "Dry cough",
+            "Uni/bilateral patchy infiltrates",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Pneumonia) - Medium",
+        explanation: "Atypical pneumonia is characterized by a gradual onset, dry cough, afebrile presentation, and patchy infiltrates on CXR."
+    },
+    {
+        question: "Aspiration pneumonia is caused by mixed flora. The MOST common organisms/elements involved are:",
+        options: [
+            "Mouth anaerobes (Peptostreptococcus spp)",
+            "Enterobacterium",
+            "Stomach contents",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Pneumonia) - Medium",
+        explanation: "Aspiration pneumonia involves mixed flora including mouth anaerobes, stomach contents, and enterobacterium."
+    },
+    {
+        question: "In the treatment of Community Acquired Pneumonia (CAP), antibiotics should ideally be started INITIALLY within:",
+        options: [
+            "1 hour",
+            "2 hours",
+            "6 hours",
+            "None of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Pneumonia) - Hard",
+        explanation: "None of the above. Antibiotics for CAP should ideally be started promptly within 4 hours."
+    },
+    {
+        question: "Guidelines recommend which of the following broad-spectrum antibiotics for hospitalized patients with HAP?",
+        options: [
+            "Piperacillin-tazobactam (TZP)",
+            "Carbapenems",
+            "Oral Amoxicillin",
+            "Both A & B"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Pneumonia) - Medium",
+        explanation: "For Hospital Acquired Pneumonia (HAP), guidelines specifically recommend broad-spectrum antibiotics like piperacillin-tazobactam and carbapenems."
+    },
+    {
+        question: "Which of the following organisms typically causes secondary infection on top of a viral disease, especially in immunosuppressed or splenectomy patients?",
+        options: [
+            "Streptococcus pneumoniae",
+            "Legionella pneumophila",
+            "Haemophilus influenzae",
+            "Both A & C"
+        ],
+        answer: 2,
+        tag: "Tricky Challenge (Pneumonia) - Hard",
+        explanation: "Haemophilus influenzae is specifically known to cause secondary infections on top of viral diseases, especially in patients with immunosuppression or splenectomy."
+    },
+    {
+        question: "For Penicillin-resistant pneumonia, the MOST common alternative treatment of choice is:",
+        options: [
+            "Ceftriaxone",
+            "Azithromycin 500mg twice daily",
+            "Levofloxacin",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Pneumonia) - Hard",
+        explanation: "The direct treatment mentioned for penicillin-resistant pneumonia is Azithromycin 500mg twice daily."
+    },
+    {
+        question: "Complications of pneumonia include which of the following?",
+        options: [
+            "Bacteremia",
+            "Empyema and abscess",
+            "Respiratory and circulatory failure",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Pneumonia) - Medium",
+        explanation: "All of the listed options (bacteremia, respiratory/circulatory failure, empyema, abscess, and pleural effusion) are severe complications of pneumonia."
+    },
+    {
+        question: "Pneumococcal pneumonia may present atypically with confusion or delirium as an INITIAL manifestation MOST commonly in which group?",
+        options: [
+            "Pediatric patients",
+            "Pregnant women",
+            "Older adults",
+            "Both A & C"
+        ],
+        answer: 2,
+        tag: "Tricky Challenge (Pneumonia) - Medium",
+        explanation: "In older adults, pneumococcal pneumonia often presents atypically, where confusion or delirium might be the only initial manifestation."
+    },
+    {
+        question: "The single MOST strong risk factor for the progression of a latent TB infection to active TB is:",
+        options: [
+            "Diabetes mellitus",
+            "Smoking",
+            "HIV infection",
+            "None of the above"
+        ],
+        answer: 2,
+        tag: "Tricky Challenge (TB) - Hard",
+        explanation: "While diabetes and smoking are risk factors, HIV infection is explicitly stated as the single strongest risk factor for progression to active TB."
+    },
+    {
+        question: "In Primary TB, the inhaled bacilli are engulfed by alveolar macrophages, but they INITIALY:",
+        options: [
+            "Die immediately due to the acidic environment",
+            "Survive and multiply within the macrophages",
+            "Migrate directly to the brain",
+            "Both A & C"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (TB) - Medium",
+        explanation: "In the primary focus, bacilli are engulfed by alveolar macrophages but they survive and multiply rather than being immediately destroyed."
+    },
+    {
+        question: "The standard intensive phase regimen (HRZE) for treating drug-sensitive TB lasts for EXACTLY:",
+        options: [
+            "2 months",
+            "4 months",
+            "6-9 months",
+            "None of the above"
+        ],
+        answer: 0,
+        tag: "Tricky Challenge (TB) - Medium",
+        explanation: "The intensive phase specifically lasts for 2 months, followed by the continuation phase which lasts for 4 months."
+    },
+    {
+        question: "Which of the following is/are considered the MOST common systemic symptom(s) of active secondary TB?",
+        options: [
+            "Fever with an evening rise",
+            "Drenching night sweats",
+            "Weight loss and anorexia",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (TB) - Medium",
+        explanation: "Fever (evening rise), drenching night sweats, weight loss, and anorexia are all classic, common systemic symptoms of active TB."
+    },
+    {
+        question: "The unique mycolic acid cell wall of Mycobacterium tuberculosis is NOT responsible for which of the following?",
+        options: [
+            "Its virulence",
+            "Its resistance to drying and many disinfectants",
+            "Its ability to survive inside immune cells",
+            "Its strict anaerobic nature"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (TB) - Hard",
+        explanation: "The cell wall is responsible for virulence, resistance to drying, and survival inside cells. However, TB is a strict aerobe, not an anaerobe."
+    },
+    {
+        question: "Which of the following tests provides rapid results, is relatively cheap, but is NOT known for high sensitivity in diagnosing TB?",
+        options: [
+            "GeneXpert MTB/RIF",
+            "Solid and Liquid Culture",
+            "Sputum Smear Microscopy (Ziehl-Neelsen stain)",
+            "Both A & C"
+        ],
+        answer: 2,
+        tag: "Tricky Challenge (TB) - Medium",
+        explanation: "Sputum smear microscopy is rapid and cheap but specifically noted to have low sensitivity compared to GeneXpert or Culture."
+    },
+    {
+        question: "Which of the following side effects is MOST uniquely associated with Rifampin rather than other first-line anti-TB drugs?",
+        options: [
+            "Peripheral neuropathy",
+            "Optic neuropathy",
+            "Brown urine",
+            "Both A & B"
+        ],
+        answer: 2,
+        tag: "Tricky Challenge (TB) - Hard",
+        explanation: "Brown urine is a distinct side effect of Rifampin. Peripheral neuropathy is associated with Isoniazid, and optic neuropathy with Ethambutol."
+    },
+    {
+        question: "To prevent the spread of active TB, a patient should ideally practice which of the following ONLY?",
+        options: [
+            "Cover their mouth when coughing",
+            "Wear a mask and keep the space ventilated",
+            "Sleep in a separate room",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (TB) - Easy",
+        explanation: "All these measures (covering mouth, wearing a mask, ventilating, and sleeping in a separate room) are required to prevent spreading active TB."
+    },
+    {
+        question: "A person can get infected with Tuberculosis ONLY if they:",
+        options: [
+            "Share food and utensils with a sick patient",
+            "Come into airborne contact with infectious droplet nuclei from a patient",
+            "Touch the bed sheets of a TB patient",
+            "Both A & C"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (TB) - Medium",
+        explanation: "TB is ONLY transmitted via airborne droplet nuclei. It is not transmitted by sharing food, utensils, or touching bed sheets."
+    },
+    {
+        question: "The BCG vaccine is MOST commonly administered to:",
+        options: [
+            "Adults with latent TB",
+            "Children in countries where TB is common",
+            "Healthcare workers with active TB",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (TB) - Easy",
+        explanation: "The BCG vaccine is often given to children in countries where TB is common to prevent severe forms of the disease."
+    },
+    {
+        question: "The paroxysmal attacks characteristic of bronchial asthma consist ONLY of:",
+        options: [
+            "Dyspnea and dry cough",
+            "Dyspnea, cough, and wheezing",
+            "Wheezing and hemoptysis",
+            "Both A & B"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Asthma) - Medium",
+        explanation: "Asthma attacks are defined by the paroxysmal triad of dyspnea, cough, and wheezing."
+    },
+    {
+        question: "Which of the following is/are considered the INITIAL environmental triggers for asthma?",
+        options: [
+            "Tobacco smoke",
+            "Air pollution",
+            "Cold air",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Asthma) - Easy",
+        explanation: "Tobacco smoke, air pollution, and cold air are all well-established environmental factors that trigger asthma."
+    },
+    {
+        question: "Exercise-induced asthma is categorized primarily under which of the following risk factors?",
+        options: [
+            "Infection",
+            "An activity",
+            "Hormonal",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Asthma) - Medium",
+        explanation: "Exercise is defined explicitly as 'an activity' risk factor causing exercise-induced asthma."
+    },
+    {
+        question: "During the pathogenesis of asthma, smooth muscle spasms INITIALY cause:",
+        options: [
+            "Subepithelial fibrosis",
+            "Rapid narrowing of the airway",
+            "Goblet cell hyperplasia",
+            "Both A & C"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Asthma) - Medium",
+        explanation: "Smooth muscle spasms cause bronchoconstriction, which is the rapid narrowing of the airway. Fibrosis and hyperplasia are part of chronic airway remodeling."
+    },
+    {
+        question: "Microvascular leakage in asthma leads MOST directly to:",
+        options: [
+            "Bronchoconstriction",
+            "Edema and exudate",
+            "Airway hyper-responsiveness",
+            "All of the above"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Asthma) - Hard",
+        explanation: "Microvascular leakage specifically causes edema and exudate in the airway tissues."
+    },
+    {
+        question: "Atopic asthma is another name for which of the following?",
+        options: [
+            "Intrinsic asthma",
+            "Extrinsic asthma",
+            "Exercise-induced asthma",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Asthma) - Medium",
+        explanation: "Extrinsic asthma, caused by exogenous allergens, is also known as atopic asthma."
+    },
+    {
+        question: "In asthma diagnosis, measuring FEV1 and FVC using Spirometry is considered:",
+        options: [
+            "An unreliable method in adults",
+            "The gold standard",
+            "Secondary to chest X-rays",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Asthma) - Easy",
+        explanation: "Spirometry is considered the gold standard for diagnosing asthma by measuring FEV1 and FVC."
+    },
+    {
+        question: "A chest X-ray showing hyperinflation is typically seen ONLY in:",
+        options: [
+            "Mild cases of asthma",
+            "Moderate cases of asthma",
+            "Severe cases of asthma",
+            "Both A & B"
+        ],
+        answer: 2,
+        tag: "Tricky Challenge (Asthma) - Medium",
+        explanation: "Normal X-rays are seen in mild and moderate cases. Hyperinflation is a finding in severe cases of asthma."
+    },
+    {
+        question: "Short-Acting B2-Agonists (SABA) like Albuterol are prescribed PRIMARILY for:",
+        options: [
+            "Long-term prevention of airway remodeling",
+            "Rapid relief during acute symptoms",
+            "Reversing subepithelial fibrosis",
+            "All of the above"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Asthma) - Medium",
+        explanation: "SABA inhalers are short-term relievers used specifically for rapid rescue during acute asthma symptoms."
+    },
+    {
+        question: "Which of the following medications functions ONLY by stabilizing and preventing the release of mediators from mast cells?",
+        options: [
+            "Montelukast",
+            "Sodium cromoglycate (Intal)",
+            "Phenergan",
+            "Both B & C"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Asthma) - Hard",
+        explanation: "Sodium cromoglycate (Intal) is the specific medication that stabilizes and prevents mediator release from mast cells."
+    },
+    {
+        question: "The INITIAL definition of Pneumonia involves an alveolar infection that leads to:",
+        options: [
+            "Chronic airway remodeling",
+            "Consolidation and alveolar filling with fluid",
+            "Spontaneous pneumothorax",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Pneumonia) - Medium",
+        explanation: "Pneumonia is an alveolar infection that causes consolidation and fills the alveoli with fluid (exudation)."
+    },
+    {
+        question: "The MOST common causative typical organism for Community Acquired Pneumonia (CAP) is:",
+        options: [
+            "Haemophilus influenzae",
+            "Staphylococcus aureus",
+            "Streptococcus pneumoniae",
+            "Both A & C"
+        ],
+        answer: 2,
+        tag: "Tricky Challenge (Pneumonia) - Medium",
+        explanation: "Streptococcus pneumoniae is the most common single cause of CAP."
+    },
+    {
+        question: "Aspiration pneumonia in patients with stroke or bulbar palsies is MOST commonly caused by:",
+        options: [
+            "Typical aerosolized viruses",
+            "Mixed flora including mouth anaerobes and stomach contents",
+            "Pure Gram-positive diplococci",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Pneumonia) - Hard",
+        explanation: "Aspiration pneumonia is caused by aspirating colonized secretions, leading to infection by mixed flora such as mouth anaerobes and stomach contents."
+    },
+    {
+        question: "For low-to-moderate Community Acquired Pneumonia (CAP), the recommended antibiotic duration is EXACTLY:",
+        options: [
+            "3 days",
+            "7 days",
+            "10-14 days",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Pneumonia) - Hard",
+        explanation: "Antibiotics should be continued for 7 days for low-to-moderate CAP."
+    },
+    {
+        question: "Which of the following is the INITIAL treatment of choice for penicillin-resistant pneumonia?",
+        options: [
+            "Oral Amoxicillin",
+            "Piperacillin-tazobactam",
+            "Azithromycin 500mg twice daily",
+            "Both B & C"
+        ],
+        answer: 2,
+        tag: "Tricky Challenge (Pneumonia) - Hard",
+        explanation: "The specific indicated treatment for penicillin-resistant pneumonia is Azithromycin 500mg twice daily."
+    },
+    {
+        question: "A typical chest X-ray finding for pneumococcal pneumonia caused by Streptococcus pneumoniae is ONLY:",
+        options: [
+            "Bilateral patchy infiltrates",
+            "Hyperinflation without consolidation",
+            "Lobar infiltrate",
+            "Both A & B"
+        ],
+        answer: 2,
+        tag: "Tricky Challenge (Pneumonia) - Medium",
+        explanation: "Streptococcus pneumoniae typically shows a classic lobar infiltrate on a CXR."
+    },
+    {
+        question: "Atypical pneumonia MOST commonly begins with which of the following initial presentations?",
+        options: [
+            "Sudden onset of rigors",
+            "Gradual onset with a dry cough",
+            "Productive cough with mucopurulent sputum",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Pneumonia) - Medium",
+        explanation: "Atypical pneumonia is characterized by a gradual onset and a dry cough, in contrast to the sudden onset of typical pneumonia."
+    },
+    {
+        question: "Which of the following is/are considered severe complications of pneumonia?",
+        options: [
+            "Bacteremia",
+            "Pleural effusion and Empyema",
+            "Respiratory and circulatory failure",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Tricky Challenge (Pneumonia) - Easy",
+        explanation: "All listed options (bacteremia, parapneumonic effusion, empyema, and respiratory/circulatory failure) are major complications of pneumonia."
+    },
+    {
+        question: "Pneumonia in immunocompromised patients is NOTABLY caused by:",
+        options: [
+            "Highly virulent hospital superbugs only",
+            "Unusual pathogens that otherwise have limited virulence",
+            "Pathogens that only cause disease in children",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Pneumonia) - Medium",
+        explanation: "In immunocompromised patients, pneumonia is often caused by unusual pathogens that typically have limited virulence in healthy people."
+    },
+    {
+        question: "To establish the diagnosis of pneumonia, the MOST critical initial imaging step is demonstrating infiltrates on:",
+        options: [
+            "An ECG",
+            "A Chest X-ray",
+            "Spirometry graphs",
+            "Both B & C"
+        ],
+        answer: 1,
+        tag: "Tricky Challenge (Pneumonia) - Easy",
+        explanation: "A Chest X-ray (CXR) is the standard imaging study used to demonstrate infiltrates and establish the diagnosis of pneumonia."
+    }
+],
+
+'internal_mid_simulator': [
+    {
+        question: "A 45-year-old patient presents with a chronic productive cough, hemoptysis, and an evening rise in temperature. Chest X-ray reveals cavitations in the upper lobes. What is the most likely diagnosis?",
+        options: [
+            "Primary Pulmonary Tuberculosis",
+            "Secondary Pulmonary Tuberculosis",
+            "Atypical Pneumonia",
+            "Bronchial Asthma"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (TB) - Hard",
+        explanation: "The combination of chronic productive cough, hemoptysis, evening fever, and upper lobe cavitations is the classic clinical presentation of Secondary (Active) TB."
+    },
+    {
+        question: "Epidemiological and social determinants that increase the risk of Tuberculosis include:",
+        options: [
+            "Close contact with an infectious TB patient",
+            "Living or working in congregate settings like prisons",
+            "Poverty, overcrowding, and inadequate healthcare access",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (TB) - Easy",
+        explanation: "TB is a disease of poverty and inequality; all the listed factors are major social and epidemiological determinants."
+    },
+    {
+        question: "The unique cell wall of Mycobacterium tuberculosis, which makes it resistant to drying and many disinfectants, is rich in:",
+        options: [
+            "Peptidoglycan",
+            "Mycolic acid",
+            "Phospholipids",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (TB) - Medium",
+        explanation: "The lipid-rich mycolic acid cell wall is the key to the virulence and resistance of the Mycobacterium tuberculosis complex."
+    },
+    {
+        question: "All of the following are well-recognized side effects of Isoniazid (INH), EXCEPT:",
+        options: [
+            "Peripheral neuropathy",
+            "Optic neuropathy",
+            "Upset stomach and vomiting",
+            "Increase in hepatic enzymes"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (TB) - Medium",
+        explanation: "Optic neuropathy is the classic and most common side effect of Ethambutol, not Isoniazid."
+    },
+    {
+        question: "The GeneXpert MTB/RIF test is considered a revolution in TB diagnosis because it rapidly detects:",
+        options: [
+            "TB DNA",
+            "Rifampicin resistance",
+            "Both A & B",
+            "Latent TB antibodies only"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (TB) - Medium",
+        explanation: "GeneXpert is a Nucleic Acid Amplification Test (NAAT) that detects both TB DNA and rifampicin resistance within 2 hours."
+    },
+    {
+        question: "Which of the following is NOT true regarding Primary Tuberculosis?",
+        options: [
+            "It is the first stage of the infection.",
+            "It typically presents with severe drenching night sweats and hemoptysis.",
+            "It is characterized by the formation of the Ghon complex.",
+            "It usually has no clinical symptoms."
+        ],
+        answer: 1,
+        tag: "Mid Simulator (TB) - Hard",
+        explanation: "Primary TB is usually asymptomatic. Severe symptoms like drenching night sweats and hemoptysis are characteristic of Secondary (Active) TB."
+    },
+    {
+        question: "A patient on a standard 4-drug TB regimen complains of their urine turning a brown/orange color. Which drug is the most likely cause?",
+        options: [
+            "Isoniazid",
+            "Rifampin",
+            "Pyrazinamide",
+            "Ethambutol"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (TB) - Medium",
+        explanation: "Brown or discolored urine is a known specific side effect of Rifampin."
+    },
+    {
+        question: "The continuation phase of the standard drug-sensitive TB regimen involves the use of ONLY:",
+        options: [
+            "Isoniazid and Pyrazinamide",
+            "Rifampicin and Ethambutol",
+            "Isoniazid and Rifampicin",
+            "Pyrazinamide and Ethambutol"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (TB) - Easy",
+        explanation: "The continuation phase lasts for 4 months and consists only of Isoniazid and Rifampicin (HR)."
+    },
+    {
+        question: "What is the single strongest risk factor for the progression from a latent TB infection to active TB disease?",
+        options: [
+            "Smoking",
+            "Diabetes mellitus",
+            "HIV infection",
+            "Malnutrition"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (TB) - Hard",
+        explanation: "While all options are risk factors, HIV infection is explicitly identified as the single strongest risk factor for progression to active TB."
+    },
+    {
+        question: "The 'Ghon Complex' formed during Primary TB pathology consists of:",
+        options: [
+            "Ghon focus + involved hilar lymph nodes",
+            "Apical cavitations + fibrotic scars",
+            "Pleural effusion + middle lobe infiltrate",
+            "None of the above"
+        ],
+        answer: 0,
+        tag: "Mid Simulator (TB) - Medium",
+        explanation: "The Ghon Complex is the specific combination of a pulmonary focus (Ghon focus) and regional hilar or mediastinal lymphadenopathy."
+    },
+    {
+        question: "A 22-year-old female complains of episodic shortness of breath, chest tightness, and a high-pitched whistling sound during breathing, typically worsening at night. Spirometry shows reversibility. What is the diagnosis?",
+        options: [
+            "Status Asthmaticus",
+            "Bronchial Asthma",
+            "Atypical Pneumonia",
+            "Primary TB"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (Asthma) - Easy",
+        explanation: "Episodic dyspnea, wheezing (whistling sound), chest tightness worsening at night, and spirometry reversibility are classic for Bronchial Asthma."
+    },
+    {
+        question: "The complex pathophysiology of bronchial asthma involves which of the following mechanisms?",
+        options: [
+            "Chronic inflammation and airway remodeling",
+            "Bronchoconstriction and smooth muscle spasms",
+            "Both A & B",
+            "Alveolar consolidation"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (Asthma) - Medium",
+        explanation: "Asthma pathophysiology includes chronic inflammation, airway remodeling, bronchoconstriction, and hyper-responsiveness."
+    },
+    {
+        question: "Risk factors and triggers known to precipitate asthma attacks include all of the following, EXCEPT:",
+        options: [
+            "Viral respiratory infections",
+            "Aspirin and penicillin",
+            "High-protein diets (e.g., meat)",
+            "Cold air and tobacco smoke"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (Asthma) - Easy",
+        explanation: "Dietary triggers include egg, fish, and milk. High-protein meat diets are not listed as asthma triggers."
+    },
+    {
+        question: "Severe cases of bronchial asthma might display which of the following clinical or investigational findings?",
+        options: [
+            "Hyperinflation on Chest X-ray",
+            "ST segment depression on ECG",
+            "T wave inversion on ECG",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (Asthma) - Hard",
+        explanation: "In severe asthma, CXR shows hyperinflation, and ECG can show ST segment depression and T wave inversion."
+    },
+    {
+        question: "Which of the following is NOT a characteristic of Short-Acting B2-Agonists (SABA) like Albuterol?",
+        options: [
+            "They are used as short-term relievers.",
+            "They provide rapid relief of symptoms.",
+            "They act as long-term preventers to reduce chronic inflammation.",
+            "They are considered rescue inhalers."
+        ],
+        answer: 2,
+        tag: "Mid Simulator (Asthma) - Medium",
+        explanation: "SABAs are short-term rescue inhalers. Inhaled Corticosteroids (ICS) are the long-term preventers that reduce inflammation."
+    },
+    {
+        question: "A patient presents to the ER with a severe, progressive asthma attack that has persisted for 8 hours despite maximum bronchodilator therapy. What is the medical term for this condition?",
+        options: [
+            "Intrinsic Asthma",
+            "Exercise-induced Asthma",
+            "Status Asthmaticus",
+            "Spontaneous Pneumothorax"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (Asthma) - Hard",
+        explanation: "Status Asthmaticus is defined as a severe, prolonged attack persisting for more than 6 hours despite all standard asthma therapy."
+    },
+    {
+        question: "Which of the following medications stabilizes mast cells and prevents the release of inflammatory mediators?",
+        options: [
+            "Montelukast",
+            "Sodium cromoglycate (Intal)",
+            "Phenergan",
+            "Periactin"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (Asthma) - Medium",
+        explanation: "Sodium cromoglycate (Intal) works specifically by stabilizing mast cells and preventing mediator release."
+    },
+    {
+        question: "In mild and moderate cases of asthma, the ECG typically shows ONLY:",
+        options: [
+            "Atrial fibrillation",
+            "Sinus tachycardia",
+            "T wave inversion",
+            "ST segment elevation"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (Asthma) - Medium",
+        explanation: "Mild and moderate asthma cases typically show sinus tachycardia on an ECG. T wave inversion is seen in severe cases."
+    },
+    {
+        question: "Intrinsic asthma is defined by the presence of:",
+        options: [
+            "Exogenous allergens like pollen",
+            "Endogenous allergens like a septic focus",
+            "Occupational chemicals only",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (Asthma) - Hard",
+        explanation: "If the allergen is endogenous (e.g., a septic focus), the asthma is called intrinsic."
+    },
+    {
+        question: "Spirometry is the gold standard for asthma diagnosis. Reversibility is defined as an increase in FEV1 by:",
+        options: [
+            "> 10% and > 150 mL",
+            "> 12% and > 200 mL",
+            "> 15% and > 250 mL",
+            "> 20% and > 300 mL"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (Asthma) - Hard",
+        explanation: "Reversibility after bronchodilator use is strictly defined as an FEV1 increase of > 12% AND > 200 mL."
+    },
+    {
+        question: "A 75-year-old man is admitted with sudden confusion and delirium. Auscultation reveals localized bronchial breath sounds. CXR shows lobar consolidation. What is the most likely diagnosis?",
+        options: [
+            "Atypical Pneumonia",
+            "Pneumococcal Pneumonia",
+            "Hospital Acquired Pneumonia",
+            "Aspiration Pneumonia"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (Pneumonia) - Hard",
+        explanation: "Pneumococcal pneumonia may present atypically in older adults with confusion/delirium. Lobar consolidation is a classic sign of Streptococcus pneumoniae."
+    },
+    {
+        question: "Atypical pneumonia is commonly characterized by which of the following clinical features?",
+        options: [
+            "Gradual onset and dry cough",
+            "Afebrile presentation and patchy infiltrates",
+            "Sore throat, myalgia, and fatigue",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (Pneumonia) - Medium",
+        explanation: "Atypical pneumonia presents gradually with a dry cough, lacks high fever, shows patchy infiltrates, and often includes systemic symptoms like myalgia."
+    },
+    {
+        question: "All of the following are major complications of pneumonia, EXCEPT:",
+        options: [
+            "Bacteremia",
+            "Empyema and lung abscess",
+            "Spontaneous pneumothorax",
+            "Respiratory and circulatory failure"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (Pneumonia) - Medium",
+        explanation: "Spontaneous pneumothorax is a complication of asthma and emphysema. Pneumonia complications include bacteremia, empyema, abscess, and respiratory failure."
+    },
+    {
+        question: "Hospital Acquired Pneumonia (HAP) is typically caused by:",
+        options: [
+            "Gram-negative enterobacteria",
+            "Staphylococcus aureus",
+            "Both A & B",
+            "Mycoplasma pneumoniae"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (Pneumonia) - Medium",
+        explanation: "HAP is commonly caused by Gram-negative enterobacteria or Staphylococcus aureus, often due to micro aspiration in seriously ill patients."
+    },
+    {
+        question: "Which statement is NOT correct regarding Aspiration Pneumonia?",
+        options: [
+            "It is caused by aspirating colonized upper respiratory tract secretions.",
+            "It is frequently seen in stroke patients or those with impaired consciousness.",
+            "It is usually caused by a single typical organism like Streptococcus pneumoniae.",
+            "It involves mixed flora including mouth anaerobes and stomach contents."
+        ],
+        answer: 2,
+        tag: "Mid Simulator (Pneumonia) - Hard",
+        explanation: "Aspiration pneumonia is caused by mixed flora (anaerobes, stomach contents, enterobacterium), not a single typical organism."
+    },
+    {
+        question: "A patient is diagnosed with penicillin-resistant pneumonia. According to the standard treatment protocols, which of the following is the recommended treatment?",
+        options: [
+            "Oral Amoxicillin",
+            "Piperacillin-tazobactam (TZP)",
+            "Azithromycin 500mg twice daily",
+            "None of the above"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (Pneumonia) - Hard",
+        explanation: "The specific indicated treatment for penicillin-resistant pneumonia is Azithromycin 500mg twice daily."
+    },
+    {
+        question: "Streptococcus pneumoniae, the most common cause of CAP, is microscopically described as ONLY:",
+        options: [
+            "Gram-negative nonmotile rods",
+            "Gram-positive diplococci",
+            "Acid-fast bacilli",
+            "Gram-negative diplococci"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (Pneumonia) - Easy",
+        explanation: "Streptococcus pneumoniae is microscopically characterized strictly as Gram-positive diplococci."
+    },
+    {
+        question: "According to treatment guidelines, antibiotics for low-to-moderate Community Acquired Pneumonia (CAP) should ideally be started within 4 hours and continued for:",
+        options: [
+            "3 days",
+            "5 days",
+            "7 days",
+            "14 days"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (Pneumonia) - Medium",
+        explanation: "Antibiotics for low-to-moderate CAP should be continued for exactly 7 days."
+    },
+    {
+        question: "Which of the following investigations is considered the primary step to establish the diagnosis of pneumonia by demonstrating lung infiltrates?",
+        options: [
+            "Chest X-ray (CXR)",
+            "Sputum gram stain",
+            "Blood culture",
+            "CBC with differential"
+        ],
+        answer: 0,
+        tag: "Mid Simulator (Pneumonia) - Easy",
+        explanation: "A Chest X-ray is the initial and primary imaging required to demonstrate infiltrates and establish the diagnosis of pneumonia."
+    },
+    {
+        question: "Haemophilus influenzae is known to cause secondary pneumonia infections on top of viral diseases, particularly in patients with:",
+        options: [
+            "Hypertension",
+            "Splenectomy or immunosuppression",
+            "Peptic ulcer disease",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (Pneumonia) - Hard",
+        explanation: "Haemophilus influenzae often causes secondary infections in vulnerable patients, specifically those with immunosuppression or who have undergone a splenectomy."
+    },
+    {
+        question: "A 35-year-old male with HIV presents with a 3-week history of an evening rise in temperature, drenching night sweats, and weight loss. Sputum smear is positive for AFB. Which of the following drugs is the most common cause of hepatotoxicity in his standard 4-drug intensive regimen?",
+        options: [
+            "Isoniazid",
+            "Ethambutol",
+            "Pyrazinamide",
+            "Streptomycin"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (TB) - Hard",
+        explanation: "The clinical case describes active secondary TB. In the intensive phase (HRZE), Pyrazinamide is explicitly noted as having hepatotoxicity as its most common side effect."
+    },
+    {
+        question: "Primary Pulmonary Tuberculosis is pathologically characterized by the formation of the Ghon Complex, which includes:",
+        options: [
+            "A Ghon focus in a subpleural area",
+            "Involved regional hilar or mediastinal lymph nodes",
+            "Upper lobe cavitations",
+            "Both A & B"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (TB) - Medium",
+        explanation: "The Ghon Complex is strictly defined as the combination of the Ghon focus (subpleural pulmonary focus) and the involved regional hilar or mediastinal lymph nodes."
+    },
+    {
+        question: "Which of the following is NOT a true statement regarding the Mycobacterium tuberculosis complex?",
+        options: [
+            "It is an acid-fast bacillus (AFB).",
+            "It is a strict anaerobe.",
+            "Its lipid-rich mycolic acid cell wall is key to its virulence.",
+            "It can survive inside immune cells."
+        ],
+        answer: 1,
+        tag: "Mid Simulator (TB) - Easy",
+        explanation: "Mycobacterium tuberculosis is a strict aerobe, not an anaerobe."
+    },
+    {
+        question: "Which of the following diagnostic methods is considered the gold standard for TB diagnosis and drug susceptibility testing (DST), despite taking 2-8 weeks?",
+        options: [
+            "Sputum Smear Microscopy",
+            "GeneXpert MTB/RIF",
+            "Culture (solid vs. liquid)",
+            "Tuberculin skin testing"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (TB) - Medium",
+        explanation: "Culture is explicitly defined in the text as the gold standard for diagnosis and DST, taking 2-8 weeks."
+    },
+    {
+        question: "All of the following statements are true regarding Tuberculosis testing, EXCEPT:",
+        options: [
+            "The skin test is called the Mantoux tuberculin skin test.",
+            "The skin test is examined for induration after 48-72 hours.",
+            "The blood test is called an interferon-gamma release assay (IGRA).",
+            "The skin test measures the response of TB proteins mixed with a small amount of your blood."
+        ],
+        answer: 3,
+        tag: "Mid Simulator (TB) - Hard",
+        explanation: "Mixing TB proteins with a small amount of blood describes the IGRA blood test, not the skin test (which involves injecting fluid into the skin)."
+    },
+    {
+        question: "A weakened immune system heavily stacks the odds in the TB bacterium's favor. Which of the following conditions contribute(s) to this?",
+        options: [
+            "Diabetes mellitus",
+            "Chronic kidney disease",
+            "Malignancies and immunosuppressive therapy",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (TB) - Easy",
+        explanation: "All listed options (Diabetes, CKD, and Malignancies/immunosuppressives) are immune-weakening risk factors for TB."
+    },
+    {
+        question: "A patient on standard anti-TB therapy develops numbness and tingling in his hands and feet. This peripheral neuropathy is primarily caused by a decrease in:",
+        options: [
+            "Hepatic enzymes",
+            "Pyridoxine level",
+            "Mycolic acid",
+            "Interferon-gamma"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (TB) - Medium",
+        explanation: "Isoniazid causes peripheral neuropathy specifically because it lowers the pyridoxine (Vitamin B6) level."
+    },
+    {
+        question: "The standard continuation phase of treatment for drug-sensitive TB involves ONLY which of the following medications?",
+        options: [
+            "Isoniazid and Rifampicin",
+            "Pyrazinamide and Ethambutol",
+            "Isoniazid, Rifampicin, and Pyrazinamide",
+            "Rifampicin only"
+        ],
+        answer: 0,
+        tag: "Mid Simulator (TB) - Easy",
+        explanation: "The continuation phase (4 months) consists solely of two drugs: Isoniazid and Rifampicin (HR)."
+    },
+    {
+        question: "The single strongest risk factor for the progression of a latent infection to active TB is:",
+        options: [
+            "Smoking",
+            "Malnutrition",
+            "HIV infection",
+            "Alcohol use disorder"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (TB) - Medium",
+        explanation: "HIV infection is specifically noted as the single strongest risk factor for progression to active TB."
+    },
+    {
+        question: "Epidemiological and social determinants that increase the risk of Tuberculosis include all of the following, EXCEPT:",
+        options: [
+            "Living in congregate settings like prisons",
+            "Origin from high TB-burden countries",
+            "Poverty and inadequate healthcare access",
+            "High dietary intake of proteins and dairy"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (TB) - Easy",
+        explanation: "High dietary intake of proteins is not a risk factor. TB is a disease of poverty, overcrowding, and congregate settings."
+    },
+    {
+        question: "A 12-year-old boy develops a high-pitched whistling sound, chest tightness, and dyspnea only when he plays soccer. This specific risk factor defines the condition as:",
+        options: [
+            "Extrinsic asthma",
+            "Exercise-induced asthma",
+            "Status Asthmaticus",
+            "Intrinsic asthma"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (Asthma) - Medium",
+        explanation: "Asthma triggered by an activity like exercise is specifically called exercise-induced asthma."
+    },
+    {
+        question: "In the pathophysiology of chronic asthma, airway remodeling leads to which of the following structural changes?",
+        options: [
+            "Goblet cell hyperplasia",
+            "Subepithelial fibrosis",
+            "Smooth muscle hypertrophy",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (Asthma) - Easy",
+        explanation: "Airway remodeling in asthma involves goblet cell hyperplasia, subepithelial fibrosis, smooth muscle hypertrophy, and increased collagen deposition."
+    },
+    {
+        question: "All of the following inflammatory cells are actively involved in the complex interaction causing asthma pathophysiology, EXCEPT:",
+        options: [
+            "Eosinophils",
+            "Mast cells",
+            "T-lymphocytes",
+            "Alveolar macrophages"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (Asthma) - Hard",
+        explanation: "Eosinophils, mast cells, and T-lymphocytes are listed as the primary cells in asthma inflammation. Alveolar macrophages are specifically discussed in TB."
+    },
+    {
+        question: "Regarding chest X-ray findings in a patient with bronchial asthma, which statement is TRUE?",
+        options: [
+            "A normal X-ray excludes the diagnosis of asthma completely.",
+            "Hyperinflation is seen in severe cases.",
+            "Normal X-rays are typically seen in mild and moderate cases.",
+            "Both B & C"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (Asthma) - Medium",
+        explanation: "In asthma, the CXR is normal in mild and moderate cases, while severe cases show hyperinflation."
+    },
+    {
+        question: "The management of Status Asthmaticus requires addressing precipitating factors, which includes:",
+        options: [
+            "Avoiding allergens",
+            "Managing psychological factors",
+            "Giving a suitable antibiotic ONLY if a bacterial infection is suspected",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (Asthma) - Medium",
+        explanation: "Treatment of precipitating factors in Status Asthmaticus involves avoiding allergens, managing psychological factors, and using antibiotics strictly when bacterial infection is suspected."
+    },
+    {
+        question: "Which of the following medications is classified as a Leukotriene Receptor Antagonist (LTRA) used as an alternative or add-on therapy?",
+        options: [
+            "Albuterol",
+            "Montelukast",
+            "Phenergan",
+            "Sodium cromoglycate"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (Asthma) - Hard",
+        explanation: "Montelukast is the anti-leukotriene medication used as an alternative or add-on therapy in asthma."
+    },
+    {
+        question: "Bronchial asthma is classified as 'Intrinsic' ONLY when the triggering allergen is:",
+        options: [
+            "Exogenous (like pollen)",
+            "Endogenous (like a septic focus)",
+            "Pharmacological (like Aspirin)",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (Asthma) - Medium",
+        explanation: "If the allergen is endogenous (e.g., septic focus), the asthma is called intrinsic."
+    },
+    {
+        question: "A pregnant female with a history of asthma reports increased paroxysmal attacks. Hormonal risk factors can precipitate asthma attacks during:",
+        options: [
+            "Pregnancy",
+            "Menstruation",
+            "Menopause",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (Asthma) - Easy",
+        explanation: "Hormonal shifts during pregnancy, menstruation, or menopause are all known to precipitate asthma attacks."
+    },
+    {
+        question: "Major complications associated with bronchial asthma include all of the following, EXCEPT:",
+        options: [
+            "Emphysema and cor pulmonale",
+            "Spontaneous pneumothorax",
+            "Anxiety state",
+            "Lung abscess"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (Asthma) - Medium",
+        explanation: "Lung abscess is a complication of pneumonia. Asthma complications include infections, emphysema (cor pulmonale), pneumothorax, and anxiety."
+    },
+    {
+        question: "The absolute cornerstone of long-term asthma treatment that actively reduces chronic inflammation is:",
+        options: [
+            "Short-Acting B2-Agonists (SABA)",
+            "Inhaled Corticosteroids (ICS)",
+            "Long-Acting B2-Agonists (LABA) as monotherapy",
+            "Magnesium sulfate"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (Asthma) - Easy",
+        explanation: "Inhaled Corticosteroids (ICS) are explicitly stated as the cornerstone of treatment for reducing inflammation."
+    },
+    {
+        question: "An 80-year-old bedridden patient with a history of stroke develops fever, tachypnea, and foul-smelling sputum. Sputum culture shows mixed flora (Peptostreptococcus spp and stomach contents). The most likely diagnosis is:",
+        options: [
+            "Community Acquired Pneumonia (CAP)",
+            "Atypical Pneumonia",
+            "Aspiration Pneumonia",
+            "Pulmonary Tuberculosis"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (Pneumonia) - Hard",
+        explanation: "Stroke history, mixed flora, mouth anaerobes, and stomach contents perfectly describe Aspiration Pneumonia."
+    },
+    {
+        question: "Hospital Acquired Pneumonia (HAP) is most commonly caused by which of the following organisms?",
+        options: [
+            "Gram-negative enterobacteria",
+            "Staphylococcus aureus",
+            "Streptococcus pneumoniae",
+            "Both A & B"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (Pneumonia) - Medium",
+        explanation: "HAP is commonly caused by Gram-negative enterobacteria or Staphylococcus aureus."
+    },
+    {
+        question: "Which of the following clinical features is NOT typical for Atypical Pneumonia?",
+        options: [
+            "Gradual onset",
+            "Dry cough",
+            "Afebrile presentation",
+            "Lobar consolidation on CXR"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (Pneumonia) - Medium",
+        explanation: "Atypical pneumonia typically shows patchy infiltrates (uni/bilateral), not the classic lobar consolidation seen in typical pneumococcal pneumonia."
+    },
+    {
+        question: "Severe complications that can arise from pneumonia include:",
+        options: [
+            "Bacteremia",
+            "Pleural effusion, empyema, and lung abscess",
+            "Respiratory and circulatory failure",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (Pneumonia) - Easy",
+        explanation: "All listed conditions (bacteremia, local pleural complications, and systemic failure) are direct complications of pneumonia."
+    },
+    {
+        question: "Appropriate antibiotic choices for treating aspiration pneumonia in a patient without a toxic appearance include all of the following, EXCEPT:",
+        options: [
+            "Ceftriaxone plus azithromycin",
+            "Levofloxacin",
+            "Moxifloxacin",
+            "Oral Isoniazid"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (Pneumonia) - Hard",
+        explanation: "Oral Isoniazid is an anti-TB drug. The appropriate choices for aspiration pneumonia are Ceftriaxone + azithromycin, levofloxacin, or moxifloxacin."
+    },
+    {
+        question: "The most common typical bacterial organism responsible for Community Acquired Pneumonia (CAP) is:",
+        options: [
+            "Mycoplasma pneumoniae",
+            "Haemophilus influenzae",
+            "Streptococcus pneumoniae",
+            "Legionella pneumophila"
+        ],
+        answer: 2,
+        tag: "Mid Simulator (Pneumonia) - Easy",
+        explanation: "Streptococcus pneumoniae is identified as the single most common cause of CAP."
+    },
+    {
+        question: "For hospitalized patients suffering from Hospital Acquired Pneumonia (HAP), treatment guidelines strongly recommend broad-spectrum antibiotics, specifically:",
+        options: [
+            "Oral Amoxicillin",
+            "Piperacillin-tazobactam (TZP) and carbapenems",
+            "Azithromycin monotherapy",
+            "Rifampicin"
+        ],
+        answer: 1,
+        tag: "Mid Simulator (Pneumonia) - Medium",
+        explanation: "Guidelines recommend piperacillin-tazobactam (TZP) and carbapenems for HAP to cover broad-spectrum pathogens."
+    },
+    {
+        question: "A previously healthy adult presents with a sudden onset of rigors, a productive cough with mucopurulent sputum, and pleuritic chest pain. Auscultation reveals localized crackles (rales). This presentation is characteristic of:",
+        options: [
+            "Typical bacterial pneumonia",
+            "Atypical pneumonia",
+            "Primary Tuberculosis",
+            "Mild Bronchial Asthma"
+        ],
+        answer: 0,
+        tag: "Mid Simulator (Pneumonia) - Medium",
+        explanation: "Sudden onset, rigors, purulent sputum, pleuritic pain, and localized crackles define the classic clinical presentation of typical bacterial pneumonia."
+    },
+    {
+        question: "Regarding Streptococcus pneumoniae, which of the following statements is FALSE?",
+        options: [
+            "It is the most common cause of CAP.",
+            "It typically shows lobar infiltrates on a CXR.",
+            "It is a Gram-negative nonmotile rod.",
+            "It is a Gram-positive diplococci."
+        ],
+        answer: 2,
+        tag: "Mid Simulator (Pneumonia) - Hard",
+        explanation: "Streptococcus pneumoniae is a Gram-positive diplococci. Haemophilus influenzae is the Gram-negative nonmotile rod."
+    },
+    {
+        question: "Haemophilus influenzae is specifically known to cause secondary infections on top of a viral disease. This is most critically seen in patients with:",
+        options: [
+            "Immunosuppression",
+            "Splenectomy",
+            "Diabetes mellitus alone",
+            "Both A & B"
+        ],
+        answer: 3,
+        tag: "Mid Simulator (Pneumonia) - Hard",
+        explanation: "Haemophilus influenzae causes secondary infection particularly in patients with immunosuppression and those who have had a splenectomy."
+    }
+],
+
+'internal_lec1': [
+    {
+        question: "A 35-year-old male presents with a chronic cough and night sweats. His physician suspects an infection by Koch's bacillus. Which of the following describes the nature of this organism?",
+        options: [
+            "Strict anaerobe, gram-positive bacillus",
+            "Strict aerobe, acid-fast bacillus",
+            "Facultative anaerobe, acid-fast bacillus",
+            "Strict aerobe, gram-negative bacillus"
+        ],
+        answer: 1,
+        tag: "Lec 1 (Etiology) - Easy",
+        explanation: "Mycobacterium tuberculosis, also known as Koch's bacillus, is characterized as a strict aerobe and an acid-fast bacillus (AFB)."
+    },
+    {
+        question: "Which of the following unique structural components is primarily responsible for the virulence of Mycobacterium tuberculosis, allowing it to survive inside immune cells and resist drying?",
+        options: [
+            "Thick peptidoglycan layer",
+            "Lipopolysaccharide (LPS) outer membrane",
+            "Lipid-rich mycolic acid cell wall",
+            "Polysaccharide capsule"
+        ],
+        answer: 2,
+        tag: "Lec 1 (Pathogenesis) - Medium",
+        explanation: "The unique, lipid-rich mycolic acid cell wall is the key to its virulence, making it resistant to drying and allowing survival inside macrophages."
+    },
+    {
+        question: "All of the following statements regarding the transmission of Tuberculosis are true, EXCEPT:",
+        options: [
+            "It is transmitted via airborne droplet nuclei.",
+            "Infectious droplets are typically 1-5 microns in size.",
+            "It can be transmitted by sharing food, utensils, or kissing.",
+            "Droplets must be inhaled and reach the alveoli to establish infection."
+        ],
+        answer: 2,
+        tag: "Lec 1 (Transmission) - Medium",
+        explanation: "Tuberculosis is NOT transmitted by kissing, or sharing food, utensils, clothes, bed sheets, towels, or toothbrushes."
+    },
+    {
+        question: "During the pathogenesis of primary TB, bacilli are inhaled and engulfed by alveolar macrophages. What constitutes the 'Ghon Complex'?",
+        options: [
+            "A subpleural primary focus only",
+            "Infected hilar lymph nodes only",
+            "A combination of the Ghon focus and involved hilar lymph nodes",
+            "Apical cavitations with fibrotic scarring"
+        ],
+        answer: 2,
+        tag: "Lec 1 (Pathogenesis) - Hard",
+        explanation: "The Ghon Complex is formed by the combination of the primary subpleural focus (Ghon focus) and the involved draining hilar lymph nodes."
+    },
+    {
+        question: "A 22-year-old patient is diagnosed with Primary Tuberculosis. What is the most likely clinical presentation for this stage of the disease?",
+        options: [
+            "Drenching night sweats and hemoptysis",
+            "Usually asymptomatic",
+            "Chronic productive cough and dyspnea",
+            "High-grade fever with pleuritic chest pain"
+        ],
+        answer: 1,
+        tag: "Lec 1 (Clinical Features) - Easy",
+        explanation: "Primary TB is the first stage of infection and usually presents with no symptoms, unlike Secondary TB which is highly symptomatic."
+    },
+    {
+        question: "Secondary Tuberculosis typically involves which part of the lungs, causing opacities, cavities, or fibrotic scars?",
+        options: [
+            "Lower lobes",
+            "Middle lobe of the right lung",
+            "Upper lobes",
+            "Diffusely across all lobes"
+        ],
+        answer: 2,
+        tag: "Lec 1 (Pathology) - Medium",
+        explanation: "Secondary TB commonly involves the upper lobes, causing opacities, cavities, or fibrotic scars as the germs multiply."
+    },
+    {
+        question: "Which of the following is considered the single strongest risk factor for the progression of latent TB to active tuberculosis?",
+        options: [
+            "Smoking",
+            "Diabetes mellitus",
+            "Silicosis",
+            "HIV infection"
+        ],
+        answer: 3,
+        tag: "Lec 1 (Risk Factors) - Easy",
+        explanation: "According to the lecture, HIV infection is the single strongest risk factor for the progression to active TB due to the severely weakened immune system."
+    },
+    {
+        question: "A patient living in a crowded homeless shelter is evaluated for prolonged cough. Which of the following factors stack the odds in the TB bacterium's favor?",
+        options: [
+            "Living in congregate settings",
+            "Malnutrition",
+            "Alcohol use disorder",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Lec 1 (Risk Factors) - Medium",
+        explanation: "TB is a disease of poverty and inequality. Social factors (congregate settings), immune factors (malnutrition), and behavioral factors (alcohol) all increase TB risk."
+    },
+    {
+        question: "Which of the following statements accurately describes the clinical features of Active Pulmonary TB (Secondary)?",
+        options: [
+            "Fever is often high-grade and peaks in the morning.",
+            "Weight gain and increased appetite are common early signs.",
+            "The chronic cough is initially productive, later becoming dry.",
+            "Systemic symptoms include low-grade evening fever and drenching night sweats."
+        ],
+        answer: 3,
+        tag: "Lec 1 (Clinical Features) - Hard",
+        explanation: "Active Pulmonary TB constitutional symptoms include fever (low-grade, evening rise), drenching night sweats, weight loss, anorexia, and a cough that is initially dry before becoming productive."
+    },
+    {
+        question: "A 45-year-old miner presents with a history of occupational lung disease. Which specific condition increases his risk for developing TB?",
+        options: [
+            "Asbestosis only",
+            "Silicosis only",
+            "Asthma only",
+            "Both Asbestosis and Asthma"
+        ],
+        answer: 1,
+        tag: "Lec 1 (Risk Factors) - Hard",
+        explanation: "Silicosis is specifically identified as an occupational lung disease that acts as a behavioral/other risk factor for Tuberculosis."
+    },
+    {
+        question: "When evaluating a patient with suspected Primary Tuberculosis, what are the classic findings expected on a Chest X-Ray?",
+        options: [
+            "Apical cavitations and posterior segment infiltrates",
+            "Hilar lymphadenopathy and pleural effusion",
+            "Diffuse reticulonodular pattern throughout both lungs",
+            "Total lung collapse and pneumothorax"
+        ],
+        answer: 1,
+        tag: "Lec 1 (Investigations) - Medium",
+        explanation: "Primary TB classic CXR findings include hilar lymphadenopathy, pleural effusion, and infiltrates typically in the middle or lower lobes."
+    },
+    {
+        question: "A physician needs rapid diagnosis and drug resistance profiling for a suspected TB patient. Which test revolutionized TB diagnosis by detecting TB DNA and rifampicin resistance within 2 hours?",
+        options: [
+            "Sputum Smear Microscopy (Ziehl-Neelsen stain)",
+            "Interferon-Gamma Release Assay (IGRA)",
+            "GeneXpert MTB/RIF (NAAT)",
+            "Solid media culture"
+        ],
+        answer: 2,
+        tag: "Lec 1 (Investigations) - Easy",
+        explanation: "Nucleic Acid Amplification Tests (NAAT) like GeneXpert MTB/RIF detect TB DNA and rifampicin resistance within 2 hours from sputum, with high sensitivity."
+    },
+    {
+        question: "Which of the following is TRUE regarding Sputum Smear Microscopy (Ziehl-Neelsen stain) for TB diagnosis?",
+        options: [
+            "It has exceptionally high sensitivity.",
+            "It identifies infectious patients rapidly and cheaply.",
+            "It serves as the gold standard for drug susceptibility testing.",
+            "It requires 2 to 8 weeks to yield results."
+        ],
+        answer: 1,
+        tag: "Lec 1 (Investigations) - Medium",
+        explanation: "Sputum Smear Microscopy is rapid, cheap, and identifies infectious ('smear-positive') patients, but it has low sensitivity. Culture is the gold standard for DST and takes weeks."
+    },
+    {
+        question: "Interferon-gamma release assays (IGRAs) belong to which category of tuberculosis testing?",
+        options: [
+            "Microbiological sputum tests",
+            "Skin testing",
+            "Blood testing",
+            "Radiological imaging"
+        ],
+        answer: 2,
+        tag: "Lec 1 (Investigations) - Easy",
+        explanation: "IGRAs are tuberculosis blood tests that measure the immune response when TB proteins are mixed with a small amount of the patient's blood."
+    },
+    {
+        question: "What is the recommended standard drug-sensitive TB regimen for the Intensive Phase, and how long does it last?",
+        options: [
+            "Isoniazid and Rifampicin for 4 months",
+            "Isoniazid, Rifampicin, Pyrazinamide, and Ethambutol for 2 months",
+            "Isoniazid, Rifampicin, and Pyrazinamide for 6 months",
+            "Rifampicin and Ethambutol for 9 months"
+        ],
+        answer: 1,
+        tag: "Lec 1 (Management) - Medium",
+        explanation: "The Intensive Phase of the standard regimen consists of HRZE (Isoniazid, Rifampicin, Pyrazinamide, Ethambutol) given for 2 months."
+    },
+    {
+        question: "A patient on anti-TB therapy complains of numbness and tingling in his hands and feet. This side effect is primarily caused by which drug, and what is its mechanism?",
+        options: [
+            "Ethambutol; toxicity to the optic nerve",
+            "Rifampicin; accumulation of red-orange metabolites",
+            "Isoniazid; lowering of pyridoxine (Vitamin B6) levels",
+            "Pyrazinamide; elevation of serum uric acid"
+        ],
+        answer: 2,
+        tag: "Lec 1 (Management) - Hard",
+        explanation: "Peripheral neuropathy (numbness and tingling) is a side effect of Isoniazid, caused because it lowers pyridoxine levels in the body."
+    },
+    {
+        question: "Which of the following anti-TB medications is MOST commonly associated with optic neuropathy?",
+        options: [
+            "Isoniazid",
+            "Rifampin",
+            "Pyrazinamide",
+            "Ethambutol"
+        ],
+        answer: 3,
+        tag: "Lec 1 (Management) - Easy",
+        explanation: "Optic neuropathy is listed as the most common side effect associated with the use of Ethambutol."
+    },
+    {
+        question: "A 50-year-old female being treated for active TB notices her urine has turned a brown color and her skin looks slightly yellowish. Which medication in her regimen is the most likely culprit?",
+        options: [
+            "Pyrazinamide",
+            "Rifampin",
+            "Ethambutol",
+            "Isoniazid"
+        ],
+        answer: 1,
+        tag: "Lec 1 (Management) - Medium",
+        explanation: "Rifampin side effects include brown urine, yellowish skin or eyes (jaundice), skin rash, and GI upset."
+    },
+    {
+        question: "Hepatotoxicity is listed as a potential side effect for several anti-TB drugs. According to the lecture, which drug has hepatotoxicity as its MOST COMMON side effect?",
+        options: [
+            "Pyrazinamide",
+            "Ethambutol",
+            "Streptomycin",
+            "Isoniazid"
+        ],
+        answer: 0,
+        tag: "Lec 1 (Management) - Medium",
+        explanation: "While Isoniazid increases hepatic enzymes, hepatotoxicity is specifically highlighted as the 'most common' side effect for Pyrazinamide."
+    },
+    {
+        question: "To ensure adherence to the prolonged 6-9 month tuberculosis treatment, the World Health Organization (WHO) recommends which of the following strategies?",
+        options: [
+            "Monthly inpatient hospitalization",
+            "Directly Observed Therapy, Short-course (DOTS)",
+            "Self-administered daily symptom checklists",
+            "Mandatory genetic testing prior to therapy"
+        ],
+        answer: 1,
+        tag: "Lec 1 (Management) - Easy",
+        explanation: "DOTS (Directly Observed Therapy, Short-course) is the WHO-recommended strategy to ensure medication adherence."
+    },
+    {
+        question: "A patient with active TB is advised on measures to protect their family members. These measures include all of the following EXCEPT:",
+        options: [
+            "Sleeping in a separate room",
+            "Keeping the windows closed to prevent airborne escape to the outside",
+            "Covering the mouth when coughing",
+            "Wearing a mask"
+        ],
+        answer: 1,
+        tag: "Lec 1 (Prevention) - Medium",
+        explanation: "To protect others, a patient should keep their space ventilated and open windows, not close them. Limiting contact, separate sleeping, and masks are recommended."
+    },
+    {
+        question: "Which of the following diagnostic tools is considered the 'Gold Standard' for both diagnosing TB and performing drug susceptibility testing (DST)?",
+        options: [
+            "Sputum Smear Microscopy",
+            "Tuberculin Skin Testing (Mantoux)",
+            "Chest X-Ray",
+            "Culture"
+        ],
+        answer: 3,
+        tag: "Lec 1 (Investigations) - Easy",
+        explanation: "Culture (solid or liquid) is the gold standard for diagnosis and DST, though it can take 2-8 weeks to yield results."
+    },
+    {
+        question: "A patient presents with a cough and chest X-ray showing cavitations in the superior segment of the right lower lobe. The patient claims they quit smoking 5 years ago. Does their smoking history affect their TB risk?",
+        options: [
+            "No, smoking only affects COPD risk, not infectious TB.",
+            "Yes, smoking increases TB risk by 2 to 3 times.",
+            "No, smoking decreases the risk by hyper-stimulating macrophages.",
+            "Yes, but only if combined with an alcohol use disorder."
+        ],
+        answer: 1,
+        tag: "Lec 1 (Risk Factors) - Medium",
+        explanation: "Smoking is a behavioral risk factor that increases the risk of tuberculosis by 2 to 3 times."
+    },
+    {
+        question: "Regarding the Mantoux tuberculin skin test, how long after the injection should the site be examined for induration?",
+        options: [
+            "12-24 hours",
+            "24-48 hours",
+            "48-72 hours",
+            "7 days"
+        ],
+        answer: 2,
+        tag: "Lec 1 (Investigations) - Easy",
+        explanation: "After a technician injects a small amount of fluid into the skin, the injection site is examined for induration after 48-72 hours."
+    },
+    {
+        question: "Which combination of symptoms and X-ray findings heavily suggests a diagnosis of Secondary Pulmonary TB rather than Primary TB?",
+        options: [
+            "Asymptomatic presentation with isolated hilar lymphadenopathy",
+            "Dry cough with normal chest X-ray",
+            "Hemoptysis, night sweats, and upper lobe cavitations",
+            "Both A and B"
+        ],
+        answer: 2,
+        tag: "Lec 1 (Clinical Features) - Hard",
+        explanation: "Secondary TB is highly symptomatic (hemoptysis, night sweats, chronic cough) and typically presents with upper lobe infiltrates or cavitations. Primary TB is usually asymptomatic with hilar lymphadenopathy."
+    }
+],
+
+'internal_lec2': [
+    {
+        question: "Asthma is a chronic inflammatory lung disease characterized by which of the following triads of recurrent breathing problems?",
+        options: [
+            "Continuous dyspnea, productive cough, and stridor",
+            "Paroxysmal attacks of dyspnea, cough, and wheezing",
+            "Progressive dyspnea, hemoptysis, and chest pain",
+            "Paroxysmal attacks of orthopnea, dry cough, and crackles"
+        ],
+        answer: 1,
+        tag: "Lec 2 (Definition) - Easy",
+        explanation: "Asthma is defined as a chronic inflammatory lung disease involving recurrent paroxysmal attacks of dyspnea, cough, and wheezing."
+    },
+    {
+        question: "Which of the following cells is NOT explicitly mentioned in the lecture as being part of the cellular infiltration in the chronic inflammation of asthma?",
+        options: [
+            "Eosinophils",
+            "Neutrophils",
+            "Mast cells",
+            "T-lymphocytes"
+        ],
+        answer: 1,
+        tag: "Lec 2 (Pathogenesis) - Hard",
+        explanation: "The lecture specifically identifies the infiltration of eosinophils, mast cells, and T-lymphocytes in the chronic inflammation process. Neutrophils are not listed."
+    },
+    {
+        question: "A 40-year-old asthmatic patient is informed that his airway has undergone structural changes due to chronic inflammation. All of the following are components of airway remodeling in asthma EXCEPT:",
+        options: [
+            "Goblet cell hyperplasia",
+            "Subepithelial fibrosis",
+            "Smooth muscle atrophy",
+            "Increased collagen deposition"
+        ],
+        answer: 2,
+        tag: "Lec 2 (Pathogenesis) - Medium",
+        explanation: "Airway remodeling involves smooth muscle hypertrophy, not atrophy. It also includes goblet cell hyperplasia, subepithelial fibrosis, and increased collagen deposition."
+    },
+    {
+        question: "Certain medications are known risk factors that can precipitate an asthma attack. According to the lecture, which of the following drug pairs is specifically identified as asthma triggers?",
+        options: [
+            "Paracetamol and Cephalosporins",
+            "Aspirin and Penicillin",
+            "Ibuprofen and Macrolides",
+            "Beta-blockers and Aminoglycosides"
+        ],
+        answer: 1,
+        tag: "Lec 2 (Risk Factors) - Medium",
+        explanation: "The lecture lists aspirin and penicillin under the 'Drugs' category as specific risk factors for triggering asthma."
+    },
+    {
+        question: "A patient develops an asthma exacerbation secondary to a septic focus (such as tonsillitis). How is this type of asthma classified based on the source of the allergen?",
+        options: [
+            "Atopic asthma",
+            "Extrinsic asthma",
+            "Intrinsic asthma",
+            "Occupational asthma"
+        ],
+        answer: 2,
+        tag: "Lec 2 (Types) - Easy",
+        explanation: "If the allergen is endogenous, such as a septic focus inside the body, the asthma is called intrinsic."
+    },
+    {
+        question: "The inflammatory mediators released during an asthma attack are responsible for multiple pathophysiological changes. These mediators cause A & B from the following choices:",
+        options: [
+            "Bronchodilation and mucous hyposecretion",
+            "Bronchoconstriction and microvascular leakage (edema and exudate)",
+            "Decreased bronchial responsiveness and subepithelial fibrosis",
+            "None of the above"
+        ],
+        answer: 1,
+        tag: "Lec 2 (Pathogenesis) - Medium",
+        explanation: "Inflammatory mediators cause bronchoconstriction, microvascular leakage (edema and exudate), mucous hypersecretion, and bronchial hyperresponsiveness."
+    },
+    {
+        question: "A 25-year-old female complains of shortness of breath and a high-pitched whistling sound when she breathes. Which of the following correctly describes the typical pattern of these symptoms?",
+        options: [
+            "They are constant throughout the day and unaffected by time.",
+            "They often come and go, but are typically worse at night or in the early morning.",
+            "They are exclusively triggered by eating dairy products.",
+            "They only occur during the daytime and resolve completely during sleep."
+        ],
+        answer: 1,
+        tag: "Lec 2 (Clinical Features) - Easy",
+        explanation: "Asthma symptoms often come and go and are characteristically worse at night or in the early morning."
+    },
+    {
+        question: "Which of the following is considered a potential complication of bronchial asthma?",
+        options: [
+            "Spontaneous pneumothorax",
+            "Emphysema and its sequela cor pulmonale",
+            "Anxiety state",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Lec 2 (Complications) - Easy",
+        explanation: "Complications of bronchial asthma include infections, emphysema (and cor pulmonale), spontaneous pneumothorax, and anxiety states."
+    },
+    {
+        question: "A patient suspected of having asthma undergoes pulmonary function testing. What is considered the 'gold standard' test for diagnosing asthma?",
+        options: [
+            "Peak Expiratory Flow (PEF)",
+            "Spirometry",
+            "Chest X-ray",
+            "Bronchial Provocation Test"
+        ],
+        answer: 1,
+        tag: "Lec 2 (Investigations) - Easy",
+        explanation: "Spirometry is the gold standard for diagnosis, measuring forced expiratory volume in 1 second (FEV1) and forced vital capacity (FVC)."
+    },
+    {
+        question: "To confirm a diagnosis of asthma via spirometry, reversibility must be demonstrated after administering a bronchodilator. What are the specific criteria for this reversibility?",
+        options: [
+            "An increase in FEV1 by > 10% and > 100 mL",
+            "An increase in FVC by > 15% and > 250 mL",
+            "An increase in FEV1 by > 12% and > 200 mL",
+            "An increase in PEF by > 20%"
+        ],
+        answer: 2,
+        tag: "Lec 2 (Investigations) - Hard",
+        explanation: "Reversibility is strictly defined as an increase in FEV1 by greater than 12% AND greater than 200 mL after the use of a bronchodilator."
+    },
+    {
+        question: "A 30-year-old male with a history of intermittent chest tightness and wheezing has a normal spirometry result during his clinic visit. Which of the following is the most appropriate next step to confirm airway hyperresponsiveness?",
+        options: [
+            "Prescribe oral corticosteroids immediately",
+            "Order an ECG",
+            "Perform a Bronchial Provocation Test",
+            "Schedule a Chest CT scan"
+        ],
+        answer: 2,
+        tag: "Lec 2 (Investigations) - Medium",
+        explanation: "A Bronchial Provocation Test is used to confirm airway hyperresponsiveness if the initial spirometry test results are normal."
+    },
+    {
+        question: "A patient presents to the ER with a severe asthma exacerbation. What findings might be expected on their chest X-ray?",
+        options: [
+            "A completely normal X-ray with no findings",
+            "Extensive fibrotic scarring and cavitations",
+            "Hyperinflation",
+            "Diffuse bilateral infiltrates"
+        ],
+        answer: 2,
+        tag: "Lec 2 (Investigations) - Medium",
+        explanation: "While a chest X-ray is normal in mild to moderate cases, severe cases typically show hyperinflation."
+    },
+    {
+        question: "An ECG is performed on a patient experiencing a severe asthma attack. Which of the following findings is most characteristic of severe cases according to the lecture?",
+        options: [
+            "Sinus bradycardia",
+            "ST segment depression and T wave inversion",
+            "Atrial fibrillation",
+            "Sinus tachycardia only"
+        ],
+        answer: 1,
+        tag: "Lec 2 (Investigations) - Hard",
+        explanation: "In mild and moderate cases, sinus tachycardia is seen. In severe cases, the ECG may show ST segment depression and T wave inversion."
+    },
+    {
+        question: "A 45-year-old patient has been experiencing a severe, progressive asthma attack that has persisted for 8 hours despite the repeated use of bronchodilators and standard asthma therapy. What is the correct medical term for this condition?",
+        options: [
+            "Exercise-induced asthma",
+            "Status asthmaticus",
+            "Atopic asthma",
+            "Cor pulmonale"
+        ],
+        answer: 1,
+        tag: "Lec 2 (Clinical Features) - Easy",
+        explanation: "Status asthmaticus is a severe, progressive, prolonged attack of asthma that persists for more than 6 hours despite bronchodilators and all therapy."
+    },
+    {
+        question: "The WHO recommends a step-wise approach to asthma management. Which of the following medications is considered the cornerstone of long-term treatment due to its ability to reduce inflammation?",
+        options: [
+            "Short-Acting B2-Agonists (SABA)",
+            "Leukotriene Receptor Antagonists (LTRA)",
+            "Long-Acting B2-Agonists (LABA)",
+            "Inhaled Corticosteroids (ICS)"
+        ],
+        answer: 3,
+        tag: "Lec 2 (Management) - Medium",
+        explanation: "Inhaled Corticosteroids (ICS) are considered the cornerstone of long-term control treatment because they effectively reduce airway inflammation."
+    },
+    {
+        question: "A patient presents with a sudden onset of chest tightness and wheezing. Which of the following medications should be used ONLY as a short-term reliever (rescue inhaler) for rapid symptom relief?",
+        options: [
+            "Albuterol/Salbutamol",
+            "Inhaled Corticosteroids",
+            "Montelukast",
+            "Long-Acting B2-Agonists"
+        ],
+        answer: 0,
+        tag: "Lec 2 (Management) - Easy",
+        explanation: "Short-Acting B2-Agonists (SABA) like Albuterol/Salbutamol are used as short-term relievers or rescue inhalers for rapid symptom relief."
+    },
+    {
+        question: "Which of the following statements regarding the use of Long-Acting B2-Agonists (LABA) in asthma management is correct based on the lecture?",
+        options: [
+            "They are the first-line monotherapy for acute asthma attacks.",
+            "They are used in combination with Inhaled Corticosteroids (ICS) for persistent asthma.",
+            "They are exclusively used for status asthmaticus.",
+            "They stabilize mast cells to prevent mediator release."
+        ],
+        answer: 1,
+        tag: "Lec 2 (Management) - Medium",
+        explanation: "LABAs are long-term controllers that are used in combination with Inhaled Corticosteroids (ICS) to manage persistent asthma."
+    },
+    {
+        question: "In cases of extreme, severe asthma exacerbations, the standard treatment protocol may include all of the following EXCEPT:",
+        options: [
+            "Short courses of oral corticosteroids",
+            "Oxygen therapy",
+            "Magnesium sulfate",
+            "Immediate administration of Montelukast"
+        ],
+        answer: 3,
+        tag: "Lec 2 (Management) - Hard",
+        explanation: "For severe exacerbations, short courses of oral corticosteroids, oxygen, and magnesium sulfate are indicated. Montelukast is an LTRA used as a long-term alternative/add-on, not a primary rescue for extreme exacerbations."
+    },
+    {
+        question: "A 12-year-old patient is prescribed Sodium cromoglycate (Intal) to help manage his asthma. What is the specific mechanism of action of this drug?",
+        options: [
+            "It acts as a leukotriene receptor antagonist.",
+            "It directly relaxes bronchial smooth muscle.",
+            "It stabilizes mast cells and prevents the release of inflammatory mediators.",
+            "It blocks histamine and serotonin receptors."
+        ],
+        answer: 2,
+        tag: "Lec 2 (Management) - Hard",
+        explanation: "Sodium cromoglycate (Intal) functions by stabilizing mast cells and preventing the release of inflammatory mediators from them."
+    },
+    {
+        question: "A patient asks about dietary factors that could potentially increase the risk of asthma exacerbations. According to the lecture, which of the following foods are identified as diet-related risk factors?",
+        options: [
+            "Wheat, soy, and peanuts",
+            "Egg, fish, and milk",
+            "Red meat and poultry",
+            "Citrus fruits and tomatoes"
+        ],
+        answer: 1,
+        tag: "Lec 2 (Risk Factors) - Easy",
+        explanation: "The lecture specifically lists egg, fish, and milk under diet as risk factors that may increase a person's chance of developing an asthma attack."
+    },
+    {
+        question: "A 28-year-old pregnant female reports an increase in the frequency of her asthma attacks. Her physician explains this is likely due to hormonal factors. During which other periods are hormonally-triggered asthma attacks commonly observed?",
+        options: [
+            "Only during childhood",
+            "During menstruation and menopause",
+            "Following strenuous physical exercise",
+            "Only when exposed to extreme cold"
+        ],
+        answer: 1,
+        tag: "Lec 2 (Risk Factors) - Medium",
+        explanation: "Hormonal attacks of asthma are known to occur during pregnancy, menstruation, or menopause."
+    },
+    {
+        question: "Which of the following accurately represents a combination of vital sign abnormalities commonly seen in a patient during an acute asthma exacerbation?",
+        options: [
+            "Bradycardia and bradypnea",
+            "Tachycardia and tachypnea",
+            "Tachycardia and bradypnea",
+            "Bradycardia and tachypnea"
+        ],
+        answer: 1,
+        tag: "Lec 2 (Clinical Features) - Medium",
+        explanation: "Clinical manifestations of asthma include both tachypnea (increased respiratory rate) and tachycardia (increased heart rate)."
+    },
+    {
+        question: "A 55-year-old patient with long-standing poorly controlled asthma is found to have right-sided heart failure resulting from primary lung disease. Which complication of asthma is most likely responsible for this?",
+        options: [
+            "Spontaneous pneumothorax",
+            "Status asthmaticus",
+            "Emphysema and its sequela cor pulmonale",
+            "Septic focus"
+        ],
+        answer: 2,
+        tag: "Lec 2 (Complications) - Hard",
+        explanation: "Cor pulmonale (right-sided heart failure) is a known sequela of emphysema, which is listed as a potential complication of bronchial asthma."
+    },
+    {
+        question: "A physician decides to add an anti-leukotriene agent to a patient's asthma regimen. Which of the following drugs is an example of an anti-leukotriene?",
+        options: [
+            "Phenergan",
+            "Periactin",
+            "Montelukast",
+            "Albuterol"
+        ],
+        answer: 2,
+        tag: "Lec 2 (Management) - Medium",
+        explanation: "Montelukast is an anti-leukotriene (LTRA) used as an alternative or add-on therapy."
+    },
+    {
+        question: "When managing the precipitating factors of asthma, the administration of a suitable antibiotic is indicated in which of the following scenarios?",
+        options: [
+            "Routinely for all acute exacerbations to prevent secondary infection",
+            "Only if a bacterial infection is suspected",
+            "To manage psychological factors and anxiety",
+            "Whenever an endogenous allergen is unknown"
+        ],
+        answer: 1,
+        tag: "Lec 2 (Management) - Easy",
+        explanation: "When treating precipitating factors, antibiotics should be given ONLY if a bacterial infection is suspected, not routinely."
+    }
+],
+
+'internal_lec3': [
+    {
+        question: "What primarily characterizes the pathophysiology of pneumonia as an 'air space disease'?",
+        options: [
+            "Extensive interstitial fibrosis and scarring",
+            "Alveolar filling with fluid, leading to consolidation and exudation",
+            "Bronchial smooth muscle spasm and hyperreactivity",
+            "Progressive destruction of alveolar walls forming bullae"
+        ],
+        answer: 1,
+        tag: "Lec 3 (Definition) - Easy",
+        explanation: "Pneumonia is an alveolar infection leading to consolidation of one or more lobes, resulting in alveolar filling with fluid, which characterizes it as an air space disease (consolidation and exudation)."
+    },
+    {
+        question: "Which of the following organisms is identified as the most common typical cause of Community Acquired Pneumonia (CAP)?",
+        options: [
+            "Haemophilus influenzae",
+            "Staphylococcus aureus",
+            "Streptococcus pneumoniae",
+            "Mycoplasma pneumoniae"
+        ],
+        answer: 2,
+        tag: "Lec 3 (Etiology) - Easy",
+        explanation: "Streptococcus pneumoniae is the most common typical organism causing Community Acquired Pneumonia (CAP)."
+    },
+    {
+        question: "A patient develops a fever, productive cough, and new lung infiltrates on the fourth day of their hospital admission for a femur fracture. How should this pneumonia be practically classified?",
+        options: [
+            "Community Acquired Pneumonia (CAP)",
+            "Hospital Acquired Pneumonia (HAP)",
+            "Aspiration Pneumonia",
+            "Atypical Pneumonia"
+        ],
+        answer: 1,
+        tag: "Lec 3 (Classification) - Medium",
+        explanation: "Hospital Acquired Pneumonia (HAP) is defined as pneumonia occurring more than 48 hours after admission, which was not incubating at the time of admission."
+    },
+    {
+        question: "Which of the following underlying conditions most strongly predisposes a patient to Aspiration Pneumonia?",
+        options: [
+            "Recent influenza infection",
+            "Hyposplenism or splenectomy",
+            "Stroke, myasthenia, or bulbar palsies",
+            "Chronic alcohol abuse only"
+        ],
+        answer: 2,
+        tag: "Lec 3 (Classification) - Medium",
+        explanation: "Aspiration pneumonia occurs when a patient aspirates colonized upper respiratory tract secretions, which is commonly seen in conditions like stroke, myasthenia, bulbar palsies, or impaired consciousness."
+    },
+    {
+        question: "In the pathogenesis of Community Acquired Pneumonia (CAP) caused by Pneumococci, how does the organism initially enter and establish itself in the host?",
+        options: [
+            "Direct hematogenous spread from an infected wound",
+            "Micro-aspiration of highly acidic stomach contents",
+            "Aerosol inhalation leading to colonization of the nasopharynx",
+            "Ingestion of contaminated food or water"
+        ],
+        answer: 2,
+        tag: "Lec 3 (Pathogenesis) - Medium",
+        explanation: "Pneumococci are acquired by aerosol inhalation, which leads to the colonization of the nasopharynx before potentially spreading to the lungs."
+    },
+    {
+        question: "What is the most common pathogenic mechanism leading to Hospital Acquired Pneumonia (HAP) in seriously ill patients?",
+        options: [
+            "Inhalation of viral aerosols from hospital staff",
+            "Micro-aspiration of bacteria colonizing the oropharynx, upper airways, and upper GI tract",
+            "Hematogenous spread exclusively from infected IV catheters",
+            "Reactivation of latent mycobacteria due to hospital stress"
+        ],
+        answer: 1,
+        tag: "Lec 3 (Pathogenesis) - Hard",
+        explanation: "The most common cause of HAP is the micro-aspiration of bacteria that colonize the oropharynx, upper airways, and upper GI tract in seriously ill patients."
+    },
+    {
+        question: "All of the following are considered established risk factors for developing Community Acquired Pneumonia (CAP) EXCEPT:",
+        options: [
+            "Smoking",
+            "Alcohol abuse",
+            "Hyperthyroidism",
+            "Hyposplenism or splenectomy"
+        ],
+        answer: 2,
+        tag: "Lec 3 (Risk Factors) - Medium",
+        explanation: "The lecture lists influenza infection, smoking, alcohol abuse, and hyposplenism/splenectomy as risk factors. Hyperthyroidism is not mentioned as a risk factor for CAP."
+    },
+    {
+        question: "A 60-year-old male presents with a sudden onset of a productive cough with mucopurulent sputum, fever, rigors, and pleuritic chest pain. Which of the following auscultatory findings is most expected over the involved lung segment?",
+        options: [
+            "Diffuse polyphonic wheezing throughout both fields",
+            "Hyperresonance to percussion with silent breath sounds",
+            "Rales (crackles) and bronchial breath sounds localized to the involved segment",
+            "Normal vesicular breath sounds"
+        ],
+        answer: 2,
+        tag: "Lec 3 (Clinical Features) - Easy",
+        explanation: "Typical clinical presentation of pneumonia includes localized auscultatory findings of rales (crackles) and bronchial breath sounds over the involved segment or lobe."
+    },
+    {
+        question: "Pneumococcal pneumonia may present atypically in certain populations. Which of the following might be the ONLY initial clinical manifestation in older adults?",
+        options: [
+            "Severe hemoptysis",
+            "Confusion or delirium",
+            "Diffuse bilateral wheezing",
+            "Severe sore throat"
+        ],
+        answer: 1,
+        tag: "Lec 3 (Clinical Features) - Hard",
+        explanation: "In older adults, Pneumococcal pneumonia may present atypically, and confusion or delirium may be an initial manifestation without the classic respiratory symptoms."
+    },
+    {
+        question: "A 25-year-old student presents with a gradual onset of a dry cough, sore throat, myalgia, fatigue, and mild diarrhea. He is currently afebrile. Chest X-ray shows patchy infiltrates. This clinical picture is most consistent with:",
+        options: [
+            "Typical Pneumococcal Pneumonia",
+            "Atypical Pneumonia",
+            "Aspiration Pneumonia",
+            "Lung Abscess"
+        ],
+        answer: 1,
+        tag: "Lec 3 (Clinical Features) - Medium",
+        explanation: "Atypical pneumonia is characterized by a gradual onset, dry cough, lack of fever (afebrile), sore throat, myalgia, fatigue, diarrhea, and patchy infiltrates on CXR."
+    },
+    {
+        question: "Which of the following groups of organisms is a common cause of Atypical Pneumonia?",
+        options: [
+            "Streptococcus pneumoniae and Haemophilus influenzae",
+            "Staphylococcus aureus and Gram-negative enterobacteria",
+            "Mycoplasma pneumoniae and Legionella pneumophila",
+            "Peptostreptococcus spp and Actinomyces spp"
+        ],
+        answer: 2,
+        tag: "Lec 3 (Etiology) - Medium",
+        explanation: "Common etiologies for atypical pneumonia include Mycoplasma pneumoniae, Chlamydia pneumoniae, Legionella pneumophila, Mycobacteria, and Viruses."
+    },
+    {
+        question: "When investigating a patient with suspected pneumonia, what are the primary diagnostic benefits of ordering a Chest X-Ray (CXR)?",
+        options: [
+            "It identifies the exact bacterial species causing the infection.",
+            "It evaluates renal function before starting broad-spectrum antibiotics.",
+            "It demonstrates infiltrates to establish the diagnosis and detects complications like parapneumonic effusion.",
+            "It directly visualizes the bronchial tree for foreign body aspiration."
+        ],
+        answer: 2,
+        tag: "Lec 3 (Investigations) - Medium",
+        explanation: "A Chest X-ray is used to demonstrate infiltrates to establish the diagnosis and to detect complications like pleural effusion (parapneumonic effusion) and multilobar disease."
+    },
+    {
+        question: "According to treatment protocols for Community Acquired Pneumonia (CAP), what is the recommended duration of antibiotic therapy for a case of HIGH severity?",
+        options: [
+            "3 to 5 days",
+            "Exactly 7 days",
+            "7 to 10 days",
+            "14 to 21 days"
+        ],
+        answer: 2,
+        tag: "Lec 3 (Management) - Medium",
+        explanation: "Antibiotics for CAP should be continued for 7 days for low-to-moderate severity, and 7-10 days for high severity CAP."
+    },
+    {
+        question: "What is the treatment of choice for Community Acquired Pneumonia (CAP) when Streptococcus pneumoniae is suspected?",
+        options: [
+            "Penicillin derivatives (oral amoxicillin)",
+            "Intravenous Carbapenems",
+            "Piperacillin-tazobactam (TZP)",
+            "Aminoglycosides"
+        ],
+        answer: 0,
+        tag: "Lec 3 (Management) - Easy",
+        explanation: "Penicillin derivatives, specifically oral amoxicillin, are the treatment of choice when Streptococcus pneumoniae is suspected in CAP."
+    },
+    {
+        question: "If a patient with Community Acquired Pneumonia (CAP) is infected with a Penicillin-resistant strain, which specific alternative treatment is recommended in the lecture?",
+        options: [
+            "Amoxicillin at a double dose",
+            "Azithromycin 500mg twice daily",
+            "Carbapenem monotherapy",
+            "Levofloxacin 750mg once daily"
+        ],
+        answer: 1,
+        tag: "Lec 3 (Management) - Medium",
+        explanation: "For Penicillin-resistant pneumonia, the explicitly recommended alternative is Azithromycin 500mg twice daily."
+    },
+    {
+        question: "Which of the following broad-spectrum antibiotic regimens is recommended by guidelines for hospitalized patients with Hospital Acquired Pneumonia (HAP)?",
+        options: [
+            "Oral Amoxicillin and Clavulanate",
+            "Piperacillin-tazobactam (TZP) and Carbapenems",
+            "Ceftriaxone monotherapy",
+            "Azithromycin monotherapy"
+        ],
+        answer: 1,
+        tag: "Lec 3 (Management) - Medium",
+        explanation: "For HAP, guidelines recommend broad-spectrum antibiotics such as piperacillin-tazobactam (TZP) and carbapenems for hospitalized patients."
+    },
+    {
+        question: "Pneumonia can lead to severe systemic and local complications. Which of the following pairs represents recognized complications of pneumonia?",
+        options: [
+            "Cor pulmonale and pneumothorax",
+            "Hyposplenism and liver cirrhosis",
+            "Bacteremia and empyema",
+            "Myasthenia gravis and stroke"
+        ],
+        answer: 2,
+        tag: "Lec 3 (Complications) - Easy",
+        explanation: "Complications of pneumonia include bacteremia (bacteria in blood), respiratory and circulatory failure, pleural effusion, empyema (pus in the pleural space), and lung abscess."
+    },
+    {
+        question: "A sputum gram stain from a CAP patient reveals gram-positive diplococci, and the CXR shows a clear lobar infiltrate. What is the most likely causative organism?",
+        options: [
+            "Haemophilus influenzae",
+            "Staphylococcus aureus",
+            "Streptococcus pneumoniae",
+            "Legionella pneumophila"
+        ],
+        answer: 2,
+        tag: "Lec 3 (Microbiology) - Hard",
+        explanation: "Streptococcus pneumoniae is classically described as a gram-positive diplococci and typically shows a lobar infiltrate on CXR."
+    },
+    {
+        question: "Haemophilus influenzae often causes secondary bacterial pneumonia on top of a viral disease. What are its morphological characteristics on a gram stain?",
+        options: [
+            "Gram-positive diplococci",
+            "Nonmotile, Gram-negative rod",
+            "Acid-fast bacillus",
+            "Gram-positive cocci in clusters"
+        ],
+        answer: 1,
+        tag: "Lec 3 (Microbiology) - Hard",
+        explanation: "Haemophilus influenzae is described as a nonmotile, Gram-negative rod."
+    },
+    {
+        question: "Which of the following statements is TRUE regarding pneumonia in immunocompromised patients?",
+        options: [
+            "It is exclusively caused by multi-drug resistant Staphylococcus aureus.",
+            "It is often caused by unusual pathogens that otherwise have limited virulence in healthy individuals.",
+            "It only requires narrow-spectrum oral antibiotics.",
+            "Its pathogenesis relies entirely on the aspiration of stomach contents."
+        ],
+        answer: 1,
+        tag: "Lec 3 (Pathogenesis) - Medium",
+        explanation: "Pneumonia in immunocompromised patients is often caused by unusual pathogens that otherwise have limited virulence. Because of this, broad-spectrum antibiotics are generally needed."
+    },
+    {
+        question: "For a patient with Aspiration Pneumonia who does NOT have a toxic appearance, which of the following antibiotic choices is appropriate to cover typical community-acquired pathogens?",
+        options: [
+            "Ceftriaxone plus Azithromycin",
+            "Penicillin G monotherapy",
+            "Carbapenem monotherapy",
+            "Oral Amoxicillin alone"
+        ],
+        answer: 0,
+        tag: "Lec 3 (Management) - Hard",
+        explanation: "For non-toxic appearing aspiration pneumonia patients, Ceftriaxone plus azithromycin, levofloxacin, or moxifloxacin are appropriate choices."
+    },
+    {
+        question: "The microbial flora responsible for Aspiration Pneumonia is typically mixed. Which of the following can be involved?",
+        options: [
+            "Mouth anaerobes (Peptostreptococcus spp, Actinomyces spp)",
+            "Stomach contents causing chemical pneumonitis",
+            "Enterobacterium",
+            "All of the above"
+        ],
+        answer: 3,
+        tag: "Lec 3 (Etiology) - Medium",
+        explanation: "Aspiration pneumonia features a mixed flora including mouth anaerobes, stomach contents (chemical pneumonitis), and enterobacterium."
+    },
+    {
+        question: "According to management protocols for Community Acquired Pneumonia, how soon should empiric antibiotic therapy ideally be initiated after the patient presents?",
+        options: [
+            "Within 1 hour",
+            "Within 4 hours",
+            "Within 12 hours",
+            "After sputum culture results are finalized (usually 48 hours)"
+        ],
+        answer: 1,
+        tag: "Lec 3 (Management) - Medium",
+        explanation: "Antibiotics should be started promptly, ideally within 4 hours, for patients with Community Acquired Pneumonia (CAP)."
+    },
+    {
+        question: "Patients with a history of splenectomy are at increased risk for severe pneumonia. According to the lecture, which of the following organisms are explicitly noted as causing infections in splenectomy patients?",
+        options: [
+            "Streptococcus pneumoniae ONLY",
+            "Haemophilus influenzae ONLY",
+            "BOTH Streptococcus pneumoniae and Haemophilus influenzae",
+            "Legionella pneumophila ONLY"
+        ],
+        answer: 2,
+        tag: "Lec 3 (Risk Factors) - Hard",
+        explanation: "Hyposplenism/splenectomy is listed as a general risk factor for CAP (S. pneumoniae), and H. influenzae is specifically noted to cause infections in immunosuppression and splenectomy patients. Therefore, both are correct."
+    },
+    {
+        question: "Routine laboratory investigations for a patient admitted with pneumonia generally include all of the following EXCEPT:",
+        options: [
+            "Complete Blood Count (CBC) with differential",
+            "Blood Urea & Serum creatinine",
+            "Blood Culture",
+            "Routine diagnostic thoracentesis for all cases"
+        ],
+        answer: 3,
+        tag: "Lec 3 (Investigations) - Easy",
+        explanation: "The lecture lists CXR, Sputum gram stain/culture, Blood Urea & Creatinine, CBC with diff, and Blood Culture as investigations. Routine thoracentesis is not listed as a standard initial investigation for all cases."
+    }
+] 
 
         };
 
@@ -10461,7 +13641,7 @@
         function hideAllViews() {
             clearInterval(timerInterval); // إيقاف المؤقت إذا كان يعمل
             
-            // مصفوفة تحتوي على الـ IDs لكل شاشات المنصة (القديمة والجديدة)
+     // مصفوفة تحتوي على الـ IDs لكل شاشات المنصة
             const allViews = [
                 'view-departments',      // واجهة الأقسام
                 'view-stages',           // واجهة المراحل
@@ -10471,6 +13651,7 @@
                 'view-subject-equip',    // واجهة أجهزة التخدير
                 'view-subject-icu',      // واجهة العناية المركزة
                 'view-subject-surgery',  // واجهة الجراحة
+               'view-subject-internal',  // واجهة الباطنية
                 'view-summary',          // واجهة الملخصات النصية (الجديدة)
                 'view-quiz',             // واجهة محرك الاختبارات
                 'view-result'            // واجهة النتيجة
@@ -10560,27 +13741,13 @@
             window.scrollTo(0, 0);
             updateProgressUI(); // للحفاظ على تحديث الشارات في حال أضفناها مستقبلاً
         }
-
-        // --- 4. Smart Return Function (دالة العودة الذكية بعد الاختبار أو الملخص) ---
-        function returnToSubject() {
+        
+        function openInternalSubject() { // الباطنية
             hideAllViews();
             document.getElementById('breadcrumbs').classList.add('hidden'); 
-
-            // فحص ذكي يعتمد على مفتاح الاختبار/الملخص الحالي لمعرفة المادة التي كان بها الطالب
-            if (currentActiveQuizKey && currentActiveQuizKey.includes('surgery')) {
-                document.getElementById('view-subject-surgery').classList.remove('hidden');
-            } else if (currentActiveQuizKey && currentActiveQuizKey.includes('icu')) {
-                document.getElementById('view-subject-icu').classList.remove('hidden');
-            } else if (currentActiveQuizKey && currentActiveQuizKey.includes('equip')) {
-                document.getElementById('view-subject-equip').classList.remove('hidden');
-            } else if (currentActiveQuizKey !== '') {
-                // الافتراضي (إذا لم يكن يحتوي على الكلمات أعلاه فهو تابع لأسس التخدير)
-                document.getElementById('view-subject').classList.remove('hidden');
-            } else {
-                // حالة الطوارئ (Fallback)
-                document.getElementById('view-dashboard').classList.remove('hidden');
-            }
+            document.getElementById('view-subject-internal').classList.remove('hidden');
             window.scrollTo(0, 0);
+            updateProgressUI();
         }
 
         // ==========================================
@@ -10606,10 +13773,48 @@
             document.getElementById('abort-modal').classList.add('hidden');
         }
 
-        function confirmAbort() {
+                function confirmAbort() {
             // تأكيد الإلغاء وتفعيل العودة الذكية
             document.getElementById('abort-modal').classList.add('hidden');
             returnToSubject();
+        }
+
+        // ==========================================
+        // SMART DYNAMIC ROUTING (دالة العودة الذكية)
+        // ==========================================
+        function returnToSubject() {
+            // إخفاء جميع الشاشات أولاً
+            if (typeof hideAllViews === "function") {
+                hideAllViews();
+            }
+            // فحص ذكي يعتمد على مفتاح الاختبار أو الملخص الحالي
+            if (!currentActiveQuizKey) {
+                // حالة الطوارئ: العودة للوحة التحكم الرئيسية
+                document.getElementById('view-dashboard').classList.remove('hidden');
+            } 
+            else if (currentActiveQuizKey.includes('surgery')) {
+                // التوجيه لمادة: أسس الجراحة
+                document.getElementById('view-subject-surgery').classList.remove('hidden');
+            } 
+            else if (currentActiveQuizKey.includes('internal')) {
+                // التوجيه لمادة: الطب الباطني
+                document.getElementById('view-subject-internal').classList.remove('hidden');
+            } 
+            else if (currentActiveQuizKey.includes('icu')) {
+                // التوجيه لمادة: العناية المركزة
+                document.getElementById('view-subject-icu').classList.remove('hidden');
+            } 
+            else if (currentActiveQuizKey.includes('equip')) {
+                // التوجيه لمادة: أجهزة التخدير
+                document.getElementById('view-subject-equip').classList.remove('hidden');
+            } 
+            else {
+                // الافتراضي: التوجيه لمادة أسس التخدير 
+                document.getElementById('view-subject').classList.remove('hidden');
+            }
+
+            // التمرير لأعلى الصفحة
+            window.scrollTo(0, 0);
         }
         
                 // ==========================================
@@ -10744,6 +13949,7 @@
     </div>
 </div>
 `,
+
 "surgery_lec3": `<div dir="ltr" class="text-left font-sans">
     <h3 class="text-2xl font-bold text-red-600 mb-4 border-b-2 border-red-100 pb-2">Urinary Stones (Urolithiasis)</h3>
     <ul class="list-disc pl-6 mb-6 space-y-3">
@@ -10794,6 +14000,7 @@
     </div>
 </div>
 `,
+
 "surgery_lec4": `<div dir="ltr" class="text-left font-sans">
     <h3 class="text-2xl font-bold text-red-600 mb-4 border-b-2 border-red-100 pb-2">Prostate Cancer</h3>
     <ul class="list-disc pl-6 mb-6 space-y-3">
@@ -10868,6 +14075,189 @@
     </div>
 </div>
 `,
+
+"internal_lec1": `<div dir="ltr" class="text-left font-sans">
+    <h3 class="text-2xl font-bold text-red-600 mb-4 border-b-2 border-red-100 pb-2">
+        <i class="fa-solid fa-lungs-virus mr-2"></i> Pulmonary Tuberculosis (TB)
+    </h3>
+    
+    <ul class="list-disc pl-6 mb-6 space-y-4">
+        <li>
+            <strong class="text-gray-800">Definition:</strong> A contagious infection usually attacking the lungs, caused by Mycobacterium tuberculosis (Koch's bacillus). 
+            <span class="block text-gray-500 text-sm mt-1" dir="rtl">(عدوى معدية تصيب الرئتين، تسببها بكتيريا المتفطرة السلية).</span>
+        </li>
+
+        <li>
+            <strong class="text-gray-800">Causes & Transmission:</strong> It is a strictly aerobic, acid-fast bacillus (AFB) with a virulence-enhancing mycolic acid cell wall. It is transmitted via airborne droplet nuclei (1-5 microns). It is NOT transmitted by sharing food, utensils, or clothes. Risk factors include HIV, diabetes, poverty, and smoking.
+            <span class="block text-gray-500 text-sm mt-1" dir="rtl">(بكتيريا هوائية صامدة للحمض ذات جدار خلوي دهني، تنتقل عبر استنشاق الرذاذ المتطاير في الهواء وليس بمشاركة الطعام والأدوات. الإيدز والسكري والتدخين من أهم عوامل الخطر).</span>
+        </li>
+
+        <li>
+            <strong class="text-gray-800">Clinical Symptoms:</strong> 
+            <ul class="list-circle pl-6 mt-2 space-y-2">
+                <li><strong class="text-gray-700">Primary TB:</strong> The first stage, which is usually asymptomatic. <span class="block text-gray-500 text-sm mt-1" dir="rtl">(المرحلة الأولى، وتكون عادةً بدون أعراض ظاهرة).</span></li>
+                <li><strong class="text-gray-700">Secondary (Active) TB:</strong> Presents with systemic symptoms like evening low-grade fever, drenching night sweats, fatigue, and weight loss. Pulmonary symptoms include a chronic cough (initially dry, later productive) and hemoptysis. <span class="block text-gray-500 text-sm mt-1" dir="rtl">(السل النشط: يسبب حمى مسائية، تعرق ليلي غزير، فقدان الوزن، وسعال مزمن قد يترافق مع نفث الدم).</span></li>
+            </ul>
+        </li>
+
+        <li>
+            <strong class="text-gray-800">Diagnosis:</strong> 
+            <ul class="list-circle pl-6 mt-2 space-y-2">
+                <li><strong class="text-gray-700">Chest X-Ray:</strong> Primary TB shows hilar lymphadenopathy. Secondary TB classically shows cavitations or infiltrates in the apical and posterior segments of the upper lobes. <span class="block text-gray-500 text-sm mt-1" dir="rtl">(الأشعة السينية: في السل الأولي تظهر اعتلالات عقدية نقيرية، وفي الثانوي تظهر تكهفات في قمم الرئتين).</span></li>
+                <li><strong class="text-gray-700">Lab & Molecular Tests:</strong> Sputum smear (AFB) is rapid but has low sensitivity. Culture is the gold standard but takes 2-8 weeks. GeneXpert (NAAT) is the recommended initial test, detecting TB DNA and rifampicin resistance within 2 hours with high sensitivity. <span class="block text-gray-500 text-sm mt-1" dir="rtl">(فحوصات المختبر: فحص البلغم المجهري سريع وقليل الحساسية، الزراعة هي المعيار الذهبي ولكنها تتأخر، بينما اختبار GeneXpert هو الأفضل والأسرع ويكشف مقاومة الأدوية).</span></li>
+            </ul>
+        </li>
+
+        <li>
+            <strong class="text-gray-800">Treatment Overview:</strong> The standard regimen takes 6-9 months total. It consists of an Intensive Phase (2 months) using HRZE (Isoniazid, Rifampicin, Pyrazinamide, Ethambutol). This is followed by a Continuation Phase (4 months) using HR (Isoniazid, Rifampicin). 
+            <span class="block text-gray-500 text-sm mt-1" dir="rtl">(علاج قياسي يستمر 6-9 أشهر: مرحلة مكثفة بشهرين بـ 4 أدوية، ومرحلة استمرار بـ 4 أشهر بدواءين).</span>
+        </li>
+    </ul>
+    
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl mb-6 mt-4">
+        <p class="font-bold text-blue-800 flex items-center gap-2 mb-3 border-b border-blue-200 pb-2">
+            <i class="fa-solid fa-lightbulb text-yellow-500"></i> Clinical Pearls
+        </p>
+        <ul class="list-disc pl-6 space-y-3">
+            <li>
+                <p class="text-gray-800"><strong class="text-blue-900">Pathology Pearl:</strong> The Ghon Complex (seen in Primary TB) is the combination of the Ghon focus and involved hilar lymph nodes.</p>
+                <p class="text-gray-600 text-sm mt-1" dir="rtl">(معقد غون: يظهر في السل الأولي وهو عبارة عن اندماج بؤرة غون الرئوية مع العقد اللمفاوية النقيرية المصابة).</p>
+            </li>
+            <li>
+                <p class="text-gray-800"><strong class="text-blue-900">Pharmacology Pearl (Isoniazid - H):</strong> Causes peripheral neuropathy because it lowers pyridoxine (Vitamin B6) levels.</p>
+                <p class="text-gray-600 text-sm mt-1" dir="rtl">(آيزونيازيد: يسبب اعتلال الأعصاب المحيطي نتيجة استنزاف فيتامين B6 في الجسم).</p>
+            </li>
+            <li>
+                <p class="text-gray-800"><strong class="text-blue-900">Pharmacology Pearl (Ethambutol - E):</strong> The most common specific side effect is optic neuropathy.</p>
+                <p class="text-gray-600 text-sm mt-1" dir="rtl">(إيثامبوتول: أثره الجانبي الأشهر هو اعتلال العصب البصري).</p>
+            </li>
+            <li>
+                <p class="text-gray-800"><strong class="text-blue-900">Pharmacology Pearl (Rifampin - R):</strong> A distinguishing side effect is that it turns urine brown/orange.</p>
+                <p class="text-gray-600 text-sm mt-1" dir="rtl">(ريفامبيسين: يتميز بأنه يغير لون البول إلى البني).</p>
+            </li>
+        </ul>
+    </div>
+</div>`,
+
+"internal_lec2": `<div dir="ltr" class="text-left font-sans">
+    <h3 class="text-2xl font-bold text-red-600 mb-4 border-b-2 border-red-100 pb-2">
+        <i class="fa-solid fa-lungs mr-2"></i> Bronchial Asthma
+    </h3>
+    
+    <ul class="list-disc pl-6 mb-6 space-y-4">
+        <li>
+            <strong class="text-gray-800">Definition:</strong> A chronic inflammatory lung disease characterized by recurrent paroxysmal attacks of dyspnea, cough, and wheezing. 
+            <span class="block text-gray-500 text-sm mt-1" dir="rtl">(مرض تنفسي التهابي مزمن يتميز بنوبات متكررة من ضيق التنفس، السعال، والأزيز).</span>
+        </li>
+
+        <li>
+            <strong class="text-gray-800">Causes & Triggers:</strong> Triggered by allergens (pollen, dust mites), environmental factors (smoke, cold air), viral infections, and occupational/emotional stress. Other risk factors include exercise, diet (egg, fish, milk), drugs (aspirin, penicillin), and hormonal changes.
+            <span class="block text-gray-500 text-sm mt-1" dir="rtl">(يُحفز بسبب مسببات الحساسية كالغبار، العوامل البيئية كالدخان والبرد، أو العدوى الفيروسية. هناك عوامل خطر أخرى كالرياضة، بعض الأطعمة، أدوية كالأسبرين، والتغيرات الهرمونية).</span>
+        </li>
+
+        <li>
+            <strong class="text-gray-800">Clinical Manifestations:</strong> Symptoms typically worsen at night or early morning. Key signs include high-pitched wheezing, shortness of breath (dyspnea), chest tightness, usually dry cough, tachypnea, and tachycardia.
+            <span class="block text-gray-500 text-sm mt-1" dir="rtl">(تسوء الأعراض غالباً في الليل أو الصباح الباكر، وتشمل: أزيز عالي الطبقة، ضيق تنفس، انقباض في الصدر، سعال جاف عادةً، مع تسارع في النبض والتنفس).</span>
+        </li>
+
+        <li>
+            <strong class="text-gray-800">Diagnosis:</strong> 
+            <ul class="list-circle pl-6 mt-2 space-y-2">
+                <li><strong class="text-gray-700">Spirometry (Gold Standard):</strong> Measures FEV1 and FVC. Diagnostic reversibility is defined as an increase in FEV1 by > 12% and > 200 mL post-bronchodilator. <span class="block text-gray-500 text-sm mt-1" dir="rtl">(قياس التنفس هو المعيار الذهبي، وتُثبت الاستجابة بزيادة الفعالية بعد أخذ موسع قصبات).</span></li>
+                <li><strong class="text-gray-700">Other Tests:</strong> Peak Expiratory Flow (PEF), Bronchial Provocation Test (used if spirometry is normal). Chest X-ray is normal in mild cases but shows hyperinflation in severe ones. <span class="block text-gray-500 text-sm mt-1" dir="rtl">(اختبارات أخرى تشمل ذروة التدفق الزفيري، واختبار التحفيز إذا كان التنفس طبيعياً. الأشعة تكون طبيعية في الحالات الخفيفة وتظهر انتفاخاً في الشديدة).</span></li>
+            </ul>
+        </li>
+
+        <li>
+            <strong class="text-gray-800">Treatment Overview:</strong> 
+            <ul class="list-circle pl-6 mt-2 space-y-2">
+                <li><strong class="text-gray-700">Long-Term Controllers:</strong> Inhaled Corticosteroids (ICS) are the cornerstone of treatment, often combined with Long-Acting B2-Agonists (LABA) for persistent asthma. <span class="block text-gray-500 text-sm mt-1" dir="rtl">(الأدوية المسيطرة: الكورتيزون المستنشق هو الأساس، ويمكن دمجه مع موسعات الشعب طويلة المفعول).</span></li>
+                <li><strong class="text-gray-700">Short-Term Relievers:</strong> Short-Acting B2-Agonists (SABA) like Albuterol are used for rapid relief. Severe exacerbations require oral corticosteroids, and in extreme cases, oxygen or magnesium sulfate. <span class="block text-gray-500 text-sm mt-1" dir="rtl">(المسكنات السريعة: موسعات الشعب قصيرة المفعول كالألبوتيرول. الحالات الشديدة تتطلب كورتيزون فموي، أوكسجين، أو مغنيسيوم).</span></li>
+            </ul>
+        </li>
+    </ul>
+    
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl mb-6 mt-4">
+        <p class="font-bold text-blue-800 flex items-center gap-2 mb-3 border-b border-blue-200 pb-2">
+            <i class="fa-solid fa-lightbulb text-yellow-500"></i> Clinical Pearls
+        </p>
+        <ul class="list-disc pl-6 space-y-3">
+            <li>
+                <p class="text-gray-800"><strong class="text-blue-900">Types of Asthma:</strong> Extrinsic (atopic) asthma is triggered by exogenous allergens, whereas intrinsic asthma is triggered by endogenous sources like a septic focus.</p>
+                <p class="text-gray-600 text-sm mt-1" dir="rtl">(أنواع الربو: الربو الخارجي التأتبي يُحفز بمسببات حساسية خارجية، بينما الداخلي يُحفز بعوامل داخلية كالبؤر الإنتانية).</p>
+            </li>
+            <li>
+                <p class="text-gray-800"><strong class="text-blue-900">Status Asthmaticus:</strong> A severe, progressive asthma attack lasting more than 6 hours that persists despite bronchodilators and standard therapy.</p>
+                <p class="text-gray-600 text-sm mt-1" dir="rtl">(حالة الربو المستمرة: نوبة شديدة ومطولة تتجاوز 6 ساعات ولا تستجيب للعلاجات المعتادة وموسعات القصبات).</p>
+            </li>
+            <li>
+                <p class="text-gray-800"><strong class="text-blue-900">Pharmacology Pearl:</strong> Sodium cromoglycate (Intal) works specifically by stabilizing mast cells and preventing the release of inflammatory mediators.</p>
+                <p class="text-gray-600 text-sm mt-1" dir="rtl">(قاعدة دوائية: كروموجليكات الصوديوم يعمل عن طريق تثبيت الخلايا البدينة لمنع إفراز وسائط الالتهاب).</p>
+            </li>
+        </ul>
+    </div>
+</div>`,
+
+"internal_lec3": `<div dir="ltr" class="text-left font-sans">
+    <h3 class="text-2xl font-bold text-red-600 mb-4 border-b-2 border-red-100 pb-2">
+        <i class="fa-solid fa-virus-covid mr-2"></i> Pneumonia
+    </h3>
+    
+    <ul class="list-disc pl-6 mb-6 space-y-4">
+        <li>
+            <strong class="text-gray-800">Definition:</strong> An acute infection of the pulmonary parenchyma characterized by alveolar filling with fluid, leading to consolidation. 
+            <span class="block text-gray-500 text-sm mt-1" dir="rtl">(عدوى حادة في نسيج الرئة تسبب امتلاء الحويصلات الهوائية بالسوائل وتصلدها).</span>
+        </li>
+
+        <li>
+            <strong class="text-gray-800">Classification:</strong> 
+            <ul class="list-circle pl-6 mt-2 space-y-2">
+                <li><strong class="text-gray-700">Community-Acquired (CAP):</strong> Acquired outside the hospital environment. <span class="block text-gray-500 text-sm mt-1" dir="rtl">(ذات الرئة المكتسبة من المجتمع/البيئة الخارجية).</span></li>
+                <li><strong class="text-gray-700">Hospital-Acquired (HAP):</strong> Occurs > 48 hours after admission. <span class="block text-gray-500 text-sm mt-1" dir="rtl">(المكتسبة في المستشفى: تظهر بعد 48 ساعة من الدخول).</span></li>
+                <li><strong class="text-gray-700">Aspiration:</strong> Results from inhaling colonized upper respiratory or gastric secretions. <span class="block text-gray-500 text-sm mt-1" dir="rtl">(الاستنشاقية: ناتجة عن استنشاق إفرازات ملوثة أو محتويات المعدة).</span></li>
+            </ul>
+        </li>
+
+        <li>
+            <strong class="text-gray-800">Typical vs. Atypical Symptoms:</strong> 
+            <ul class="list-circle pl-6 mt-2 space-y-2">
+                <li><strong class="text-gray-700">Typical:</strong> Sudden onset, fever, rigors, productive mucopurulent cough, and pleuritic chest pain. <span class="block text-gray-500 text-sm mt-1" dir="rtl">(النمطية: بداية مفاجئة، حمى، رجفة، وسعال ببلغم صديدي).</span></li>
+                <li><strong class="text-gray-700">Atypical:</strong> Gradual onset, dry cough, and being afebrile (no fever). Common causes include Mycoplasma and viruses. <span class="block text-gray-500 text-sm mt-1" dir="rtl">(غير النمطية: بداية تدريجية، سعال جاف، وغالباً بدون حمى).</span></li>
+            </ul>
+        </li>
+
+        <li>
+            <strong class="text-gray-800">Diagnosis:</strong> Chest X-ray is essential to demonstrate infiltrates. Laboratory tests include sputum Gram stain/culture and CBC. CT scans provide further diagnostic confirmation.
+            <span class="block text-gray-500 text-sm mt-1" dir="rtl">(التشخيص: أشعة الصدر هي الأساس لرؤية الارتشاحات، مع فحص البلغم وصورة الدم الكاملة).</span>
+        </li>
+
+        <li>
+            <strong class="text-gray-800">Treatment:</strong> CAP is treated with Amoxicillin or Azithromycin for 7-10 days. HAP requires broad-spectrum antibiotics like Piperacillin-tazobactam. Aspiration cases may use Ceftriaxone plus Azithromycin.
+            <span class="block text-gray-500 text-sm mt-1" dir="rtl">(العلاج: المجتمعية تعالج بالأموكسيسيلين، بينما المكتسبة في المستشفى تتطلب مضادات واسعة الطيف).</span>
+        </li>
+    </ul>
+    
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl mb-6 mt-4">
+        <p class="font-bold text-blue-800 flex items-center gap-2 mb-3 border-b border-blue-200 pb-2">
+            <i class="fa-solid fa-lightbulb text-yellow-500"></i> Clinical Pearls
+        </p>
+        <ul class="list-disc pl-6 space-y-3">
+            <li>
+                <p class="text-gray-800"><strong class="text-blue-900">Etiology Rule:</strong> Streptococcus pneumoniae is the most common cause of Community-Acquired Pneumonia (CAP).</p>
+                <p class="text-gray-600 text-sm mt-1" dir="rtl">(العقدية الرئوية هي المسبب الأول والأشهر لذات الرئة المكتسبة من المجتمع).</p>
+            </li>
+            <li>
+                <p class="text-gray-800"><strong class="text-blue-900">Elderly Presentation:</strong> Pneumococcal pneumonia in older adults may present atypically, often manifesting as confusion or delirium.</p>
+                <p class="text-gray-600 text-sm mt-1" dir="rtl">(قاعدة سريرية: ذات الرئة عند كبار السن قد لا تظهر بأعراض تنفسية واضحة، بل تظهر كحالة ارتباك أو هذيان).</p>
+            </li>
+            <li>
+                <p class="text-gray-800"><strong class="text-blue-900">Physical Signs:</strong> Auscultatory findings of bronchial breath sounds and rales (crackles) are typically localized to the involved lobe.</p>
+                <p class="text-gray-600 text-sm mt-1" dir="rtl">(العلامات البدنية: أصوات التنفس القصبية والخشخشة تكون متمركزة فوق الفص الرئوي المصاب).</p>
+            </li>
+        </ul>
+    </div>
+</div>`,
+
             // سيتم إضافة باقي الملخصات هنا
         };
 
@@ -11023,7 +14413,7 @@
             document.getElementById('abort-modal').classList.add('hidden');
         }
 
-        function loadQuestion() {
+                function loadQuestion() {
             window.scrollTo(0, 0); // Fix Auto-Scroll Issue
             answered = false;
             const currentQ = activeQuestions[currentQuestionIndex];
@@ -11050,13 +14440,24 @@
             nextBtn.classList.add('hidden');
             optionsContainer.innerHTML = '';
 
-            // Shuffle Options Logic
+            // 1. إعداد الخيارات مع حالة الإجابة الصحيحة
             let optionsWithState = currentQ.options.map((opt, index) => ({
                 text: opt,
                 isCorrect: index === currentQ.answer
             }));
             
-            shuffleArray(optionsWithState);
+            // 2. نظام التجميد الذكي (Smart Freeze Logic)
+            const trapKeywords = ["above", "a & b", "a and b", "a & c", "a and c", "b & c", "b and c", "both", "none"];
+            const hasFixedOptions = currentQ.options.some(opt => 
+                trapKeywords.some(keyword => opt.toLowerCase().includes(keyword))
+            );
+
+            // 3. الخلط المشروط
+            if (!hasFixedOptions) {
+                // إذا كان السؤال آمناً (لا يحتوي على فخاخ)، قم بخلطه
+                shuffleArray(optionsWithState);
+            }
+            // (إذا كان يحتوي على فخاخ، سيتجاوز دالة الخلط ويبقى بالترتيب الأصلي السليم)
 
             // Create Options DOM
             optionsWithState.forEach((optData, index) => {
